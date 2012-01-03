@@ -1,0 +1,203 @@
+body {
+    background:#2e3436;
+    color:#eeeeec;
+    font-family: Arial, helvetica, sans-serif;
+}
+
+h3 {
+    margin:0;
+    padding:0;
+}
+
+h3 a:link {
+    color:#eeeeec;
+}
+
+h3 a:visited {
+    color:#bbb;
+}
+
+img.thumb {
+    display:none;
+    position:absolute;
+    top:1em;
+    right:50%;
+    clear:both;
+    float:right;
+    margin:.2em;
+}
+
+.tooltip:hover:after {
+    content: attr(data-tooltip);
+}
+
+a:link {
+    /* color:#CD9E3F; */
+    color:#eeeeec;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+a:visited {
+    /* color:#22893A; */
+    color:#bbbbbc;
+}
+
+a:hover {
+    color:#eeeeec;
+}
+
+a:active {
+    color:#f00;
+}
+
+.feedTitle {
+    color:#CD9E3F;
+    background:#2e3436;
+    padding: .4em;
+}
+
+.feedTitle a {
+    vertical-align:.3em;
+}
+
+.feed {
+    /* position:relative; */
+    /* float:left; */
+    /* display:inline-block; */
+    vertical-align:top;
+    /* display:table-cell; */
+    margin: 0 .5em .5em 0;
+    /* width:24%; */
+    font-size:.7em;
+    border: #6CC918 1px solid;
+    /* padding: .2em; */
+    /* clear:left; */
+    text-align:left;
+}
+
+.feed ul li img {
+width:28%;
+vertical-align:text-top;
+clear:both;
+}
+
+.ui-tabs-selected span {color:#CD9E3F}
+
+.txt {
+    width:68%;
+    float:right;
+}
+
+.txt-noImg {
+margin:0;
+}
+
+.feed:hover {
+    border: #ff0 1px solid;
+}
+
+#dashBoard td {
+    padding: .2em;
+    vertical-align:top;
+}
+
+.feed ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.feed ul li {
+    margin:0;
+    padding: .3em;
+    background: #555;
+}
+
+.feed ul li:nth-child(even) {
+    background: #444;
+}
+
+.feed ul li:hover {
+    background: #111;
+}
+
+.invisible {
+    display:none;
+}
+
+.visible {
+    display:block;
+}
+
+/* Tabs */
+.ui-widget-content {
+    background: #555;
+    border: 1px solid #AAAAAA;
+    color: #222222;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    background: #555;
+    border: 1px solid #AAAAAA;
+    color: #212121;
+    font-weight: normal;
+}
+
+.ui-widget-header {
+    background: #999;
+    border: 1px solid #AAAAAA;
+    color: #222222;
+    font-weight: bold;
+}
+
+img.loading {
+position:absolute;
+top:15px;
+right:15px;
+}
+
+span.reload-feed {
+margin: 0 0 -5px 90%;
+float:right;
+}
+
+div.reload-feed {
+    /* width:35px; */
+    cursor:pointer;
+    border-right: 30px solid #E9BE25;
+    border-top: 30px solid transparent;
+    margin: 0 -3px -4px 0;
+}
+
+.reload-feed:hover {
+    border-right: 30px solid #6CC918;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1em .5em;
+}
+
+.reload {
+cursor:pointer;
+float:right;
+line-height:.3em;
+font-size:200%;
+}
+
+.reload:hover {
+color:red;
+}
+
+.feedUp {
+line-height:1.5em;
+vertical-align:bottom;
+}
+
+.feedDel:hover {
+color:red;
+}
+
+.feedUp:hover {
+color:green;
+}
