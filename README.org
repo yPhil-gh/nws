@@ -1,20 +1,20 @@
-** NWS
+* NWS
 
-* NWS is an online news reader
+** NWS is an online news reader
 
   I made this to replace the online news services that I've been
   using, as they became bloated and crippled with spyware. It's really
   a barebones system, but I've been using it for weeks now, and it
   basically does what I want.
 
-* Features
+** Features
   - Does its best to parse your feed and identify it w/o questions.
   - Links directly on any included image Displays images full width if it's the only item's element
   - Plays nice with different resolutions, ie phones, tablets, etc.
 
-#####
+######
 
-TODO
+** TODO
   - A better sorting system. Right now it's quite a PITA when you add a new feed and assign it to a category/tab, to bump (^) the feeds
     and tabs to their previous locations. In fact I hate that.
   - A sqlite DB (in a ramdisk where applicable). This plain text file is nice and portable and all, but it's damn slow.
