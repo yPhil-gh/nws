@@ -7,25 +7,25 @@
   a barebones system, but I've been using it for weeks now, and it
   basically does what I want.
 
-** Features
+*** Features
    - AJAX asynchronous loading of the feeds (ie reload one single feed w/o reloading the whole page)
    - Lightweight (no images) and standard (valid HTML5 code)
    - Does its best to parse any given feed and identify it w/o questions.
    - Links directly on any included image Displays images full width if it's the only item's element
    - Plays nice with different resolutions, ie phones, tablets, etc
 
-** Installation
+*** Installation
    - Copy the files in a directory within a webserver root
    - Point a browser to the directory
 
 #######
 
-** +TODO
+*** +TODO
   - A better sorting system. Right now it's quite a PITA when you add a new feed and assign it to a category/tab, to promote (^) the feeds and tabs to their previous locations
   - A sqlite DB (in a ramdisk where applicable). This plain text file is nice and portable and all, but it's damn slow
   - Some way of listening linked audio files & feeds
 
-** LICENSE
+*** LICENSE
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
