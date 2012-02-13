@@ -1,7 +1,7 @@
 <?
 /*
-MGMT : Manage feed list
-Time-stamp: <mgmt.php - Mon 13-Feb-2012 16:29:26>
+MGMT : Manage (add, categorise, promote, delete) feeds
+Time-stamp: <mgmt.php - Mon 13-Feb-2012 16:33:15>
 
 This script is part of NWS
 
