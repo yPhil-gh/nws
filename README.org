@@ -16,8 +16,9 @@
 
 *** Installation
    - Copy the files in a directory within a webserver root
-   - Point a browser to the directory
    - Optional : Edit the .htaccess to protect (restrict access to) the back-office (create users with eg. http://aspirine.org/htpasswd_en.html)
+
+*** Usage
    - Use the "mgmt" link to access the "back office"
      - Use the "add a new feed" text entry field at the bottom to enter a new feed
      - Use the "new tab" text entry field to create a new category
