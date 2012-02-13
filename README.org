@@ -2,18 +2,14 @@
 
 * NWS is an online news reader
 
-  It's really a barebones system, I've been using it for a month and
-  it basically does what I want.
-
-* NWS est un aggrégateur de news
-
-  C'est vraiment un CMS basique, mais je l'utilise tous les jours et
-  il fait ce que je lui demande.
+  I made this to replace the online news services that I've been
+  using, as they became bloated and crippled with spyware. It's really
+  a barebones system, but I've been using it for weeks now, and it
+  basically does what I want.
 
 * Features
   - Does its best to parse your feed and identify it w/o questions.
-  - Links directly on any included image Displays images full width if
-  it's the only item's element
+  - Links directly on any included image Displays images full width if it's the only item's element
   - Plays nice with different resolution, ie phones, tablets, etc.
 
 
