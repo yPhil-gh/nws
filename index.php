@@ -1,7 +1,7 @@
 <?
 /*
 Index : View feeds
-Time-stamp: <index.php - Mon 13-Feb-2012 21:55:29>
+Time-stamp: <index.php - Mon 13-Feb-2012 21:59:15>
 
 This script is part of NWS
 
@@ -30,6 +30,7 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
     <link href="jquery-ui.css" rel="stylesheet" type="text/css"/>
     <style type="text/css" media="screen">@import "nws.css";</style>
   </head>
+<body>
     <script src="jquery.min.js"></script>
     <script src="jquery-ui.min.js"></script>
 
@@ -56,7 +57,6 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 
       });
 </script>
-<body>
 <div id="tabs">
 <?php
   $conf = "feeds.xml";
@@ -80,7 +80,7 @@ function parse($u) {
       $idiv = str_replace($chars, "", $feedRss->channel->title);
       echo '
 <div class="outerContainer" style="" title ="'.$u.'">
-<span class="reload" title="Reload '.$feedRss->channel->title.'">&phi;</span>
+<span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&phi;</span>
 <div class="innerContainer"></div>
 </div>
 ';
