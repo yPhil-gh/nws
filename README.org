@@ -9,14 +9,21 @@
 
 *** Features
    - AJAX asynchronous loading of the feeds (ie reload one single feed w/o reloading the whole page)
-   - Lightweight (no images) and standard (valid HTML5 code)
    - Does its best to parse any given feed and identify it w/o questions.
    - Links directly on any included image Displays images full width if it's the only item's element
    - Plays nice with different resolutions, ie phones, tablets, etc
+   - Lightweight and standard (valid HTML5 code)
 
 *** Installation
    - Copy the files in a directory within a webserver root
    - Point a browser to the directory
+   - Optional : Edit the .htaccess to protect restrict access to back-office
+   - Use the "mgmt" link to access the "back office"
+     - Use the "add a new feed" text entry field at the bottom to enter a new feed
+     - Use the "new tab" text entry field to create a new category
+     - Use the "change this feed's tab" menu to re-categorize the feed
+     - Use the "promote this feed" (^) link to bump up a feed as 1st of its tab
+     - Use the "delete this feed" (x) link to delete a feed
 
 *** +TODO
   - A better sorting system. Right now it's quite a PITA when you add a new feed and assign it to a category/tab, to promote (^) the feeds and tabs to their previous locations
