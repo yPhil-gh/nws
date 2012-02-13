@@ -1,42 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feeds>
   <url tab="actu">http://rss.lemonde.fr/c/205/f/3050/index.rss</url>
-  <url tab="alt">http://dystopie.net/feed/</url>
   <url tab="alt">http://www.acrimed.org/spip.php?page=backend</url>
   <url tab="tech">http://linuxfr.org/news.atom</url>
-  <url tab="int">http://feeds.feedburner.com/MaghrebConfidentiel</url>
-  <url tab="int">http://www.haaretz.com/cmlink/haaretz-com-headlines-rss-1.263335?localLinksEnabled=false</url>
   <url tab="fun">http://feeds.feedburner.com/boingboing/iBag</url>
   <url tab="img">http://feeds.boston.com/boston/bigpicture/index</url>
-  <url tab="e">http://palestinechronicle.com/rss.php</url>
-  <url tab="m">http://feeds2.feedburner.com/PitchforkAlbumReviews</url>
   <url tab="x">http://dailynudes.tumblr.com/rss</url>
-  <url tab="x">http://sexy-yetclassy.tumblr.com/rss</url>
-  <url tab="x">http://ridiculouslybeautiful.tumblr.com/rss</url>
-  <url tab="tech">http://stephaniehobson.ca/feed/rss/</url>
-  <url tab="tech">http://framapack.org/~framaflux/rss.php</url>
-  <url tab="x">http://feeds.feedburner.com/HornyAngels</url>
-  <url tab="m">http://www.mevio.com/feeds/ucpod.xml</url>
-  <url tab="tech">http://www.linformaticien.com/DesktopModules/DnnForge%20-%20NewsArticles/Rss.aspx?TabID=58</url>
-  <url tab="tech">http://www.framablog.org/index.php/feed/atom</url>
-  <url tab="actu">http://feeds.bbci.co.uk/news/world/rss.xml</url>
-  <url tab="actu">http://rezo.net/backend/</url>
-  <url tab="e">http://feeds.feedburner.com/wordpress/haJM</url>
-  <url tab="fun">http://www.nanarland.com/nanarland_rss.php</url>
-  <url tab="alt">http://www.maitre-eolas.fr/feed/atom</url>
-  <url tab="alt">http://www.arretsurimages.net/tous-les-contenus.rss</url>
-  <url tab="alt">http://www.plumedepresse.net/feed/</url>
-  <url tab="alt">http://www.bellaciao.org/fr/backend.php3</url>
-  <url tab="actu">http://rss.lefigaro.fr/lefigaro/laune</url>
-  <url tab="tech">http://news.ycombinator.com/rss</url>
-  <url tab="tech">http://feeds.feedburner.com/hackaday/LgoM</url>
-  <url tab="tech">http://www.reghardware.com/headlines.atom</url>
-  <url tab="tech">http://rss.slashdot.org/Slashdot/slashdot</url>
-  <url tab="tech">http://feeds.feedburner.com/TechCrunch/</url>
-  <url tab="int">http://www.magharebia.com/cocoon/awi/rss/fr/magharebia.rss</url>
-  <url tab="m">http://www.bide-et-musique.com/playlist.rss</url>
-  <url tab="e">http://stallman.org/rss/rss.xml</url>
-  <url tab="e">http://numerolambda.wordpress.com/feed/</url>
-  <url tab="e">http://feeds.feedburner.com/refletsinfo</url>
   <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
 </feeds>
