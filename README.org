@@ -2,16 +2,23 @@
 
 * NWS is an online news reader
 
-It's really a barebones system, I've been using it for a month and it
-basically does what I want.
+  It's really a barebones system, I've been using it for a month and
+  it basically does what I want.
 
 * NWS est un aggrégateur de news
 
-C'est vraiment un CMS basique, mais je l'utilise tous les jours et il
-fait ce que je lui demande.
+  C'est vraiment un CMS basique, mais je l'utilise tous les jours et
+  il fait ce que je lui demande.
+
+* Features
+  - Does its best to parse your feed and identify it w/o questions.
+  - Links directly on any included image Displays images full width if
+  it's the only item's element
+  - Plays nice with different resolution, ie phones, tablets, etc.
+
 
 * TODO
-- A better sorting system. Right now it's quite a PITA when you add
-a new feed and assign it to a category/tab, to bump (^) the feeds and
-tabs to their previous locations. In fact I hate that.
-- A sqlite DB
+  - A better sorting system. Right now it's quite a PITA when you add
+  - A new feed and assign it to a category/tab, to bump (^) the feeds
+    and tabs to their previous locations. In fact I hate that.
+  - A sqlite DB
