@@ -16,10 +16,9 @@
 #######
 
 ** +TODO
-  - A better sorting system. Right now it's quite a PITA when you add a new feed and assign it to a category/tab, to bump (^) the feeds
-    and tabs to their previous locations. In fact I hate that.
+  - A better sorting system. Right now it's quite a PITA when you add a new feed and assign it to a category/tab, to promote (^) the feeds and tabs to their previous locations.
   - A sqlite DB (in a ramdisk where applicable). This plain text file is nice and portable and all, but it's damn slow.
-  - Some way of listening audio
+  - Some way of listening linked audio files & feeds.
 
 ** LICENSE
     This program is free software: you can redistribute it and/or modify
