@@ -1,9 +1,8 @@
 <?
 if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
   <head>
     <title>nws</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,7 +11,6 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
     <style type="text/css" media="screen">@import "nws.css";</style>
     <script src="jquery.min.js"></script>
     <script src="jquery-ui.min.js"></script>
-    <script src="jquery.qtip.js"></script>
   </head>
 
 <script>
@@ -21,31 +19,21 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
     	  cache: false
     	      });
 
-	$('#foo').bind('click', function() {
-	    alert($(this).text());
-	  });
-	$('#foo').trigger('click');
-
     	var ajax_load = '<img src="loading.gif" class="loading" alt="loading..." />';
     	var loadUrl = 'nws-reload-feed.php';
-	$('.feedContainer').click(function(){
-    		var myFeed = $(this).attr('title')
-		  $(this).children('div.anotherDiv')
-    		  .html(ajax_load)
-    		  .load(loadUrl, "z="+myFeed);
 
+	$('.reload').click(function(){
+	    var DivToReload = $(this).parent()
+	      var myUrl = DivToReload.attr('title')
+	      DivToReload.children('div.innerContainer')
+	      .html(ajax_load)
+	      .load(loadUrl, "z="+myUrl);
     	  });
 
 	$( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
 	// $( ".feed" ).tooltip();
-	$('.feedContainer').trigger('click');
-	$('.tip').qtip();
-	$('.feed a[href][title]').qtip({
-	    content: {
-	      text: false // Use each elements title attribute
-		},
-	      style: 'cream' // Give it some style
-	      });
+	$('.reload').trigger('click');
+
       });
 </script>
 <body>
@@ -71,8 +59,9 @@ function parse($u) {
       $items = $feedRss->channel->item;
       $idiv = str_replace($chars, "", $feedRss->channel->title);
       echo '
-<div class="feedContainer" style="width:24%;display:inline-block;vertical-align:top;" title ="'.$u.'" id="'.$idiv.'">
-<div class="anotherDiv"></div>
+<div class="outerContainer" style="" title ="'.$u.'">
+<span class="reload" title="Reload '.$feedRss->channel->title.'">&phi;</span>
+<div class="innerContainer"></div>
 </div>
 ';
     }
@@ -115,7 +104,7 @@ foreach (array_keys($tabGroups) as $tabName) {
 
 ?>
 
-    </div>
-    <a href="./mgmt.php">mgmt</a>
+</div>
+<a href="./mgmt.php">mgmt</a>
 </body>
 </html>

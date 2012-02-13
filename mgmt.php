@@ -1,21 +1,27 @@
-<html>
-<head>
-<style type="text/css" media="screen">@import "nws.css";</style>
-<title>Manage feeds</title>
-<style>
-form {
- margin:0;
-}
-</style>
-</head>
-<body>
-<div><?php
+<?
+/*
+* MGMT : Manage feed list
+* Time-stamp: <mgmt.php - Tue 10-Jan-2012 14:36:47>
+*/
+?>
 
-/* error_reporting(E_ALL); */
-/* ini_set('display_errors', 1); */
+<html>
+  <head>
+    <style type="text/css" media="screen">@import "nws.css";</style>
+    <title>nws - Manage feeds</title>
+  </head>
+  <body>
+    <div>
+
+<?
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 if (isset($_GET['d'])) $feedToDel = $_GET['d'];
+/* if (isset($_POST['d'])) $feedToDel = $_POST['d']; */
 if (isset($_GET['u'])) $feedToUp = $_GET['u'];
+
 if (isset($_POST['a']) && filter_var($_POST['a'], FILTER_VALIDATE_URL) && !empty($_POST['a'])) $feedToAdd = $_POST['a'];
 
 if (!empty($_POST['tabName'])) {
@@ -26,14 +32,6 @@ if (!empty($_POST['newTabName'])) {
   $tabName = $_POST['newTabName'];
   $feedToRetab = $_POST['idFeed'];
 }
-/* if (isset($_POST['idFeed'])) $idFeed = $_POST['idFeed']; */
-
-/* echo '<pre>'; */
-/*     var_dump($_POST); */
-/* echo '</pre>'; */
-
-/* var_dump($tabName); */
-/* var_dump(); */
 
 $domIn = new DOMDocument;
 $domIn->load('feeds.xml');
@@ -50,8 +48,8 @@ $entries = $urlTagList->length;
 $feeds = $domIn->documentElement;
 
 if (isset($feedToDel)) {
-  $feed = $feeds->getElementsByTagName('url')->item($feedToDel);
-  $feeds->removeChild($feed);
+  $del = $feeds->getElementsByTagName('url')->item($feedToDel);
+  $feeds->removeChild($del);
 }
 
 if (isset($feedToUp)) {
@@ -128,12 +126,29 @@ foreach ($defUrlTagList as $defUrlTag) {
   $defUrlTabList[] = $defUrlTag->getAttribute('tab');
 }
 
-echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
 
 for ($i=0; $i < $defUrlTagList->length ; $i++) {
+
   $deffeedz[] = $defUrlTagList->item($i)->nodeValue;
   $myFeedz[] = array("url" => $defUrlTagList->item($i)->nodeValue, "tab" => $defUrlTagList->item($i)->getAttribute('tab'));
-  echo ' <a title="Delete this feed" class="feedDel" href="'.$_SERVER['PHP_SELF'].'?d='.$i.'">x</a>&nbsp;<a title="Promote this feed as 1st of itstab" class="feedUp" href="'.$_SERVER['PHP_SELF'].'?u='.$i.'">^</a><input type="hidden" name="idFeed" value="'.$i.'">
+
+  /* $doc = new DOMDocument(); */
+  /* $doc->strictErrorChecking = FALSE; */
+  /* $doc->loadHTML(file_get_contents($myFeedz[$i]['url'])); */
+  /* $xml = simplexml_import_dom($doc); */
+  /* $arr = $xml->xpath('//link[@rel="shortcut icon"]'); */
+  /* $favicon = $arr[0]['href']; */
+
+  /* $url = parse_url($myFeedz[$i]['url']); */
+  /* $subs = explode( '.', $url['host']); */
+  /* $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1]; */
+  /* $favicon = (getimagesize($url['scheme'].'://'.$domain.'/favicon.ico') ? $url['scheme'].'://'.$domain.'/favicon.ico' : 'favicon.png'); */
+
+  $favicon = 'http://g.etfv.co/'.$myFeedz[$i]['url'];
+
+  echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
+
+  echo ' <a title="Delete this feed" class="feedDel" href="'.$_SERVER['PHP_SELF'].'?d='.$i.'">x</a>&nbsp;<a title="Promote this feed as 1st of its tab" class="feedUp" href="'.$_SERVER['PHP_SELF'].'?u='.$i.'">^</a><input type="hidden" name="idFeed" value="'.$i.'">
  <select title="Change this feed\'s tab" name="tabName" value="">';
 
   echo '<option value="'.$myFeedz[$i]['tab'].'" selected="yes">'.$myFeedz[$i]['tab'].'</option>';
@@ -144,10 +159,16 @@ for ($i=0; $i < $defUrlTagList->length ; $i++) {
 
   echo '
 </select>
-<input title="New tab" type="text" size="6" name="newTabName" value=""> <input type="submit" value="<"> '.$myFeedz[$i]['url'].'<br />';
+<input title="New tab" type="text" size="6" name="newTabName" value="">
+<input type="submit" value="<">
+<img height="16" src="'.$favicon.'" />
+'.$myFeedz[$i]['url'].'
+<br />';
+echo '</form>';
 }
 
-echo '</form>';
+
+
 
 if (isset($feedToUp) || isset($feedToAdd) || isset($feedToDel) || isset($feedToRetab)) {
 echo '<hr />Wrote: (' . $domOut->save("feeds.xml") . ') bytes';
@@ -157,7 +178,7 @@ echo '<hr />Wrote: (' . $domOut->save("feeds.xml") . ') bytes';
 echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
 ?>
 <input type="text" title="Add a new feed" name="a">
-  <input type="submit" name="submit" value="+">
+<input type="submit" name="submit" value="+">
 </form>
 <a href="./">nws</a>
 </div>
