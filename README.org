@@ -13,7 +13,7 @@
   - Plays nice with different resolution, ie phones, tablets, etc.
 
 
-* TODO
+** TODO
   - A better sorting system. Right now it's quite a PITA when you add
   - A new feed and assign it to a category/tab, to bump (^) the feeds
     and tabs to their previous locations. In fact I hate that.
