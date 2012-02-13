@@ -9,7 +9,7 @@
 
 ** Features
   - AJAX asynchronous loading of the feeds (ie reload one single feed w/o reloading the whole page)
-  - Very lightweight
+  - Lightweight (no images) and standard (valid HTML5 code)
   - Does its best to parse any given feed and identify it w/o questions.
   - Links directly on any included image Displays images full width if it's the only item's element
   - Plays nice with different resolutions, ie phones, tablets, etc
