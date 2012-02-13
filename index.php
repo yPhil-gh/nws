@@ -1,6 +1,7 @@
+<?
 /*
 Index : View feeds
-Time-stamp: <index.php - Mon 13-Feb-2012 21:50:52>
+Time-stamp: <index.php - Mon 13-Feb-2012 21:55:29>
 
 This script is part of NWS
 
@@ -18,7 +19,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-<?
 if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 ?>
 <!DOCTYPE html>
