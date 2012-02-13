@@ -15,7 +15,7 @@
    - Plays nice with different resolutions, ie phones, tablets, etc
 
 ** Installation
-   - Copy the files on a server
+   - Copy the files in a directory within a webserver root
    - Point a browser to the directory
 
 #######
