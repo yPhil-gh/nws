@@ -6,5 +6,13 @@
   <url tab="fun">http://feeds.feedburner.com/boingboing/iBag</url>
   <url tab="img">http://feeds.boston.com/boston/bigpicture/index</url>
   <url tab="x">http://dailynudes.tumblr.com/rss</url>
+  <url tab="actu">http://feeds.bbci.co.uk/news/world/rss.xml</url>
+  <url tab="actu">http://rezo.net/backend/</url>
+  <url tab="actu">http://rss.lefigaro.fr/lefigaro/laune</url>
+  <url tab="tech">http://news.ycombinator.com/rss</url>
+  <url tab="tech">http://feeds.feedburner.com/hackaday/LgoM</url>
+  <url tab="tech">http://www.reghardware.com/headlines.atom</url>
+  <url tab="tech">http://rss.slashdot.org/Slashdot/slashdot</url>
+  <url tab="tech">http://feeds.feedburner.com/TechCrunch/</url>
   <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
 </feeds>
