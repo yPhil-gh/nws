@@ -1,58 +1,65 @@
 <?php
 
 function debug ($var) {
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+/* error_reporting(E_ALL); */
+/* ini_set('display_errors', 1); */
   echo "<pre>";
   var_dump($var);
   echo "</pre>";
 }
 
-    /**
-    * Searches for the first occurence of an html <img> element in a string
-    * and extracts the src if it finds it. Returns boolean false if
-    * <img> element is not found.
-    * @param    string  $str    An HTML string
-    * @return   mixed           The contents of the src attribute in the
-    *                           found <img> or boolean false if no <img>
-    *                           is found
-    */
-    function str_img_src($html) {
-        if (stripos($html, '<img') !== false) {
-            $imgsrc_regex = '#<\s*img [^\>]*src\s*=\s*(["\'])(.*?)\1#im';
-            preg_match($imgsrc_regex, $html, $matches);
-            unset($imgsrc_regex);
-            unset($html);
-            if (is_array($matches) && !empty($matches)) {
-                return $matches[2];
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+/**
+ * Searches for the first occurence of an html <img> element in a string
+ * and extracts the src if it finds it. Returns boolean false if
+ * <img> element is not found.
+ * @param    string  $str    An HTML string
+ * @return   mixed           The contents of the src attribute in the
+ *                           found <img> or boolean false if no <img>
+ *                           is found
+ */
+function str_img_src($html) {
+  if (stripos($html, '<img') !== false) {
+    $imgsrc_regex = '#<\s*img [^\>]*src\s*=\s*(["\'])(.*?)\1#im';
+    preg_match($imgsrc_regex, $html, $matches);
+    unset($imgsrc_regex);
+    unset($html);
+    if (is_array($matches) && !empty($matches)) {
+      return $matches[2];
+    } else {
+      return false;
     }
+  } else {
+    return false;
+  }
+}
 
 $z = $_GET['z'];
 
 function reparse($u) {
-  $limit="12";
+  $limit="18";
   $feedRss=simplexml_load_file($u);
   $i=0;
   $url = parse_url($u);
   $subs = explode( '.', $url['host']);
   $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1];
-  $favicon = (getimagesize($url['scheme'].'://'.$domain.'/favicon.ico') ? $url['scheme'].'://'.$domain.'/favicon.ico' : 'favicon.png');
+  /* $favicon = (getimagesize($url['scheme'].'://'.$domain.'/favicon.ico') ? $url['scheme'].'://'.$domain.'/favicon.ico' : 'favicon.png'); */
+
+  $favicon = 'http://g.etfv.co/'.$u;
+
+  $tumb = $feedRss->tumblelog->attributes()->name;
 
   if($feedRss) {
-    $feedTitle = $feedRss->channel->title;
     if (isset($feedRss->channel->item)) {
       $items = $feedRss->channel->item;
+      $feedTitle = $feedRss->channel->title;
     }
     else {
       if (isset($feedRss->item)) {
-	$items = $feedRss->item; // rss
-      } else {			 // atom
+	$items = $feedRss->item;         // rss of some sort
+      } elseif (isset($tumb)) {		 // tumblr
+	$items = $feedRss->posts->post;
+	$feedTitle = $tumb;
+      } else {		         	 // Atom
 	$items = $feedRss->entry;
 	$feedTitle = $feedRss->title;
       }
@@ -61,34 +68,72 @@ function reparse($u) {
     echo '
 <div class="feed" title ="'.$u.'">
 <div class="feedTitle">
-<span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title="">'.$feedTitle.'</a><span class="reload" title="Reload feed">&phi;</span>
+<span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title=""></span>'.$feedTitle.'</a>
 </div>
 <ul>';
 
     foreach($items as $item) {
       if ($i++ < $limit) {
-	/* unset($imgSrc); */
 	$link = htmlspecialchars($item->link);
-	$imgSrc = str_img_src(strip_tags($item->description, "<img>"));
+	$title = strip_tags($item->title);
+	$imgSrc = str_img_src($item->description);
 	list($width, $height) = getimagesize($imgSrc);
 	$atomImg = $item->enclosure['url'];
+	$elseSrc = str_img_src(strip_tags($item->content, "<img>"));
+	$elseSrx = htmlspecialchars_decode($item->description);
+
+	//Use that namespace
+	$namespaces = $item->getNameSpaces(true);
+
+	//Relative
+	$media = $item->children($namespaces['media']);
+
+	// Must call attributes()
+	$mediaImg = $media->thumbnail->attributes()->url;
+
+	//This looks like the favicon
+	$media2Img = $media->content->attributes()->url;
+
 	if (!empty($atomImg)) {
-	  $img = '<img alt="At0m" src="'.$atomImg.'" />&nbsp';
-	  $txtClass = "txt";
-	} elseif (isset($imgSrc) && $width > 2) {
-	  $img = '<img alt="no0Atom" src="'.$imgSrc.'" />&nbsp';
-	  $txtClass = "txt";
+	  $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
+	  if ($ext == "mp3") {
+	    $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="snd.png" /></a>';
+	  /* $txtClass = "txt-noImg"; */
+	  } else {
+	    $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
+	  }
+	} elseif (!empty($mediaImg)) {
+	  $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
+	} elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
+	  $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
+	} elseif ($title == "Photo") {
+	  $title = 'post';
+	  $img = '<a href="'.$imgSrc.'"><img class="full" alt="Photo" src="'.$imgSrc.'" /></a>';
+	} elseif (!empty($elseSrc)) {
+	  /* $img = ""; */
+	  /* debug($elseSrc); */
+	  $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
+	  $description = $item->content;
 	} else {
 	  $img = '';
-	  $txtClass = "txt-noImg";
 	}
+
+	/* $img = '<img class="feed" alt="plop" src="'.$imgSrc.'" />&nbsp'; */
 
 	if (empty($link)) $link = htmlspecialchars($item->link['href']);
 	$fullDescription = strip_tags($item->description, "<img>, <p>");
-	$description = strip_tags($item->description);
+
+	$description = (isset($item->description) ? $item->description : $item->content);
+	$description = htmlspecialchars(htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description)))));
+
+	//	$title = (($item->title == "Photo") ? $item->title : '');
 
 	echo '
-<li><a title="'.$description.'" target="_blank" href="'.$link.'">'.$img.'<div class="'.$txtClass.'">'.strip_tags($item->title).'</a></div></li>';
+<li title="'.$description.'">
+    <div class="all">'.$img.'<a target="_blank" href="'.$link.'">'.$title.'</a>
+    <hr />
+    </div>
+</li>';
       }
     }
     echo '
