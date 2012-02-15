@@ -1,7 +1,7 @@
 <?
 /*
 Index : View feeds
-Time-stamp: <index.php - Mon 13-Feb-2012 21:59:15>
+Time-stamp: <index.php - Wed 15-Feb-2012 15:39:53>
 
 This script is part of NWS
 
@@ -40,8 +40,8 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
     	  cache: false
     	      });
 
-    	var ajax_load = '<img src="loading.gif" class="loading" alt="loading..." />';
-    	var loadUrl = 'nws-reload-feed.php';
+    	var ajax_load = '<img src="nws/loading.gif" class="loading" alt="loading..." />';
+    	var loadUrl = 'nws/nws-reload-feed.php';
 
 	$('.reload').click(function(){
 	    var DivToReload = $(this).parent()
@@ -59,7 +59,7 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 </script>
 <div id="tabs">
 <?php
-  $conf = "feeds.xml";
+  $conf = "nws/feeds.xml";
 $urls = simplexml_load_file($conf);
 
 $z = 0;
@@ -125,6 +125,6 @@ foreach (array_keys($tabGroups) as $tabName) {
 ?>
 
 </div>
-<a href="./mgmt.php">mgmt</a>
+<a href="nws/mgmt.php">mgmt</a>
 </body>
 </html>
