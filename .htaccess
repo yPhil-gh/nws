@@ -9,3 +9,5 @@ ErrorDocument 403 philippe/nws/plop.php
 # <FilesMatch ".(flv|swf|ico|gif|jpg|jpeg|png)$">
 #     Header set Cache-Control "max-age=2592000"
 # </FilesMatch>
+
+plop
