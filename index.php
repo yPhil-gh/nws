@@ -1,7 +1,7 @@
 <?
 /*
 Index : View feeds
-Time-stamp: <index.php - Wed 15-Feb-2012 15:47:39>
+Time-stamp: <index.php - Wed 15-Feb-2012 16:27:04>
 
 This script is part of NWS
 
@@ -125,6 +125,6 @@ foreach (array_keys($tabGroups) as $tabName) {
 ?>
 
 </div>
-<a href="nws/mgmt.php">mgmt</a>
+<a href="mgmt.php">mgmt</a>
 </body>
 </html>
