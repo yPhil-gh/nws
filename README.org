@@ -10,7 +10,7 @@
 
 *** Features
    - AJAX asynchronous loading of the feeds (ie reload one single feed w/o reloading the whole page)
-   - Grabs the most out of the description centent and displays it as standard tooltip on mouse hover
+   - Grabs the most out of the description text and displays it as standard tooltip on mouse hover
    - Does its best to parse any given feed and identify it w/o questions.
    - Plays nice with different resolutions & ergonomics, ie phones, tablets, etc
    - Links directly on any included image
