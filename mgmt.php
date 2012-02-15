@@ -1,8 +1,7 @@
-
 <?
 /*
 MGMT : Manage (add, categorise, promote, delete) feeds
-Time-stamp: <mgmt.php - Wed 15-Feb-2012 16:26:14>
+Time-stamp: <mgmt.php - Wed 15-Feb-2012 17:15:27>
 
 This script is part of NWS
 
@@ -18,7 +17,6 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 ?>
 
