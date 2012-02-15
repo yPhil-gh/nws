@@ -1,7 +1,7 @@
 <?
 /*
 Index : View feeds
-Time-stamp: <index.php - Wed 15-Feb-2012 15:39:53>
+Time-stamp: <index.php - Wed 15-Feb-2012 15:45:49>
 
 This script is part of NWS
 
@@ -26,13 +26,13 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
   <head>
     <title>nws</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="nws/favicon.png" />
     <link href="jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <style type="text/css" media="screen">@import "nws.css";</style>
+    <style type="text/css" media="screen">@import "nws/nws.css";</style>
   </head>
 <body>
-    <script src="jquery.min.js"></script>
-    <script src="jquery-ui.min.js"></script>
+    <script src="nws/jquery.min.js"></script>
+    <script src="nws/jquery-ui.min.js"></script>
 
 <script>
     $(document).ready(function() {
