@@ -9,22 +9,23 @@
    been using it for weeks now, and it basically does what I want.
 
 *** Features
-   - If any, displays item image, wrapped around text.
    - AJAX asynchronous loading of the feeds (ie reload one single feed w/o reloading the whole page)
    - Does its best to parse any given feed and identify it w/o questions.
-   - Links directly on any included image Displays images full width if it's the only item's element
    - Plays nice with different resolutions & ergonomics, ie phones, tablets, etc
+   - Links directly on any included image Displays images full width if it's the only item's element
+   - If any, displays item image, wrapped around text.
    - Lightweight and standard (valid HTML5 code)
 
 *** Installation
-   - Copy the files in a directory within a webserver root
-   - Optional : Edit the .htaccess to protect (restrict access to) the back-office
+   - Copy the files in a directory within a webserver root. Point your browser to that directory
+   - Recommended : Edit the .htaccess to protect (restrict access to) the back-office
      - Go to http://aspirine.org/htpasswd_en.html
      - Paste this user/password pair in a file, and upload it as nws/.access (or another location, see below)
      - You can also create user/password pair(s) directly on the server with the command "htpasswd -b .access username password"
-     - Recommended : Move the .access out of the http server root, and edit .htaccess to reflect this change.
+     - Optional : Move the .access out of the http server root, and edit .htaccess to reflect this change.
 
 *** Usage
+   - Use "Pin as app tab" in Firefox to prevent tab clutter
    - Use the "mgmt" link to access the "back office"
      - Use the "add a new feed" text entry field at the bottom to enter a new feed
      - Use the "new tab" text entry field to create a new category
