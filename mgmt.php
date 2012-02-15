@@ -1,7 +1,7 @@
 <?
 /*
 MGMT : Manage (add, categorise, promote, delete) feeds
-Time-stamp: <mgmt.php - Mon 13-Feb-2012 16:33:15>
+Time-stamp: <mgmt.php - Wed 15-Feb-2012 14:37:32>
 
 This script is part of NWS
 
@@ -31,6 +31,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <?
 
+    class XDOMElement extends DOMElement {
+      function __construct($name, $value = null, $namespaceURI = null) {
+        parent::__construct($name, null, $namespaceURI);
+      }
+							      }
+
+class XDOMDocument extends DOMDocument {
+  function __construct($version = null, $encoding = null) {
+    parent::__construct($version, $encoding);
+    $this->registerNodeClass('DOMElement', 'XDOMElement');
+  }
+
+  function createElement($name, $value = null, $namespaceURI = null) {
+    $element = new XDOMElement($name, $value, $namespaceURI);
+    $element = $this->importNode($element);
+    if (!empty($value)) {
+      $element->appendChild(new DOMText($value));
+    }
+    return $element;
+  }
+}
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -49,10 +71,10 @@ if (!empty($_POST['newTabName'])) {
   $feedToRetab = $_POST['idFeed'];
 }
 
-$domIn = new DOMDocument;
+$domIn = new XDOMDocument;
 $domIn->load('feeds.xml');
 
-$domOut = new DOMDocument('1.0', 'utf-8');
+$domOut = new XDOMDocument('1.0', 'utf-8');
 $domOut->preserveWhiteSpace=false;
 $domOut->formatOutput=true;
 $root = $domOut->createElement('feeds');
