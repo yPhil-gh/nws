@@ -18,7 +18,11 @@
 
 *** Installation
    - Copy the files in a directory within a webserver root
-   - Optional : Edit the .htaccess to protect (restrict access to) the back-office (create users with eg. http://aspirine.org/htpasswd_en.html)
+   - Optional : Edit the .htaccess to protect (restrict access to) the back-office
+     - Go to http://aspirine.org/htpasswd_en.html
+     - Paste this user/password pair in a file, and upload it as nws/.access (or another location, see below)
+     - You can also create user/password pair(s) directly on the server with the command "htpasswd -b .access username password"
+     - Recommended : Move the .access out of the http server root, and edit .htaccess to reflect this change.
 
 *** Usage
    - Use the "mgmt" link to access the "back office"
