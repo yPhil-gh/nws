@@ -2,7 +2,7 @@
 <?
 /*
 MGMT : Manage (add, categorise, promote, delete) feeds
-Time-stamp: <mgmt.php - Wed 15-Feb-2012 16:22:25>
+Time-stamp: <mgmt.php - Wed 15-Feb-2012 16:26:14>
 
 This script is part of NWS
 
@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <html>
   <head>
-    <style type="text/css" media="screen">@import "nws.css";</style>
+    <style type="text/css" media="screen">@import "nws/nws.css";</style>
     <title>nws - Manage feeds</title>
   </head>
   <body>
@@ -73,7 +73,7 @@ if (!empty($_POST['newTabName'])) {
 }
 
 $domIn = new XDOMDocument;
-$domIn->load('feeds.xml');
+$domIn->load('nws/feeds.xml');
 
 $domOut = new XDOMDocument('1.0', 'utf-8');
 $domOut->preserveWhiteSpace=false;
