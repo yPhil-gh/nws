@@ -2,7 +2,7 @@
 <feeds>
   <url tab="actu">http://rss.lemonde.fr/c/205/f/3050/index.rss</url>
   <url tab="alt">http://www.acrimed.org/spip.php?page=backend</url>
-  <url tab="tech">http://linuxfr.org/news.atom</url>
+  <url tab="tech">https://github.com/xaccrocheur/nws/commits/master.atom</url>
   <url tab="fun">http://feeds.feedburner.com/boingboing/iBag</url>
   <url tab="img">http://feeds.boston.com/boston/bigpicture/index</url>
   <url tab="x">http://dailynudes.tumblr.com/rss</url>
