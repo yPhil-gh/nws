@@ -1,6 +1,8 @@
+<?php
+
 /*
 reload-feed : Reload one feed
-Time-stamp: <nws-reload-feed.php - Mon 13-Feb-2012 16:33:50>
+Time-stamp: <nws-reload-feed.php - Wed 15-Feb-2012 15:55:10>
 
 This script is part of NWS
 
@@ -18,8 +20,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-
-<?php
 
 function debug ($var) {
 /* error_reporting(E_ALL); */
