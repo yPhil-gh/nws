@@ -34,6 +34,7 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 <body>
     <script src="nws/jquery.min.js"></script>
     <script src="nws/jquery-ui.min.js"></script>
+    <script src="nws/jquery.isotope.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -54,6 +55,13 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 
 	$( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
 	// $( ".feed" ).tooltip();
+
+
+        $("#tab-alt").isotope({
+          itemSelector : '.outerContainer',
+          layoutMode : 'masonry'
+        });
+
 	$('.reload').trigger('click');
 
       });

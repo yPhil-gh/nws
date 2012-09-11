@@ -75,9 +75,9 @@ a:active {
 }
 
 .outerContainer {
-    width:24%;
-    display:inline-block;
-    vertical-align:top;
+    width:250px;
+    /* display:inline-block; */
+    /* vertical-align:top; */
 }
 
 .feed ul li img.feed {
