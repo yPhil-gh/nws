@@ -12,11 +12,11 @@ option) any later version.
 
 This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
@@ -24,68 +24,39 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>nws</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="nws/favicon.png" />
-    <link href="nws/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <style type="text/css" media="screen">@import "nws/nws.css";</style>
-  </head>
+<head>
+<title>nws</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="shortcut icon" type="image/x-icon" href="nws/favicon.png" />
+<link href="nws/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<style type="text/css" media="screen">@import "nws/nws.css";</style>
+</head>
 <body>
-    <script src="nws/jquery.min.js"></script>
-    <script src="nws/jquery-ui.min.js"></script>
-    <script src="nws/jquery.isotope.min.js"></script>
-
+<script src="nws/jquery.min.js"></script>
+<script src="nws/jquery-ui.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-    	$.ajaxSetup ({
-    	  cache: false
-    	      });
+$(document).ready(function() {
+$.ajaxSetup ({
+cache: false
+});
 
-    	var ajax_load = '<img src="nws/loading.gif" class="loading" alt="loading..." />';
-    	var loadUrl = 'nws/nws-reload-feed.php';
+var ajax_load = '<img src="nws/loading.gif" class="loading" alt="loading..." />';
+var loadUrl = 'nws/nws-reload-feed.php';
 
-	$('.reload').click(function(){
-	    var DivToReload = $(this).parent()
-	      var myUrl = DivToReload.attr('title')
-	      DivToReload.children('div.innerContainer')
-	      .html(ajax_load)
-	      .load(loadUrl, "z="+myUrl);
-    	  });
+$('.reload').click(function(){
+var DivToReload = $(this).parent()
+var myUrl = DivToReload.attr('title')
+DivToReload.children('div.innerContainer')
+.html(ajax_load)
+.load(loadUrl, "z="+myUrl);
+});
 
-	$( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
-	// $( ".feed" ).tooltip();
+$( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
+// $( ".feed" ).tooltip();
+$('.reload').trigger('click');
 
-
-        /*
-         * var $container = $('#tab-alt')
-         * /\* var $container = $('#tabs') *\/
-         *
-         * $container.isotope({
-         *   itemSelector : '.outerContainer',
-         *   layoutMode : 'masonry'
-         * });
-         */
-
-        /*
-         * $('.retile').click(function(){
-         *     // get href attribute, minus the '#'
-         *     var $container = $(this).attr('title');
-         *     /\* alert($container); *\/
-         *     $container.isotope({
-         *       sortBy : 'original-order'
-         *           });
-         *     return false;
-         *   });
-         */
-
-	$('.reload').trigger('click');
-	$('.retile').trigger('click');
-
-        /* $("#tab-alt").isotope( 'reLayout', callback ) */
-
-      });
+});
 </script>
 <div id="tabs">
 <?php
@@ -121,7 +92,7 @@ foreach ($urls->url as $url) {
   $myUrls[] = $url;
     foreach($url->attributes() as $attr => $val) {
       if ($attr == 'tab') {
-	$myTabs[] = array('tab'=> (string) $val, 'url'=> (string) $url);
+$myTabs[] = array('tab'=> (string) $val, 'url'=> (string) $url);
       }
     }
 }
@@ -149,40 +120,12 @@ foreach (array_keys($tabGroups) as $tabName) {
   foreach ($tabGroups[$tabName] as $tabUrl) {
     parse($tabUrl);
   }
-    echo '
-</div>';
-
-echo '
-<script>
-    var $container = $("#tab-'.$tabName.'")
-
-      $container.isotope({
-        itemSelector : ".outerContainer",
-        layoutMode : "masonry"
-      });
-
-
-      $("#retile-'.$tabName.'").click(function(){
-alert("plop");
-            $container.isotope({
-              sortBy : "original-order"
-                  });
-            return false;
-          });
-</script>
-<a id="retile-'.$tabName.'" href="#" title="tab-'.$tabName.'">reloa</a>
-';
+    echo '</div>';
 }
 
 ?>
 
 </div>
-
-<ul id="sort-by">
-  <li><a href="#random">name</a></li>
-  <li><a href="#original-order">original-order</a></li>
-</ul>
-
 <a href="mgmt.php">mgmt</a>
 </body>
 </html>

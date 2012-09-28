@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feeds>
   <url tab="alt">http://www.arretsurimages.net/tous-les-contenus.rss</url>
-  <url tab="alt">http://www.egaliteetreconciliation.fr/spip.php?page=backend</url>
   <url tab="alt">http://www.fakirpresse.info/backend.php</url>
   <url tab="alt">http://www.acrimed.org/spip.php?page=backend</url>
-  <url tab="alt">http://labanlieuesexprime.org/backend</url>
   <url tab="alt">http://www.article11.info/spip.php?page=backend</url>
   <url tab="alt">http://www.maitre-eolas.fr/feed/atom</url>
-  <url tab="alt">http://www.bellaciao.org/fr/backend.php3</url>
   <url tab="tech">http://feeds.feedburner.com/thechangelog</url>
   <url tab="tech">http://linuxfr.org/news.atom</url>
   <url tab="tech">http://www.theverge.com/rss/index.xml</url>
-  <url tab="tech">http://www.framablog.org/index.php/feed/atom</url>
-  <url tab="tech">http://framapack.org/~framaflux/rss.php</url>
   <url tab="tech">http://news.ycombinator.com/rss</url>
   <url tab="tech">http://feeds.feedburner.com/hackaday/LgoM</url>
+  <url tab="tech">http://www.reghardware.com/headlines.atom</url>
+  <url tab="tech">http://rss.slashdot.org/Slashdot/slashdot</url>
+  <url tab="tech">http://feeds.feedburner.com/TechCrunch/</url>
+  <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
 </feeds>
