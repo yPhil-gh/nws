@@ -75,9 +75,11 @@ a:active {
 }
 
 .outerContainer {
-    width:250px;
+    width:24%;
+    float: left;
     /* display:inline-block; */
     /* vertical-align:top; */
+
 }
 
 .feed ul li img.feed {
@@ -171,6 +173,13 @@ img.full {
 }
 
 /* Tabs */
+
+/*
+ * .spacer {
+ *     margin: 0 0 3em 0;
+ * }
+ */
+
 .ui-widget-content {
     background: #555;
     border: 1px solid #AAAAAA;

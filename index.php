@@ -57,12 +57,32 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 	// $( ".feed" ).tooltip();
 
 
-        $("#tab-alt").isotope({
-          itemSelector : '.outerContainer',
-          layoutMode : 'masonry'
-        });
+        /*
+         * var $container = $('#tab-alt')
+         * /\* var $container = $('#tabs') *\/
+         *
+         * $container.isotope({
+         *   itemSelector : '.outerContainer',
+         *   layoutMode : 'masonry'
+         * });
+         */
+
+        /*
+         * $('.retile').click(function(){
+         *     // get href attribute, minus the '#'
+         *     var $container = $(this).attr('title');
+         *     /\* alert($container); *\/
+         *     $container.isotope({
+         *       sortBy : 'original-order'
+         *           });
+         *     return false;
+         *   });
+         */
 
 	$('.reload').trigger('click');
+	$('.retile').trigger('click');
+
+        /* $("#tab-alt").isotope( 'reLayout', callback ) */
 
       });
 </script>
@@ -128,12 +148,40 @@ foreach (array_keys($tabGroups) as $tabName) {
   foreach ($tabGroups[$tabName] as $tabUrl) {
     parse($tabUrl);
   }
-    echo '</div>';
+    echo '
+</div>';
+
+echo '
+<script>
+    var $container = $("#tab-'.$tabName.'")
+
+      $container.isotope({
+        itemSelector : ".outerContainer",
+        layoutMode : "masonry"
+      });
+
+
+      $("#retile-'.$tabName.'").click(function(){
+alert("plop");
+            $container.isotope({
+              sortBy : "original-order"
+                  });
+            return false;
+          });
+</script>
+<a id="retile-'.$tabName.'" href="#" title="tab-'.$tabName.'">reloa</a>
+';
 }
 
 ?>
 
 </div>
+
+<ul id="sort-by">
+  <li><a href="#random">name</a></li>
+  <li><a href="#original-order">original-order</a></li>
+</ul>
+
 <a href="mgmt.php">mgmt</a>
 </body>
 </html>
