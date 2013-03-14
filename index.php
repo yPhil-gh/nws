@@ -128,4 +128,5 @@ foreach (array_keys($tabGroups) as $tabName) {
 </div>
 <a href="mgmt.php">mgmt</a>
 </body>
+
 </html>
