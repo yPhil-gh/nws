@@ -20,7 +20,7 @@
 *** Installation
    - Copy the files in a directory within a webserver root. Point your browser to that directory
    - Recommended : Protect (restrict access to) the back-office
-     - Use [[http://www.google.com/search?q=htpassword+generator][a trusted online htpassword generator]] (You can also create user/password pair(s) directly on the server with the command "htpasswd -b .access username password")
+     - Use [[https://duckduckgo.com/?q%3Dhtpassword%2Bgenerator][a trusted online htpassword generator]] (You can also create user/password pair(s) directly on the server with the command "htpasswd -b .access username password")
      - Paste this user/password pair in a file, and upload it as nws/.access (or another - secure - location, see below)
      - Optional : Move the .access out of the http server root, and edit .htaccess to reflect this change.
 
