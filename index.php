@@ -32,6 +32,7 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 <style type="text/css" media="screen">@import "nws/nws.css";</style>
 </head>
 <body>
+<base target='_blank' />
 <script src="nws/jquery.min.js"></script>
 <script src="nws/jquery-ui.min.js"></script>
 
