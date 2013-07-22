@@ -1,6 +1,5 @@
 * NWS
 
-
 ** NWS is an online news reader
 
    NWS iz a php CMS to manage various XML (RSS, aTom, etc) news feeds
