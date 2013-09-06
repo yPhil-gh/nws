@@ -21,11 +21,11 @@
 
 <html>
 <head>
-<style type="text/css" media="screen">@import "nws/nws.css";</style>
-<title>nws - Manage feeds</title>
+    <style type="text/css" media="screen">@import "nws/nws.css";</style>
+    <title>nws - Manage feeds</title>
 </head>
 <body>
-<div>
+    <div>
 
 <?
 
@@ -213,10 +213,10 @@ if (isset($feedToUp) || isset($feedToAdd) || isset($feedToDel) || isset($feedToR
 }
 echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
 ?>
-<input type="text" title="Add a new feed" name="a">
-    <input type="submit" name="submit" value="+">
-    </form>
-    <a href="./">nws</a>
+            <input type="text" title="Add a new feed" name="a">
+            <input type="submit" name="submit" value="+">
+        </form>
+        <a href="./">nws</a>
     </div>
-    </body>
-    </html>
+</body>
+</html>
