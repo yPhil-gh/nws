@@ -34,10 +34,13 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 <body>
 <base target='_blank' />
 
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<!--script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="nws/jquery.ui.tabs.min.js"></script-->
 
-<script src="nws/jquery.ui.tabs.min.js"></script>
+<script src="nws/jquery.min.js"></script>
+<script src="nws/jquery-ui.min.js"></script>
+
 
     <script>
     $(document).ready(function() {
