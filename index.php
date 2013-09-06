@@ -28,7 +28,7 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 <title>nws</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" type="image/x-icon" href="nws/favicon.png" />
-    <!--link href="nws/jquery.ui.tabs.min.css" rel="stylesheet" type="text/css" /-->
+    <link href="http://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css" rel="stylesheet" type="text/css" />
 
     <link href="nws/jquery-ui.css" rel="stylesheet" type="text/css" />
 
@@ -37,9 +37,10 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 <body>
 <base target='_blank' />
 
-<!--script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="nws/jquery.ui.tabs.min.js"></script-->
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+
 
 <script src="nws/jquery.min.js"></script>
 <script src="nws/jquery-ui.min.js"></script>
