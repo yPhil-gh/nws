@@ -1,9 +1,9 @@
 <?
 /*
   Index : View feeds
-  Time-stamp: <index.php - Wed 15-Feb-2012 17:14:23>
 
   This script is part of NWS
+  https://github.com/xaccrocheur/nws/
 
   NWS is free software: you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free

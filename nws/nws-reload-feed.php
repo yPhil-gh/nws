@@ -4,6 +4,8 @@
   reload-feed : Reload one feed
 
   This script is part of NWS
+  https://github.com/xaccrocheur/nws/
+
 
   NWS is free software: you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free
