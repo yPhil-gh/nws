@@ -116,14 +116,12 @@ function reparse($u) {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                     }
                 } elseif (!empty($mediaImg)) {
-                    $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
-                } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
-                    $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
-                } elseif ($title == "Photo" || strstr($title, "= Photographer")) {
+                    $img = '<a href="'.$mediaImg.'"><img class="feed" title="plup" alt="media" src="'.$mediaImg.'" /></a>';
+                } elseif (strstr($imgSrc, ".tumblr.")) {
+                    $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="Photo" src="'.$imgSrc.'" /></a>';
                     $title = 'post';
-                    $img = '<a href="'.$imgSrc.'"><img class="full" alt="Photo" src="'.$imgSrc.'" /></a>';
                 } elseif (!empty($elseSrc)) {
-                    $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
+                    $img = '<a href="'.$elseSrc.'"><img class="feed" title="plip" alt="else" src="'.$elseSrc.'" /></a>';
                     $description = $item->content;
                 } else {
                     $img = '';

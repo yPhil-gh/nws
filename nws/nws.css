@@ -212,7 +212,7 @@ img.loading {
 .reload {
     cursor:pointer;
     float:right;
-    line-height:.5em;
+    line-height:1em;
     margin: 0 .1em 0 0;
     font-size:150%;
 }
@@ -233,4 +233,3 @@ img.loading {
 .feedUp:hover {
     color:green;
 }
-

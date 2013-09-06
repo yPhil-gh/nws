@@ -1,6 +1,5 @@
 * NWS
 
-
 ** NWS is an online news reader
 
    NWS iz a php CMS to manage various XML (RSS, aTom, etc) news feeds
@@ -15,7 +14,7 @@
    - Does its best to parse any given feed and identify it w/o questions.
    - Plays nice with different resolutions & ergonomics, ie phones, tablets, etc
    - Links directly on any included image
-   - If any, displays item image, wrapped around text (displays it full width if it's the only item's element)
+   - If any, displays item image, wrapped around text (displays it full width if it's the only item's element, or if it comes from tumblr)
    - Lightweight and standard (valid HTML5 code)
 
 *** Installation
@@ -52,4 +51,3 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-

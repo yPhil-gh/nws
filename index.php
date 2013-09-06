@@ -90,7 +90,7 @@ function parse($u) {
             $idiv = str_replace($chars, "", $feedRss->channel->title);
             echo '
 <div class="outerContainer" style="" title ="'.$u.'">
-<span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9842;</span>
+<span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9889;</span>
 <div class="innerContainer"></div>
 </div>
 ';
