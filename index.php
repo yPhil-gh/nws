@@ -28,7 +28,6 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 <title>nws</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" type="image/x-icon" href="nws/favicon.png" />
-    <link href="http://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css" rel="stylesheet" type="text/css" />
 
     <link href="nws/jquery-ui.css" rel="stylesheet" type="text/css" />
 
@@ -37,12 +36,8 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 <body>
 <base target='_blank' />
 
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
-
-<!--script src="nws/jquery.min.js"></script>
-<script src="nws/jquery-ui.min.js"></script-->
-
+<script src="nws/jquery.min.js"></script>
+<script src="nws/jquery-ui.min.js"></script>
 
     <script>
     $(document).ready(function() {

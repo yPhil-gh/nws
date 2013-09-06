@@ -116,12 +116,12 @@ function reparse($u) {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                     }
                 } elseif (!empty($mediaImg)) {
-                    $img = '<a href="'.$mediaImg.'"><img class="feed" title="plup" alt="media" src="'.$mediaImg.'" /></a>';
+                    $img = '<a href="'.$mediaImg.'"><img class="feed" title="'.$title.'" alt="'.$title.'" src="'.$mediaImg.'" /></a>';
                 } elseif (strstr($imgSrc, ".tumblr.")) {
-                    $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="Photo" src="'.$imgSrc.'" /></a>';
+                    $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
                     $title = 'post';
                 } elseif (!empty($elseSrc)) {
-                    $img = '<a href="'.$elseSrc.'"><img class="feed" title="plip" alt="else" src="'.$elseSrc.'" /></a>';
+                    $img = '<a href="'.$elseSrc.'"><img class="feed" title="'.$title.'" alt="'.$title.'" src="'.$elseSrc.'" /></a>';
                     $description = $item->content;
                 } else {
                     $img = '';
