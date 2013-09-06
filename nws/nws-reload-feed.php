@@ -119,7 +119,7 @@ function reparse($u) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
-                } elseif ($title == "Photo") {
+                } elseif ($title == "Photo" || strstr($title, "= Photographer")) {
                     $title = 'post';
                     $img = '<a href="'.$imgSrc.'"><img class="full" alt="Photo" src="'.$imgSrc.'" /></a>';
                 } elseif (!empty($elseSrc)) {
