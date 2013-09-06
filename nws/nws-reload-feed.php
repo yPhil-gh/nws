@@ -2,7 +2,6 @@
 
 /*
   reload-feed : Reload one feed
-  Time-stamp: <nws-reload-feed.php - Wed 15-Feb-2012 17:18:17>
 
   This script is part of NWS
 
@@ -19,14 +18,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-function debug ($var) {
-/* error_reporting(E_ALL); */
-/* ini_set('display_errors', 1); */
-    echo "<pre>";
-    var_dump($var);
-    echo "</pre>";
-}
 
 /**
  * Searches for the first occurence of an html <img> element in a string
@@ -86,11 +77,11 @@ function reparse($u) {
         }
 
         echo '
-<div class="feed" title ="'.$u.'">
-<div class="feedTitle">
-<span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title=""></span>'.$feedTitle.'</a>
-</div>
-<ul>';
+             <div class="feed" title ="'.$u.'">
+                 <div class="feedTitle">
+                     <span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title=""></span>'.$feedTitle.'</a>
+                 </div>
+                 <ul>';
 
         foreach($items as $item) {
             if ($i++ < $limit) {
@@ -114,11 +105,11 @@ function reparse($u) {
                 //This looks like the favicon
                 $media2Img = $media->content->attributes()->url;
 
+                // Images.
                 if (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3") {
                         $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="snd.png" /></a>';
-                        /* $txtClass = "txt-noImg"; */
                     } else {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                     }
@@ -130,15 +121,11 @@ function reparse($u) {
                     $title = 'post';
                     $img = '<a href="'.$imgSrc.'"><img class="full" alt="Photo" src="'.$imgSrc.'" /></a>';
                 } elseif (!empty($elseSrc)) {
-                    /* $img = ""; */
-                    /* debug($elseSrc); */
                     $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
                     $description = $item->content;
                 } else {
                     $img = '';
                 }
-
-                /* $img = '<img class="feed" alt="plop" src="'.$imgSrc.'" />&nbsp'; */
 
                 if (empty($link)) $link = htmlspecialchars($item->link['href']);
                 $fullDescription = strip_tags($item->description, "<img>, <p>");
@@ -146,19 +133,17 @@ function reparse($u) {
                 $description = (isset($item->description) ? $item->description : $item->content);
                 $description = htmlspecialchars(htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description)))));
 
-                //	$title = (($item->title == "Photo") ? $item->title : '');
-
                 echo '
-<li title="'.$description.'">
-    <div class="all">'.$img.'<a target="_blank" href="'.$link.'">'.$title.'</a>
-    <hr />
-    </div>
-</li>';
+                          <li title="'.$description.'">
+                              <div class="all">'.$img.'<a target="_blank" href="'.$link.'">'.$title.'</a>
+                                  <hr />
+                              </div>
+                          </li>';
             }
         }
         echo '
-</ul>
-</div>';
+                      </ul>
+                      </div>';
     }
 }
 
