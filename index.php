@@ -5,21 +5,7 @@
   This script is part of NWS
   https://github.com/xaccrocheur/nws/
 
-  NWS is free software: you can redistribute it and/or modify it under
-  the terms of the GNU General Public License as published by the Free
-  Software Foundation, either version 3 of the License, or (at your
-  option) any later version.
-
-  This program is distributed in the hope that it will be useful, but
-  WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-  General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program. If not, see <http://www.gnu.org/licenses/>.
-
 */
-if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +48,7 @@ $(document).ready(function() {
 
 </script>
 <div id="tabs">
+
 <?php
 $conf = "feeds.xml";
 $urls = simplexml_load_file($conf);
@@ -73,17 +60,16 @@ function parse($u) {
     $chars = array(" ", ".", ":");
     $i=0;
 
-    if($feedRss)
-        {
-            $items = $feedRss->channel->item;
-            $idiv = str_replace($chars, "", $feedRss->channel->title);
-            echo '
-<div class="outerContainer" style="" title ="'.$u.'">
-    <span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9889;</span>
-    <div class="innerContainer"></div>
-</div>
-';
-        }
+    if($feedRss) {
+        $items = $feedRss->channel->item;
+        $idiv = str_replace($chars, "", $feedRss->channel->title);
+        echo '
+        <div class="outerContainer" style="" title ="'.$u.'">
+            <span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9889;</span>
+            <div class="innerContainer"></div>
+        </div>
+        ';
+    }
 }
 
 foreach ($urls->url as $url) {
@@ -100,25 +86,24 @@ foreach($myTabs as $aRow){
 }
 
 echo '
-<ul>
-';
+        <ul>';
 
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
-<li><a title="'.$tabName.', Drag to re-order" href="#tab-'.$tabName.'"><span>'.$tabName.'</span></a></li>';
+            <li><a title="'.$tabName.', Drag to re-order" href="#tab-'.$tabName.'"><span>'.$tabName.'</span></a></li>';
 }
 
 echo '
-</ul>
-';
-
+        </ul>';
 
 foreach (array_keys($tabGroups) as $tabName) {
-    echo '<div id="tab-'.$tabName.'">';
+    echo '
+        <div id="tab-'.$tabName.'">';
     foreach ($tabGroups[$tabName] as $tabUrl) {
         parse($tabUrl);
     }
-    echo '</div>';
+    echo '
+        </div>';
 }
 
 ?>
