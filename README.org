@@ -8,8 +8,6 @@
    crippled with spyware. It's really a [[https://github.com/xaccrocheur/nws/blob/master/screenshot.png][barebones]] system, but I've
    been using it for +weeks+ years now, and it basically does what I want.
 
-![Alt text](https://github.com/xaccrocheur/nws/blob/master/screenshot.png)
-
 *** Features
    - AJAX asynchronous loading of the feeds (ie reload one single feed w/o reloading the whole page)
    - Grabs the most out of the description text and displays it as standard tooltip on mouse hover
