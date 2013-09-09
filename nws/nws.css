@@ -193,16 +193,10 @@ img.full {
 
 .ui-widget-header {
     background: #999;
-    border: 1px solid #AAAAAA;
+    /* border: 1px solid #AAAAAA; */
+    border: 0;
     color: #222222;
     font-weight: bold;
-}
-
-img.loading {
-/* position:absolute; */
-/* top:15px; */
-/* right:15px; */
-
 }
 
 .ui-tabs .ui-tabs-panel {
