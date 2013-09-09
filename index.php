@@ -25,29 +25,30 @@
 <script src="libs/jquery.min.js"></script>
 <script src="libs/jquery-ui.min.js"></script>
 
-<script>
+    <script>
+    $(document).ready(function() {
+        $.ajaxSetup ({
+            cache: false
+        });
 
-$(document).ready(function() {
-    $.ajaxsetup ({ cache: false });
+        var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />';
+        var loadUrl = 'nws-load-feed.php';
 
-    var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />';
-    var loadUrl = 'nws-load-feed.php';
+        $('.reload').click(function(){
+            var DivToReload = $(this).parent()
+            var myUrl = DivToReload.attr('title')
+            DivToReload.children('div.innerContainer')
+                .html(ajax_load)
+                .load(loadUrl, "z="+myUrl);
+        });
 
-    $('.reload').click(function(){
-        var DivToReload = $(this).parent()
-        var myUrl = DivToReload.attr('title')
-        DivToReload.children('div.innerContainer')
-            .html(ajax_load)
-            .load(loadUrl, "z="+myUrl);
+        $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
+        $('.reload').trigger('click');
+
     });
 
-    $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
-    $('.reload').trigger('click');
-
-});
-
-</script>
-<div id="tabs">
+    </script>
+    <div id="tabs">
 
 <?php
 $conf = "feeds.xml";
