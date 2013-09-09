@@ -1,9 +1,6 @@
-AuthUserFile .htauth
+AuthUserFile /absolute/path/to/.htauth
 AuthName "You get to read my feeds, but only I manage them, mmkay ?"
 AuthType Basic
-Require valid-user
-#ErrorDocument 403 philippe/nws/plop.php
-#cache flash and images for one month
-# <FilesMatch ".(flv|swf|ico|gif|jpg|jpeg|png)$">
-#     Header set Cache-Control "max-age=2592000"
-# </FilesMatch>
+<Files "nws-manage.php">
+    Require valid-user
+</Files>
