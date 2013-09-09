@@ -15,8 +15,8 @@ error_reporting(E_ALL);
 /* $url = 'http://herveryssen.hautetfort.com/'; // weird redirect case */
 /* $url = 'http://www.lyrics.com/'; // fucking redirection */
 /* $url = 'http://www.acrimed.org/'; // std */
-$url = 'http://lelibrepenseur.org.trafficvisualize.com//'; // non-std favicon found OK
-/* $url = 'http://www.jaimelinfo.fr/'; // non-std favicon */
+/* $url = 'http://lelibrepenseur.org.trafficvisualize.com//'; // non-std favicon found OK */
+$url = 'http://jaimelinfo.fr/'; // non-std favicon
 
 $u = parse_url($url);
 $subs = explode( '.', $u['host']);
@@ -33,7 +33,9 @@ function CheckImageExists($imgUrl) {
 $file = $url.'/favicon.ico';
 $file_headers = @get_headers($file);
 
-var_dump($file_headers);
+/* var_dump($file_headers); */
+
+echo "<br />Checking ".$url."</br /";
 
 if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 NOT FOUND') {
     $exists = false;
@@ -43,25 +45,43 @@ if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1
     $oDOMDocument->formatOutput = true;
     @$oDOMDocument->loadHTML(file_get_contents($url));
     $oDOMDocument = DOMDocument::loadXML($oDOMDocument->saveXML());
+    $oDOMDocument = utf8_decode($oDOMDocument);
     $oXPath = new DOMXPath($oDOMDocument);
-    $links = $oXPath->query('//link/@href');
+    $links = $oXPath->query('head/link//@href');
 
+//link[@rel="shortcut icon"]
+
+    var_dump($links);
 
     $hrefs = array();
+
+    $links = array();
+    foreach($oDOMDocument->getElementsByTagName('link') as $link) {
+        $links[] = array('url' => $link->getAttribute('href'), 'text' => $link->nodeValue);
+    }
+
+    var_dump($links);
+
     foreach ($links as $link) {
         $hrefs[] = $link->value;
     }
     /* $key = array_search('/images/favicon.ico', $hrefs, FALSE); // $key = 2; */
 
     if (count($hrefs) <= 0) {
-        echo "<br />hrefs empty<br />";
-        } else {
-        echo "<br />hrefs full<br />";
+        echo "hrefs empty<br />";
+        $links = $oXPath->query('//link[@rel="shortcut icon"]');
+        $hrefs = array();
+        foreach ($links as $link) {
+            $hrefs[] = $link->value;
+        }
+        /* $key = array_search('/images/favicon.ico', $hrefs, FALSE); // $key = 2; */
+
+    } else {
+        echo "hrefs full<br />";
     }
 
     $found_favicon = array();
     foreach ( $hrefs as $key => $value ) {
-        echo "plop";
         if( substr_count($value, 'favicon.ico') > 0 ) {
             $found_favicon[] = $value;
             $icon_key = $key;
@@ -90,10 +110,10 @@ if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1
 
 
     if (!CheckImageExists($favicon)) {
-        echo 'DOES NOT EXIST';
+        echo 'File DOES NOT EXIST<br />';
         $favicon = 'http://opensimo.org/philippe/nws/img/nws.png';
     } else {
-        echo 'DOES EXIST';
+        echo 'File DOES EXIST<br />';
     };
 
 
