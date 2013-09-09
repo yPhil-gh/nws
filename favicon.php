@@ -8,7 +8,6 @@
 
 <?php
 
-
 /* $url = 'https://ariejan.net/'; // Weird two-part favicon */
 /* $url = 'http://rezo.net/'; // half-std favicon */
 /* $url = 'http://www.bbc.co.uk/'; // std favicon */
@@ -17,7 +16,6 @@
 /* $url = 'http://www.acrimed.org/'; // std */
 /* $url = 'http://lelibrepenseur.org.trafficvisualize.com//'; // non-std favicon found OK */
 $url = 'http://jaimelinfo.fr/'; // non-std favicon
-
 
 $u = parse_url($url);
 $subs = explode( '.', $u['host']);
@@ -33,8 +31,6 @@ function CheckImageExists($imgUrl) {
 
 $file = $url.'/favicon.ico';
 $file_headers = @get_headers($file);
-
-echo "<br />Checking ".$url."</br /";
 
 if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 NOT FOUND' || $file_headers[0] == 'HTTP/1.1 301 Moved Permanently') {
     $exists = false;
@@ -78,8 +74,6 @@ if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1
         echo 'File DOES EXIST<br />';
     };
 
-
-    /* print_r($founded); */
 
 } else {
     $exists = true;
