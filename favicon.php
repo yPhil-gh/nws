@@ -9,6 +9,7 @@
 // Report all PHP errors (see changelog)
 error_reporting(E_ALL);
 
+
 /* $url = 'https://ariejan.net/'; // Weird two-part favicon */
 /* $url = 'http://rezo.net/'; // half-std favicon */
 /* $url = 'http://www.bbc.co.uk/'; // std favicon */
