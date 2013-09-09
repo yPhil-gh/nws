@@ -23,7 +23,7 @@
 
 <html>
 <head>
-    <style type="text/css" media="screen">@import "nws/nws.css";</style>
+    <style type="text/css" media="screen">@import "nws-style.css";</style>
     <title>nws - Manage feeds</title>
 </head>
 <body>
@@ -72,7 +72,7 @@ if (!empty($_POST['newTabName'])) {
 }
 
 $domIn = new XDOMDocument;
-$domIn->load('nws/feeds.xml');
+$domIn->load('feeds.xml');
 
 $domOut = new XDOMDocument('1.0', 'utf-8');
 $domOut->preserveWhiteSpace=false;
