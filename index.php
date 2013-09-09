@@ -125,6 +125,6 @@ foreach (array_keys($tabGroups) as $tabName) {
 ?>
 
     </div>
-    <a href="mgmt.php">mgmt</a>
+    <a href="nws-manage.php">mgmt</a>
 </body>
 </html>
