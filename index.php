@@ -6,7 +6,7 @@
   https://github.com/xaccrocheur/nws/
 
 */
-if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
+
 ?>
 
 <!DOCTYPE html>
