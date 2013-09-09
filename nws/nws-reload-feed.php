@@ -69,10 +69,10 @@ function reparse($u) {
         else {
             if (isset($feedRss->item)) {
                 $items = $feedRss->item;         // rss of some sort
-            } elseif (isset($tumb)) {		 // tumblr
+            } elseif (isset($tumb)) {	    	 // tumblr
                 $items = $feedRss->posts->post;
                 $feedTitle = $tumb;
-            } else {		         	 // Atom
+            } else {		         	         // Atom
                 $items = $feedRss->entry;
                 $feedTitle = $feedRss->title;
             }
@@ -107,7 +107,7 @@ function reparse($u) {
                 //This looks like the favicon
                 $media2Img = $media->content->attributes()->url;
 
-                // Images.
+                // Images
                 if (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3") {

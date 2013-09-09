@@ -41,40 +41,35 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 
     <script>
     $(document).ready(function() {
-    $.ajaxSetup ({
-      cache: false
+        $.ajaxSetup ({
+            cache: false
         });
 
-    var ajax_load = '<img src="nws/loading.gif" class="loading" alt="loading..." />';
-    var loadUrl = 'nws/nws-reload-feed.php';
+        var ajax_load = '<img src="nws/loading.gif" class="loading" alt="loading..." />';
+        var loadUrl = 'nws/nws-reload-feed.php';
 
-    $('.reload').click(function(){
-    var DivToReload = $(this).parent()
-        var myUrl = DivToReload.attr('title')
-        DivToReload.children('div.innerContainer')
-                   .html(ajax_load)
-                   .load(loadUrl, "z="+myUrl);
-});
+        $('.reload').click(function(){
+            var DivToReload = $(this).parent()
+            var myUrl = DivToReload.attr('title')
+            DivToReload.children('div.innerContainer')
+                .html(ajax_load)
+                .load(loadUrl, "z="+myUrl);
+        });
 
-    $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
-// $( ".feed" ).tooltip();
-    $('.reload').trigger('click');
+        $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
+        $('.reload').trigger('click');
 
-});
+    });
+
 </script>
 <div id="tabs">
 <?php
-    $conf = "nws/feeds.xml";
+$conf = "nws/feeds.xml";
 $urls = simplexml_load_file($conf);
 
 $z = 0;
 
-/* limite d'items par feed */
-if (isset($_GET['limit'])) $feedsByTab = $_GET['limit'];
-$feedsByTab="8";
-
 function parse($u) {
-    $limit="8";
     $feedRss=simplexml_load_file($u);
     $chars = array(" ", ".", ":");
     $i=0;
@@ -85,8 +80,8 @@ function parse($u) {
             $idiv = str_replace($chars, "", $feedRss->channel->title);
             echo '
 <div class="outerContainer" style="" title ="'.$u.'">
-<span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9889;</span>
-<div class="innerContainer"></div>
+    <span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9889;</span>
+    <div class="innerContainer"></div>
 </div>
 ';
         }
@@ -129,7 +124,7 @@ foreach (array_keys($tabGroups) as $tabName) {
 
 ?>
 
-</div>
-<a href="mgmt.php">mgmt</a>
+    </div>
+    <a href="mgmt.php">mgmt</a>
 </body>
 </html>
