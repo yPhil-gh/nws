@@ -131,7 +131,12 @@ function reparse($u) {
                 $fullDescription = strip_tags($item->description, "<img>, <p>");
 
                 $description = (isset($item->description) ? $item->description : $item->content);
-                $description = htmlspecialchars(htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description)))));
+                $description = htmlspecialchars(htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description)))), ENT_NOQUOTES);
+
+                /* $description = str_replace('\&rsquo\;', 'plop', $description); */
+
+                $description = htmlspecialchars_decode($description);
+
 
                 echo '
                           <li title="'.$description.'">
