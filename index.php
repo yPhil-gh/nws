@@ -6,7 +6,6 @@
   https://github.com/xaccrocheur/nws/
 
 */
-
 ?>
 
 <!DOCTYPE html>
@@ -26,30 +25,33 @@
 <script src="libs/jquery.min.js"></script>
 <script src="libs/jquery-ui.min.js"></script>
 
-    <script>
-    $(document).ready(function() {
-        $.ajaxSetup ({
-            cache: false
-        });
+<script>
 
-        var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />';
-        var loadUrl = 'nws-load-feed.php';
-
-        $('.reload').click(function(){
-            var DivToReload = $(this).parent()
-            var myUrl = DivToReload.attr('title')
-            DivToReload.children('div.innerContainer')
-                .html(ajax_load)
-                .load(loadUrl, "z="+myUrl);
-        });
-
-        $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
-        $('.reload').trigger('click');
-
+$(document).ready(function() {
+    $.ajaxSetup ({
+        cache: false
     });
 
+    var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />';
+    var loadUrl = 'nws-load-feed.php';
+
+    $('.reload').click(function(){
+        var DivToReload = $(this).parent()
+        var myUrl = DivToReload.attr('title')
+        DivToReload.children('div.innerContainer')
+            .html(ajax_load)
+            .load(loadUrl, "z="+myUrl);
+    });
+
+    $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
+    $('.reload').trigger('click');
+
+});
+
 </script>
+
 <div id="tabs">
+
 <?php
 $conf = "feeds.xml";
 $urls = simplexml_load_file($conf);
