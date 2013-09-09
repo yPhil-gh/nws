@@ -27,7 +27,7 @@
     <title>nws - Manage feeds</title>
 </head>
 <body>
-<div>
+    <div>
 
 <?
 
@@ -184,41 +184,41 @@ for ($i=0; $i < $defUrlTagList->length ; $i++) {
 
     $favicon = 'http://g.etfv.co/'.$myFeedz[$i]['url'];
 
-    echo '
-<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
+    echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
 
-    echo '
-    <a title="Delete this feed" class="feedDel" href="'.$_SERVER['PHP_SELF'].'?d='.$i.'">x</a>&nbsp;<a title="Promote this feed as 1st of its tab" class="feedUp" href="'.$_SERVER['PHP_SELF'].'?u='.$i.'">^</a><input type="hidden" name="idFeed" value="'.$i.'">
-    <select title="Change this feed\'s tab" name="tabName" value="">';
+    echo ' <a title="Delete this feed" class="feedDel" href="'.$_SERVER['PHP_SELF'].'?d='.$i.'">x</a>&nbsp;<a title="Promote this feed as 1st of its tab" class="feedUp" href="'.$_SERVER['PHP_SELF'].'?u='.$i.'">^</a><input type="hidden" name="idFeed" value="'.$i.'">
+ <select title="Change this feed\'s tab" name="tabName" value="">';
 
-        echo '
-        <option value="'.$myFeedz[$i]['tab'].'" selected="yes">'.$myFeedz[$i]['tab'].'</option>';
+        echo '<option value="'.$myFeedz[$i]['tab'].'" selected="yes">'.$myFeedz[$i]['tab'].'</option>';
 
         foreach (array_unique($defUrlTabList) as $defUrlTab) {
-            echo '
-        <option value="'.$defUrlTab.'">'.$defUrlTab.'</option>';
+            echo '<option value="'.$defUrlTab.'">'.$defUrlTab.'</option>';
         }
 
         echo '
-    </select>
-    <input title="New tab" type="text" size="6" name="newTabName" value="">
-    <input type="submit" value="<">
-    <img height="16" src="'.$favicon.'" />'.$myFeedz[$i]['url'].'<br />
-    </form>';
+</select>
+<input title="New tab" type="text" size="6" name="newTabName" value="">
+<input type="submit" value="<">
+<img height="16" src="'.$favicon.'" />
+'.$myFeedz[$i]['url'].'
+<br />';
+        echo '</form>';
 }
+
+
+
 
 if (isset($feedToUp) || isset($feedToAdd) || isset($feedToDel) || isset($feedToRetab)) {
     echo '<hr />Wrote: (' . $domOut->save("feeds.xml") . ') bytes';
 // header("Cache-Control: no-cache");
 /* header('Location: '.$_SERVER['PHP_SELF'].'#'); */
 }
-echo '
-    <form method="post" action="'.$_SERVER['PHP_SELF'].'">';
+echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
 ?>
-        <input type="text" title="Add a new feed" name="a">
-        <input type="submit" name="submit" value="+">
-    </form>
-    <a href="./">nws</a>
+            <input type="text" title="Add a new feed" name="a">
+            <input type="submit" name="submit" value="+">
+        </form>
+        <a href="./">nws</a>
     </div>
 </body>
 </html>
