@@ -27,7 +27,7 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 <head>
 <title>nws</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="nws/favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/nws.png" />
 
     <link href="libs/jquery-ui.css" rel="stylesheet" type="text/css" />
 
@@ -45,7 +45,7 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
             cache: false
         });
 
-        var ajax_load = '<img src="nws/loading.gif" class="loading" alt="loading..." />';
+        var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />';
         var loadUrl = 'nws-load-feed.php';
 
         $('.reload').click(function(){
