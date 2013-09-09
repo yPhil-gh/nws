@@ -18,6 +18,7 @@
 /* $url = 'http://lelibrepenseur.org.trafficvisualize.com//'; // non-std favicon found OK */
 $url = 'http://jaimelinfo.fr/'; // non-std favicon
 
+
 $u = parse_url($url);
 $subs = explode( '.', $u['host']);
 $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1];
