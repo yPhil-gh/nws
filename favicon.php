@@ -56,13 +56,6 @@ if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1
 
     $hrefs = array();
 
-    $links = array();
-    foreach($oDOMDocument->getElementsByTagName('link') as $link) {
-        $links[] = array('url' => $link->getAttribute('href'), 'text' => $link->nodeValue);
-    }
-
-    var_dump($links);
-
     foreach ($links as $link) {
         $hrefs[] = $link->value;
     }
