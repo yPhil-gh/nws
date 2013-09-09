@@ -137,7 +137,6 @@ function reparse($u) {
 
                 $description = htmlspecialchars_decode($description);
 
-
                 echo '
                           <li title="'.$description.'">
                               <div class="all">'.$img.'<a target="_blank" href="'.$link.'">'.$title.'</a>
