@@ -8,6 +8,8 @@
    crippled with spyware. It's really a [[https://github.com/xaccrocheur/nws/blob/master/screenshot.png][barebones]] system, but I've
    been using it for +weeks+ years now, and it basically does what I want.
 
+![Alt text](https://github.com/xaccrocheur/nws/blob/master/screenshot.png)
+
 *** Features
    - AJAX asynchronous loading of the feeds (ie reload one single feed w/o reloading the whole page)
    - Grabs the most out of the description text and displays it as standard tooltip on mouse hover
@@ -18,7 +20,8 @@
    - Lightweight and standard (valid HTML5 code)
 
 *** Installation
-   - Copy the files in a directory within a webserver root. Point your browser to that directory
+   - Copy the files in a directory within a webserver root.
+   - Point your browser to that directory. That's it.
    - Recommended : Protect (restrict access to) the back-office
      - Use [[https://duckduckgo.com/?q%3Dhtpassword%2Bgenerator][a trusted online htpassword generator]] (You can also create user/password pair(s) directly on the server with the command "htpasswd -b .access username password")
      - Paste this user/password pair in a file, and upload it as nws/.access (or another - secure - location, see below)
@@ -26,12 +29,13 @@
 
 *** Usage
    - Use "Pin as app tab" in Firefox to prevent tab clutter
-   - Use the "mgmt" link to access the "back office"
+   - Use the "Manage feeds" link to access the "back office"
      - Use the "add a new feed" text entry field at the bottom to enter a new feed
      - Use the "new tab" text entry field to create a new category
      - Use the "change this feed's tab" menu to re-categorize the feed
      - Use the "promote this feed" (^) link to bump up a feed as 1st of its tab
      - Use the "delete this feed" (x) link to delete a feed
+   - Or directly edit [[https://github.com/xaccrocheur/nws/blob/master/feeds.xml][feeds.xml]] (faster).
 
 *** +TODO
   - A better sorting system. Right now it's quite a PITA when you add a new feed and assign it to a category/tab, to promote (^) the feeds and tabs to their previous locations
