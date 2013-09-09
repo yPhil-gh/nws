@@ -184,10 +184,10 @@ img.full {
     color: #222222;
 }
 
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active a:visited {
     background: #555;
     border: 1px solid #AAAAAA;
-    color: #212121;
+    /* color: red; */
     font-weight: normal;
 }
 
@@ -195,7 +195,7 @@ img.full {
     background: #999;
     /* border: 1px solid #AAAAAA; */
     border: 0;
-    color: #222222;
+    color: red;
     font-weight: bold;
 }
 
