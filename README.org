@@ -2,11 +2,11 @@
 
 ** NWS is an online news reader
 
-   NWS iz a php CMS to manage various XML (RSS, aTom, etc) news feeds
+   NWS is a php CMS to manage various XML (RSS, aTom, etc) news feeds
    and present them in a nice, ergonomic fashion. I made it to replace the online
-   news services that I've been using, as they became bloated and
+   news services that I use up until around 2007, when they became bloated and
    crippled with spyware. It's really a [[https://github.com/xaccrocheur/nws/blob/master/screenshot.png][barebones]] system, but I've
-   been using it for weeks now, and it basically does what I want.
+   been using it for ~~weeks~~ years now, and it basically does what I want.
 
 *** Features
    - AJAX asynchronous loading of the feeds (ie reload one single feed w/o reloading the whole page)
