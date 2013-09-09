@@ -71,7 +71,7 @@ a:active {
     vertical-align:top;
     margin: 0 1% .5em 0;
     font-size:.7em;
-    border: #6CC918 1px solid;
+    border: gray 1px solid;
 }
 
 .outerContainer {
@@ -129,7 +129,7 @@ img.full {
 }
 
 .feed:hover {
-    border: #ff0 1px solid;
+    border: orange 1px solid;
 }
 
 #dashBoard td {
@@ -187,15 +187,17 @@ img.full {
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active a:visited {
     background: #555;
     border: 1px solid #AAAAAA;
-    /* color: red; */
     font-weight: normal;
+}
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    color: orange;
 }
 
 .ui-widget-header {
     background: #999;
     /* border: 1px solid #AAAAAA; */
     border: 0;
-    color: red;
     font-weight: bold;
 }
 
@@ -212,7 +214,7 @@ img.full {
 }
 
 .reload:hover {
-    color:red;
+    color:orange;
 }
 
 .feedUp {
