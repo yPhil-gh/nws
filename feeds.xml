@@ -7,10 +7,5 @@
 
   <url tab="tech">http://linuxfr.org/news.atom</url>
   <url tab="tech">http://www.theverge.com/rss/index.xml</url>
-  <url tab="tech">http://news.ycombinator.com/rss</url>
-  <url tab="tech">http://feeds.feedburner.com/hackaday/LgoM</url>
-  <url tab="tech">http://www.reghardware.com/headlines.atom</url>
-  <url tab="tech">http://rss.slashdot.org/Slashdot/slashdot</url>
-  <url tab="tech">http://feeds.feedburner.com/TechCrunch/</url>
-  <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
+
 </feeds>

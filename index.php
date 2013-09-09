@@ -36,8 +36,8 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 <body>
 <base target='_blank' />
 
-<script src="nws/jquery.min.js"></script>
-<script src="nws/jquery-ui.min.js"></script>
+<script src="libs/jquery.min.js"></script>
+<script src="libs/jquery-ui.min.js"></script>
 
     <script>
     $(document).ready(function() {
@@ -46,7 +46,7 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
         });
 
         var ajax_load = '<img src="nws/loading.gif" class="loading" alt="loading..." />';
-        var loadUrl = 'nws/nws-reload-feed.php';
+        var loadUrl = 'nws-load-feed.php';
 
         $('.reload').click(function(){
             var DivToReload = $(this).parent()
@@ -64,7 +64,7 @@ if (isset($_GET['code'])) { die(highlight_file(__FILE__, 1)); }
 </script>
 <div id="tabs">
 <?php
-$conf = "nws/feeds.xml";
+$conf = "feeds.xml";
 $urls = simplexml_load_file($conf);
 
 $z = 0;
