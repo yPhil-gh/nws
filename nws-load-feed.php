@@ -55,7 +55,6 @@ function reparse($u) {
     $url = parse_url($u);
     $subs = explode( '.', $url['host']);
     $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1];
-    /* $favicon = (getimagesize($url['scheme'].'://'.$domain.'/favicon.ico') ? $url['scheme'].'://'.$domain.'/favicon.ico' : 'favicon.png'); */
 
     $favicon = 'http://g.etfv.co/'.$u;
 
@@ -132,8 +131,6 @@ function reparse($u) {
 
                 $description = (isset($item->description) ? $item->description : $item->content);
                 $description = htmlspecialchars(htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description)))), ENT_NOQUOTES);
-
-                /* $description = str_replace('\&rsquo\;', 'plop', $description); */
 
                 $description = htmlspecialchars_decode($description);
 
