@@ -1,6 +1,6 @@
 <?
 /*
-  Index : View feeds
+  index : View all feeds
 
   This script is part of NWS
   https://github.com/xaccrocheur/nws/
@@ -51,7 +51,6 @@ $(document).ready(function() {
 </script>
 
 <div id="tabs">
-
 <?php
 $conf = "feeds.xml";
 $urls = simplexml_load_file($conf);
@@ -68,10 +67,10 @@ function parse($u) {
             $items = $feedRss->channel->item;
             $idiv = str_replace($chars, "", $feedRss->channel->title);
             echo '
-<div class="outerContainer" style="" title ="'.$u.'">
-    <span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9889;</span>
-    <div class="innerContainer"></div>
-</div>
+        <div class="outerContainer" style="" title ="'.$u.'">
+            <span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9889;</span>
+            <div class="innerContainer"></div>
+        </div>
 ';
         }
 }
@@ -90,30 +89,30 @@ foreach($myTabs as $aRow){
 }
 
 echo '
-<ul>
-';
+    <ul>';
 
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
-<li><a title="'.$tabName.', Drag to re-order" href="#tab-'.$tabName.'"><span>'.$tabName.'</span></a></li>';
+        <li><a title="'.$tabName.', Drag to re-order" href="#tab-'.$tabName.'"><span>'.$tabName.'</span></a></li>';
 }
 
 echo '
-</ul>
-';
+    </ul>';
 
 
 foreach (array_keys($tabGroups) as $tabName) {
-    echo '<div id="tab-'.$tabName.'">';
+    echo '
+    <div id="tab-'.$tabName.'">';
     foreach ($tabGroups[$tabName] as $tabUrl) {
         parse($tabUrl);
     }
-    echo '</div>';
+    echo '
+    </div>';
 }
 
 ?>
 
-    </div>
-    <a href="nws-manage.php">Manage feeds</a>
+</div>
+<a href="nws-manage.php">Manage feeds</a>
 </body>
 </html>

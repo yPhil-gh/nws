@@ -94,9 +94,6 @@ function reparse($u) {
                 // Must call attributes()
                 $mediaImg = $media->thumbnail->attributes()->url;
 
-                //This looks like the favicon
-                $media2Img = $media->content->attributes()->url;
-
                 // Image
                 if (strstr($imgSrc, ".tumblr.")) {
                     $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
