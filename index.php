@@ -18,9 +18,9 @@
     <link href="libs/jquery-ui.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css" media="screen">@import "nws-style.css";</style>
+    <base target='_blank' />
 </head>
 <body>
-<base target='_blank' />
 
 <script src="libs/jquery.min.js"></script>
 <script src="libs/jquery-ui.min.js"></script>
