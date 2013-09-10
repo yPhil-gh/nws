@@ -1,4 +1,7 @@
 <?php
+
+include('nws-favicon.php');
+
 /*
   reload-feed : Reload one feed
 
@@ -41,11 +44,12 @@ function reparse($u) {
     $url = parse_url($u);
     $subs = explode( '.', $url['host']);
     $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1];
-    /* $favicon = (getimagesize($url['scheme'].'://'.$domain.'/favicon.ico') ? $url['scheme'].'://'.$domain.'/favicon.ico' : 'favicon.png'); */
 
-    $favicon = 'http://g.etfv.co/'.$u;
-
+    $favicon = getFavicon('http://'.$domain);
     $tumb = $feedRss->tumblelog->attributes()->name;
+
+    /* echo $favicon; */
+    /* echo $method; */
 
     if($feedRss) {
         if (isset($feedRss->channel->item)) {
