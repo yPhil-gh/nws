@@ -7,6 +7,7 @@
 */
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
     <style type="text/css" media="screen">@import "nws-style.css";</style>
