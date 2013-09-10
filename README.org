@@ -16,12 +16,12 @@
    - Plays nice with different resolutions & ergonomics, ie phones, tablets, etc
    - Directly links to any included image (and sound file)
    - If any, displays item image, wrapped around text (displays it full width if it's the only item's element, or if it comes from tumblr)
-   - Totally self-contained. No linked librairies online commodities or, heaven forbid, "statistics" trackers
+   - Totally self-contained. No linked librairies, online commodities or, heaven forbid, "statistics" trackers
    - Lightweight and standard (valid HTML5 code)
 
 *** Installation
    - Copy the files in a directory within a webserver root.
-   - Point your browser to that directory. That's it.
+   - Point your browser to that webserver's directory. That's it.
    - Recommended : Protect (restrict access to) the back-office
      - Use [[https://duckduckgo.com/?q%3Dhtpassword%2Bgenerator][a trusted online htpassword generator]] (You can also create user/password pair(s) directly on the server with the command "htpasswd -b .access username password")
      - Paste this user/password pair in a file, and upload it as nws/.access (or another - secure - location, see below)
