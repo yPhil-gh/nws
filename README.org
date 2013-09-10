@@ -12,10 +12,11 @@
    - AJAX (asynchronous) loading of the feeds (ie reload one single feed w/o reloading the whole page)
    - Handles any charset encoding/langage
    - Grabs the most out of the description text and displays it as standard tooltip on mouse hover
-   - Does its best to parse any given feed and identify it w/o questions.
+   - Does its best to parse any given feed and identify it w/o questions
    - Plays nice with different resolutions & ergonomics, ie phones, tablets, etc
    - Directly links to any included image (and sound file)
    - If any, displays item image, wrapped around text (displays it full width if it's the only item's element, or if it comes from tumblr)
+   - Totally self-contained. No linked librairies online commodities or, heaven forbid, "statistics" trackers
    - Lightweight and standard (valid HTML5 code)
 
 *** Installation
