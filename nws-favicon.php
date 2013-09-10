@@ -42,6 +42,8 @@ function getFavicon ($url) {
     if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 NOT FOUND' || $file_headers[0] == 'HTTP/1.1 301 Moved Permanently') {
         $exists = false;
 
+        echo "http://".$domain;
+
         $fileContent = @file_get_contents("http://".$domain);
 
         $dom = @DOMDocument::loadHTML($fileContent);
