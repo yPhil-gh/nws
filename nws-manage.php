@@ -159,8 +159,6 @@ for ($i=0; $i < $defUrlTagList->length ; $i++) {
     $myFeedz[] = array("url" => $defUrlTagList->item($i)->nodeValue, "tab" => $defUrlTagList->item($i)->getAttribute('tab'));
     $favicon = getFavicon($myFeedz[$i]['url']);
 
-    echo $favicon;
-
     echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
 
     echo ' <a title="Delete this feed" class="feedDel" href="'.$_SERVER['PHP_SELF'].'?d='.$i.'">x</a>&nbsp;<a title="Promote this feed as 1st of its tab" class="feedUp" href="'.$_SERVER['PHP_SELF'].'?u='.$i.'">^</a><input type="hidden" name="idFeed" value="'.$i.'">
