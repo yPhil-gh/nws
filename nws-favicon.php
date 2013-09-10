@@ -36,13 +36,13 @@ function getFavicon ($url) {
     $subs = explode( '.', $u['host']);
     $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1];
 
-    $file = $url.'/favicon.ico';
+    $file = "http://".$domain."/favicon.ico";
     $file_headers = @get_headers($file);
 
     if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 NOT FOUND' || $file_headers[0] == 'HTTP/1.1 301 Moved Permanently') {
         $exists = false;
 
-        $fileContent = @file_get_contents($url);
+        $fileContent = @file_get_contents("http://".$domain);
 
         $dom = @DOMDocument::loadHTML($fileContent);
         $xpath = new DOMXpath($dom);
@@ -76,8 +76,13 @@ function getFavicon ($url) {
             }
         }
 
-        if (!CheckImageExists($favicon)) {
-            /* echo 'File DOES NOT EXIST<br />'; */
+        if (isset($favicon)) {
+            if (!CheckImageExists($favicon)) {
+                /* echo 'File DOES NOT EXIST<br />'; */
+                $favicon = 'http://opensimo.org/philippe/nws/img/nws.png';
+                $method = "fallback";
+            }
+        } else {
             $favicon = 'http://opensimo.org/philippe/nws/img/nws.png';
             $method = "fallback";
         }
@@ -98,6 +103,7 @@ function getFavicon ($url) {
         $founded[] = '';
     }
     return $favicon;
+/* .'('.$url.')-'.$method; */
 }
 
 /* echo getFavicon('http://www.acrimed.org/'); */

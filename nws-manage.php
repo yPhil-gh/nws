@@ -17,6 +17,8 @@
 
 <?
 
+include('nws-favicon.php');
+
 class XDOMElement extends DOMElement {
     function __construct($name, $value = null, $namespaceURI = null) {
         parent::__construct($name, null, $namespaceURI);
@@ -155,20 +157,7 @@ for ($i=0; $i < $defUrlTagList->length ; $i++) {
 
     $deffeedz[] = $defUrlTagList->item($i)->nodeValue;
     $myFeedz[] = array("url" => $defUrlTagList->item($i)->nodeValue, "tab" => $defUrlTagList->item($i)->getAttribute('tab'));
-
-    /* $doc = new DOMDocument(); */
-    /* $doc->strictErrorChecking = FALSE; */
-    /* $doc->loadHTML(file_get_contents($myFeedz[$i]['url'])); */
-    /* $xml = simplexml_import_dom($doc); */
-    /* $arr = $xml->xpath('//link[@rel="shortcut icon"]'); */
-    /* $favicon = $arr[0]['href']; */
-
-    /* $url = parse_url($myFeedz[$i]['url']); */
-    /* $subs = explode( '.', $url['host']); */
-    /* $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1]; */
-    /* $favicon = (getimagesize($url['scheme'].'://'.$domain.'/favicon.ico') ? $url['scheme'].'://'.$domain.'/favicon.ico' : 'favicon.png'); */
-
-    $favicon = 'http://g.etfv.co/'.$myFeedz[$i]['url'];
+    $favicon = getFavicon($myFeedz[$i]['url']);
 
     echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
 

@@ -51,6 +51,7 @@ function reparse($u) {
     /* echo $favicon; */
     /* echo $method; */
 
+
     if($feedRss) {
         if (isset($feedRss->channel->item)) {
             $items = $feedRss->channel->item;
