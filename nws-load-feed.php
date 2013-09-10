@@ -98,21 +98,26 @@ function reparse($u) {
                 //This looks like the favicon
                 $media2Img = $media->content->attributes()->url;
 
-                // Images
-                if (!empty($atomImg)) {
+                // Image
+                if (strstr($imgSrc, ".tumblr.")) {
+                    $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
+                    $title = 'post';
+                } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3") {
-                        $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="img/snd.png" /></a>';
+                        $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="snd.png" /></a>';
                     } else {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                     }
                 } elseif (!empty($mediaImg)) {
-                    $img = '<a href="'.$mediaImg.'"><img class="feed" title="'.$title.'" alt="'.$title.'" src="'.$mediaImg.'" /></a>';
-                } elseif (strstr($imgSrc, ".tumblr.")) {
-                    $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
+                    $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
+                } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
+                    $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
+                } elseif ($title == "Photo") {
                     $title = 'post';
+                    $img = '<a href="'.$imgSrc.'"><img class="full" alt="Photo" src="'.$imgSrc.'" /></a>';
                 } elseif (!empty($elseSrc)) {
-                    $img = '<a href="'.$elseSrc.'"><img class="feed" title="'.$title.'" alt="'.$title.'" src="'.$elseSrc.'" /></a>';
+                    $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
                     $description = $item->content;
                 } else {
                     $img = '';
