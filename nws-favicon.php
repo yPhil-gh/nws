@@ -8,17 +8,6 @@
 
 <?php
 
-/* $url = 'https://ariejan.net/'; // Weird two-part favicon */
-/* $url = 'http://rezo.net/'; // half-std favicon */
-/* $url = 'http://www.bbc.co.uk/'; // std favicon */
-/* $url = 'http://herveryssen.hautetfort.com/'; // weird redirect case */
-/* $url = 'http://www.lyrics.com/'; // fucking redirection */
-/* $url = 'http://www.acrimed.org/'; // std */
-/* $url = 'http://lelibrepenseur.org.trafficvisualize.com//'; // non-std favicon found OK */
-      $url = 'http://jaimelinfo.fr/'; // non-std favicon
-$url = 'http://www.article11.info/';
-/* $url = $_GET['url']; */
-
 function CheckImageExists($imgUrl) {
     if (@GetImageSize($imgUrl)) {
         return true;
@@ -28,8 +17,6 @@ function CheckImageExists($imgUrl) {
 };
 
 function getFavicon ($url) {
-
-    /* echo "url : ".$url; */
 
     $u = parse_url($url);
 
@@ -78,7 +65,6 @@ function getFavicon ($url) {
 
         if (isset($favicon)) {
             if (!CheckImageExists($favicon)) {
-                /* echo 'File DOES NOT EXIST<br />'; */
                 $favicon = 'http://opensimo.org/philippe/nws/img/nws.png';
                 $method = "fallback";
             }
@@ -89,7 +75,6 @@ function getFavicon ($url) {
 
     } else {
         $exists = true;
-        /* $hrefs[] = $file; */
         $favicon = $file;
         $method = "classic";
 
@@ -103,9 +88,6 @@ function getFavicon ($url) {
         $founded[] = '';
     }
     return $favicon;
-/* .'('.$url.')-'.$method; */
 }
-
-/* echo getFavicon('http://www.acrimed.org/'); */
 
 ?>
