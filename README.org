@@ -28,7 +28,6 @@
      - Optional : Move the .access out of the http server root, and edit .htaccess to reflect this change.
 
 *** Usage
-   - Use "Pin as app tab" in Firefox to prevent tab clutter
    - Use the "Manage feeds" link to access the "back office"
      - Use the "add a new feed" text entry field at the bottom to enter a new feed
      - Use the "new tab" text entry field to create a new category
@@ -36,6 +35,8 @@
      - Use the "promote this feed" (^) link to bump up a feed as 1st of its tab
      - Use the "delete this feed" (x) link to delete a feed
    - Or directly edit [[https://github.com/xaccrocheur/nws/blob/master/feeds.xml][feeds.xml]] (way faster).
+   - Use "Pin tab" in your browser to prevent tab clutter
+   - Use [[http://www.firefoxfacts.com/2013/08/14/back-is-close/][Back is close]] to quickly go back to where you were
 
 *** +TODO
   - A better sorting system. Right now it's quite a PITA when you add a new feed and assign it to a category/tab, to promote (^) the feeds and tabs to their previous locations
