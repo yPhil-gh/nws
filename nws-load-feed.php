@@ -1,14 +1,13 @@
 <?php
-
-include('nws-favicon.php');
-
 /*
-  reload-feed : Reload one feed
+  nws-reload-feed : Reload one feed
 
   This script is part of NWS
   https://github.com/xaccrocheur/nws/
 
 */
+
+include('nws-favicon.php');
 
 /**
  * Searches for the first occurence of an html <img> element in a string
@@ -128,8 +127,6 @@ function reparse($u) {
 
                 $description = (isset($item->description) ? $item->description : $item->content);
                 $description = htmlspecialchars(htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description)))), ENT_NOQUOTES);
-
-                /* $description = str_replace('\&rsquo\;', 'plop', $description); */
 
                 $description = htmlspecialchars_decode($description);
 

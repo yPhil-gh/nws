@@ -1,3 +1,13 @@
+<?
+/*
+  nws-favicon : Get site's favicon using various strategies
+
+  This script is part of NWS
+  https://github.com/xaccrocheur/nws/
+
+*/
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
