@@ -36,44 +36,6 @@ function str_img_src($html) {
     }
 }
 
-function img($img_url) {
-    $cache_dir = './img_cache/';
-    $exploded_img_url = explode("/",$img_url);
-    $img_filename = end($exploded_img_url);
-    $exploded_img_filename = explode(".",$img_filename);
-    $extension = end($exploded_img_filename);
-
-    if($extension=="gif"||$extension=="jpg"||$extension=="png"){
-        if (file_exists($cache_dir.$img_filename)) {
-            return $cache_dir.$img_filename;
-        } else {
-            $img_to_fetch = file_get_contents($img_url);
-            $local_img_file  = fopen($cache_dir.$img_filename, 'w+');
-            chmod($cache_dir.$img_filename,0755);
-            fwrite($local_img_file, $img_to_fetch);
-            fclose($local_img_file);
-            return $cache_dir.$img_filename;
-        }
-    }
-}
-
-/*
- * $doc = new DOMDocument();
- * $doc->load($_GET['z']);
- * $arrFeeds = array();
- * foreach ($doc->getElementsByTagName('item') as $node) {
- *     $itemRSS = array (
- *         'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
- *         'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
- *         'link' => $node->getElementsByTagName('link')->item(0)->nodeValue,
- *         'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue
- *     );
- *     array_push($arrFeeds, $itemRSS);
- *
- *     var_dump($itemRSS);
- * }
- */
-
 function reparse($u) {
     $limit="18";
     $feedRss=simplexml_load_file($u);
@@ -121,7 +83,7 @@ function reparse($u) {
                 // Image
 
                 if (strstr($imgSrc, ".tumblr.")) {
-                    $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.img($imgSrc).'" /></a>';
+                    $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
                     $title = 'post';
                 } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
@@ -166,8 +128,6 @@ function reparse($u) {
                       </div>';
     }
 }
-
-/* echo "<img src=".img('https://gs1.wac.edgecastcdn.net/8019B6/data.tumblr.com/tumblr_maioxdu1VE1r7okhqo1_500.jpg')." />" */
 
 reparse($_GET['z']);
 ?>
