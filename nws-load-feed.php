@@ -97,11 +97,9 @@ function reparse($u) {
                 $title = strip_tags($item->title);
                 $imgSrc = str_img_src($item->description);
 
-                /*
-                 * if (isset($imgSrc) || $imgSrc == "") {
-                 *     list($width, $height) = getimagesize($imgSrc);
-                 * }
-                 */
+                if (isset($imgSrc) || $imgSrc == "") {
+                    list($width, $height) = getimagesize($imgSrc);
+                }
 
                 // Image
 
