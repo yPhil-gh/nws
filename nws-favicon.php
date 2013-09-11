@@ -7,6 +7,7 @@
 
 */
 
+
 function CheckImageExists($imgUrl) {
     if (@GetImageSize($imgUrl)) {
         return true;
@@ -17,6 +18,23 @@ function CheckImageExists($imgUrl) {
 
 function getFavicon ($url) {
 
+/* $fallback_favicon = "http://opensimo.org/philippe/nws/img/nws.png"; */
+
+$fallback_favicon = "/var/www/nws/img/nws.png";
+
+    $dom = new DOMDocument();
+    @$dom->loadHTML($url);
+    $links = $dom->getElementsByTagName('link');
+    $l = $links->length;
+    $favicon = "/favicon.ico";
+    for( $i=0; $i<$l; $i++) {
+        $item = $links->item($i);
+        if( strcasecmp($item->getAttribute("rel"),"shortcut icon") === 0) {
+            $favicon = $item->getAttribute("href");
+            break;
+        }
+    }
+
     $u = parse_url($url);
 
     $subs = explode( '.', $u['host']);
@@ -26,7 +44,6 @@ function getFavicon ($url) {
     $file_headers = @get_headers($file);
 
     if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 NOT FOUND' || $file_headers[0] == 'HTTP/1.1 301 Moved Permanently') {
-        $exists = false;
 
         $fileContent = @file_get_contents("http://".$domain);
 
@@ -66,27 +83,23 @@ function getFavicon ($url) {
 
         if (isset($favicon)) {
             if (!CheckImageExists($favicon)) {
-                $favicon = 'http://opensimo.org/philippe/nws/img/nws.png';
+                $favicon = $fallback_favicon;
                 $method = "fallback";
             }
         } else {
-            $favicon = 'http://opensimo.org/philippe/nws/img/nws.png';
+            $favicon = $fallback_favicon;
             $method = "fallback";
         }
 
     } else {
-        $exists = true;
         $favicon = $file;
         $method = "classic";
 
         if (!CheckImageExists($file)) {
-            $favicon = 'http://opensimo.org/philippe/nws/img/nws.png';
+            $favicon = $fallback_favicon;
             $method = "fallback";
         }
 
-        $key = '';
-        $founded = array();
-        $founded[] = '';
     }
     return $favicon;
 }
