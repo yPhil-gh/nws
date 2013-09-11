@@ -29,7 +29,7 @@
 
 $(document).ready(function() {
     $.ajaxSetup ({
-        cache: false
+        cache: true
     });
 
     var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />';
