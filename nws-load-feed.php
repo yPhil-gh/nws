@@ -7,7 +7,7 @@
 
 */
 
-/* ini_set('display_errors', 'On'); */
+ini_set('display_errors', 'Off');
 
 include('nws-favicon.php');
 
@@ -33,27 +33,6 @@ function str_img_src($html) {
         }
     } else {
         return false;
-    }
-}
-
-function img($img_url) {
-    $cache_dir = './img_cache/';
-    $exploded_img_url = explode("/",$img_url);
-    $img_filename = end($exploded_img_url);
-    $exploded_img_filename = explode(".",$img_filename);
-    $extension = end($exploded_img_filename);
-
-    if($extension=="gif"||$extension=="jpg"||$extension=="png"){
-        if (file_exists($cache_dir.$img_filename)) {
-            return $cache_dir.$img_filename;
-        } else {
-            $img_to_fetch = file_get_contents($img_url);
-            $local_img_file  = fopen($cache_dir.$img_filename, 'w+');
-            chmod($cache_dir.$img_filename,0755);
-            fwrite($local_img_file, $img_to_fetch);
-            fclose($local_img_file);
-            return $cache_dir.$img_filename;
-        }
     }
 }
 

@@ -18,8 +18,6 @@ function CheckImageExists($imgUrl) {
 
 function getFavicon ($url) {
 
-/* $fallback_favicon = "http://opensimo.org/philippe/nws/img/nws.png"; */
-
 $fallback_favicon = "img/nws.png";
 
     $dom = new DOMDocument();
