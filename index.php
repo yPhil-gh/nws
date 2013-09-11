@@ -27,7 +27,7 @@
 
 <script>
 
-$(document).ready(function() {
+$(function() {
     $.ajaxSetup ({
         cache: true
     });
@@ -62,17 +62,28 @@ function parse($u) {
     $chars = array(" ", ".", ":");
     $i=0;
 
-    if($feedRss)
-        {
-            $items = $feedRss->channel->item;
-            $idiv = str_replace($chars, "", $feedRss->channel->title);
-            echo '
+    if($feedRss) {
+        $items = $feedRss->channel->item;
+        /* $idiv = str_replace($chars, "", $feedRss->channel->title); */
+        echo '
         <div class="outerContainer" style="" title ="'.$u.'">
             <span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9889;</span>
             <div class="innerContainer"></div>
         </div>
 ';
-        }
+    }
+
+/*
+ *     echo '
+ *         <div class="outerContainer" style="" title ="plop">
+ *             <span class="reload" title="plop">&#9889;</span>
+ *             <div class="innerContainer"></div>
+ *         </div>
+ * ';
+ */
+
+
+
 }
 
 foreach ($urls->url as $url) {

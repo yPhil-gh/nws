@@ -57,23 +57,6 @@ function img($img_url) {
     }
 }
 
-/*
- * $doc = new DOMDocument();
- * $doc->load($_GET['z']);
- * $arrFeeds = array();
- * foreach ($doc->getElementsByTagName('item') as $node) {
- *     $itemRSS = array (
- *         'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
- *         'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
- *         'link' => $node->getElementsByTagName('link')->item(0)->nodeValue,
- *         'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue
- *     );
- *     array_push($arrFeeds, $itemRSS);
- *
- *     var_dump($itemRSS);
- * }
- */
-
 function reparse($u) {
     $limit="18";
     $feedRss=simplexml_load_file($u);
@@ -83,11 +66,6 @@ function reparse($u) {
     $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1];
 
     $favicon = getFavicon('http://'.$domain);
-    /* $tumb = $feedRss->tumblelog->attributes()->name; */
-
-    /* echo $favicon; */
-    /* echo $method; */
-
 
     if($feedRss) {
         if (isset($feedRss->channel->item)) {
@@ -125,6 +103,8 @@ function reparse($u) {
                  * }
                  */
 
+                // Image
+
                 $atomImg = $item->enclosure['url'];
                 $elseSrc = str_img_src(strip_tags($item->content, "<img>"));
                 $elseSrx = htmlspecialchars_decode($item->description);
@@ -140,8 +120,6 @@ function reparse($u) {
                 if (isset($media)) {
                     $mediaImg = $media->thumbnail->attributes()->url;
                 }
-
-                // Image
 
                 if (strstr($imgSrc, ".tumblr.")) {
                     $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
@@ -191,4 +169,7 @@ function reparse($u) {
 }
 
 reparse($_GET['z']);
+
+/* echo "plop"; */
+
 ?>
