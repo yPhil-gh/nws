@@ -192,5 +192,7 @@ function reparse($u) {
 
 /* echo "<img src=".img('https://gs1.wac.edgecastcdn.net/8019B6/data.tumblr.com/tumblr_maioxdu1VE1r7okhqo1_500.jpg')." />" */
 
+echo "plop";
+
 reparse($_GET['z']);
 ?>
