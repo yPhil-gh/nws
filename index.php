@@ -57,30 +57,13 @@ $urls = simplexml_load_file($conf);
 
 $z = 0;
 
-function parse($u) {
-    $feedRss=simplexml_load_file($u);
-    $chars = array(" ", ".", ":");
-    $i=0;
-
-    if($feedRss) {
-        $items = $feedRss->channel->item;
-        /* $idiv = str_replace($chars, "", $feedRss->channel->title); */
-        echo '
+function outerContainer($u) {
+    echo '
         <div class="outerContainer" style="" title ="'.$u.'">
-            <span class="reload" title="Reload '.htmlspecialchars($feedRss->channel->title).'">&#9889;</span>
+            <span class="reload" title="plop">&#9889;</span>
             <div class="innerContainer"></div>
         </div>
 ';
-    }
-
-/*
- *     echo '
- *         <div class="outerContainer" style="" title ="plop">
- *             <span class="reload" title="plop">&#9889;</span>
- *             <div class="innerContainer"></div>
- *         </div>
- * ';
- */
 
 
 
@@ -115,7 +98,7 @@ foreach (array_keys($tabGroups) as $tabName) {
     echo '
     <div id="tab-'.$tabName.'">';
     foreach ($tabGroups[$tabName] as $tabUrl) {
-        parse($tabUrl);
+        outerContainer($tabUrl);
     }
     echo '
     </div>';
