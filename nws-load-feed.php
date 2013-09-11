@@ -1,6 +1,4 @@
 <?php
-/* ini_set('display_errors', 'Off'); */
-
 /*
   nws-reload-feed : Reload one feed
 
@@ -8,6 +6,8 @@
   https://github.com/xaccrocheur/nws/
 
 */
+
+/* ini_set('display_errors', 'On'); */
 
 include('nws-favicon.php');
 
@@ -189,10 +189,6 @@ function reparse($u) {
                       </div>';
     }
 }
-
-/* echo "<img src=".img('https://gs1.wac.edgecastcdn.net/8019B6/data.tumblr.com/tumblr_maioxdu1VE1r7okhqo1_500.jpg')." />" */
-
-echo "plop";
 
 reparse($_GET['z']);
 ?>
