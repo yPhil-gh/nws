@@ -52,21 +52,16 @@ $(function() {
 
 <div id="tabs">
 <?php
-$conf = "feeds.xml";
-$urls = simplexml_load_file($conf);
 
-$z = 0;
+$urls = simplexml_load_file("feeds.xml");
 
 function outerContainer($u) {
     echo '
         <div class="outerContainer" style="" title ="'.$u.'">
-            <span class="reload" title="plop">&#9889;</span>
+            <span class="reload" title="Reload '.$u.'">&#9889;</span>
             <div class="innerContainer"></div>
         </div>
 ';
-
-
-
 }
 
 foreach ($urls->url as $url) {
@@ -92,7 +87,6 @@ foreach (array_keys($tabGroups) as $tabName) {
 
 echo '
     </ul>';
-
 
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
