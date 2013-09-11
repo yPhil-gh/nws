@@ -46,6 +46,8 @@ function getFavicon ($url) {
 
         $elements = $xpath->query("head/link//@href");
 
+        $hrefs = array();
+
         foreach ($elements as $link) {
             $hrefs[] = $link->value;
         }

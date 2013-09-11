@@ -123,7 +123,6 @@ if (isset($feedToRetab)) {
     $root->appendChild($newRetabbed);
 }
 
-
 // re-creation of the file, new and promoted first
 foreach ($fedz as $fed) {
 
@@ -133,26 +132,17 @@ foreach ($fedz as $fed) {
     // Value for the created attribute
     $oldAttribute->value = $fed['tab'];
 
-    // Don't forget to append it to the element
+    // Append it to the element
     $newTag->appendChild($oldAttribute);
-
-    // Append it to the document itself
-    /* $domDocument->appendChild($domElement); */
 
     $root->appendChild($newTag);
 }
-
-/* foreach ($feedz as $key => $feed) { */
-/*   $urlTag = $domOut->createElement('url', $feed); */
-/*   $root->appendChild($urlTag); */
-/* } */
 
 $defUrlTagList = $domOut->getElementsByTagName('url');
 
 foreach ($defUrlTagList as $defUrlTag) {
     $defUrlTabList[] = $defUrlTag->getAttribute('tab');
 }
-
 
 for ($i=0; $i < $defUrlTagList->length ; $i++) {
 
@@ -180,9 +170,6 @@ for ($i=0; $i < $defUrlTagList->length ; $i++) {
 <br />';
         echo '</form>';
 }
-
-
-
 
 if (isset($feedToUp) || isset($feedToAdd) || isset($feedToDel) || isset($feedToRetab)) {
     echo '<hr />Wrote: (' . $domOut->save("feeds.xml") . ') bytes';
