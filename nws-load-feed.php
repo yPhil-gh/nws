@@ -97,13 +97,11 @@ function reparse($u) {
                 $title = strip_tags($item->title);
                 $imgSrc = str_img_src($item->description);
 
-                /*
-                 * if (isset($imgSrc) || $imgSrc == "") {
-                 *     list($width, $height) = getimagesize($imgSrc);
-                 * }
-                 */
-
                 // Image
+
+                if (isset($imgSrc) || $imgSrc == "") {
+                    list($width, $height) = getimagesize($imgSrc);
+                }
 
                 $atomImg = $item->enclosure['url'];
                 $elseSrc = str_img_src(strip_tags($item->content, "<img>"));
