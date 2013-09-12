@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feeds>
-  <url tab="alt">http://www.arretsurimages.net/tous-les-contenus.rss</url>
-  <url tab="alt">http://www.fakirpresse.info/backend.php</url>
-  <url tab="alt">http://www.acrimed.org/spip.php?page=backend</url>
-  <url tab="alt">http://www.article11.info/spip.php?page=backend</url>
+  <url tab="news">http://www.arretsurimages.net/tous-les-contenus.rss</url>
+  <url tab="news">http://www.acrimed.org/spip.php?page=backend</url>
+  <url tab="news">http://feeds.bbci.co.uk/news/world/rss.xml</url>
+  <url tab="news">http://rezo.net/backend/</url>
 
+  <url tab="img">http://generalelectric.tumblr.com/</url>
+  <url tab="img">http://allcreatures.tumblr.com/rss/</url>
+  <url tab="img">http://freecabinporn.com/rss/</url>
+  <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
+
+  <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
   <url tab="tech">http://linuxfr.org/news.atom</url>
   <url tab="tech">http://www.theverge.com/rss/index.xml</url>
+
 </feeds>
