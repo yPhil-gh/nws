@@ -15,7 +15,7 @@
   <url tab="tech">http://www.theverge.com/rss/index.xml</url>
   <url tab="tech">http://rss.slashdot.org/Slashdot/slashdot</url>
 
-  <url tab="00z">http://awkwardstockphotos.com/</url>
+  <url tab="00z">http://awkwardstockphotos.com/rss</url>
 
   <!-- disabled feeds
      <url tab="snd">http://planet.linuxaudio.org/rss20.xml</url>
