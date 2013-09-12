@@ -14,9 +14,7 @@
 <title>nws</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" type="image/x-icon" href="img/nws.png" />
-
     <link href="libs/jquery-ui.css" rel="stylesheet" type="text/css" />
-
     <style type="text/css" media="screen">@import "nws-style.css";</style>
     <base target='_blank' />
 </head>
