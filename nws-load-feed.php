@@ -7,6 +7,7 @@
 
 */
 
+
 ini_set('display_errors', 'Off');
 
 include('nws-favicon.php');
@@ -45,6 +46,7 @@ function reparse($u) {
     $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1];
 
     $favicon = getFavicon('http://'.$domain);
+    /* $favicon = "img/nws.png"; */
 
     if($feedRss) {
         if (isset($feedRss->channel->item)) {
