@@ -174,7 +174,6 @@ for ($i=0; $i < $defUrlTagList->length ; $i++) {
 </select>
 <input title="New tab" type="text" size="6" name="newTabName" value="">
 <input type="submit" value="<">
-<img height="16" src="'.$favicon.'" />
 '.$myUrl.'
 <br />';
         echo '</form>';
