@@ -50,10 +50,6 @@ if (isset($_GET['u'])) $feedToUp = $_GET['u'];
 
 if (isset($_POST['a']) && filter_var($_POST['a'], FILTER_VALIDATE_URL) && !empty($_POST['a'])) $feedToAdd = $_POST['a'];
 
-if (filter_var($_POST['a'], FILTER_VALIDATE_URL)) echo "zou";
-
-echo $_POST['a'];
-
 if (!empty($_POST['tabName'])) {
     $tabName = $_POST['tabName'];
     $feedToRetab = $_POST['idFeed'];
