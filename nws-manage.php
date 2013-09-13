@@ -142,22 +142,10 @@ foreach ($defUrlTagList as $defUrlTag) {
     $defUrlTabList[] = $defUrlTag->getAttribute('tab');
 }
 
-/* $myFeedz = array(); */
-
 for ($i=0; $i < $defUrlTagList->length ; $i++) {
-
-    /* $deffeedz[] = $defUrlTagList->item($i)->nodeValue; */
-    /* $myFeedz["url"] = $defUrlTagList->item($i)->nodeValue; */
- /* "tab" => $defUrlTagList->item($i)->getAttribute('tab'); */
-
-    /* var_dump($myFeedz); */
 
     $myUrl = $defUrlTagList->item($i)->nodeValue;
     $myTab = $defUrlTagList->item($i)->getAttribute('tab');
-    /* $favicon = getFavicon($myUrl); */
-
-    /* echo "<hr />myUrl : ".$myUrl."<br />"; */
-    /* echo "<hr />myTab : ".$myTab."<br />"; */
 
     echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
 
