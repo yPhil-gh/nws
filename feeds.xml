@@ -1,71 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feeds>
-  <url tab="actu">http://rss.lemonde.fr/c/205/f/3050/index.rss</url>
-  <url tab="actu">http://feeds.bbci.co.uk/news/world/rss.xml</url>
-  <url tab="actu">http://rezo.net/backend/</url>
-  <url tab="actu">http://rss.lefigaro.fr/lefigaro/laune/</url>
+  <url tab="news">http://www.arretsurimages.net/tous-les-contenus.rss</url>
+  <url tab="news">http://www.acrimed.org/spip.php?page=backend</url>
+  <url tab="news">http://feeds.bbci.co.uk/news/world/rss.xml</url>
+  <url tab="news">http://rezo.net/backend/</url>
 
-  <url tab="alt">http://www.arretsurimages.net/tous-les-contenus.rss</url>
-  <url tab="alt">http://www.egaliteetreconciliation.fr/spip.php?page=backend</url>
-  <url tab="alt">http://www.panamza.com/?feed=linkfeed</url>
-  <url tab="alt">http://www.infowars.com/rss/</url>
-  <url tab="alt">http://www.lelibrepenseur.org/feed/</url>
-  <url tab="alt">http://www.acrimed.org/spip.php?page=backend</url>
-  <url tab="alt">https://gdata.youtube.com/feeds/api/users/iamdieudo/uploads</url>
-  <url tab="alt">http://www.article11.info/spip.php?page=backend</url>
-  <url tab="alt">http://www.maitre-eolas.fr/feed/atom</url>
-
-  <url tab="tech">http://feeds.feedburner.com/ommalik</url>
-  <url tab="tech">http://www.zdnet.fr/feeds/rss/</url>
-  <url tab="tech">http://feeds.feedburner.com/thechangelog</url>
-  <url tab="tech">http://www.theverge.com/rss/index.xml</url>
-  <url tab="tech">http://www.tomshardware.com/feeds/rss2/tom-s-hardware-us,18-2.xml</url>
-  <url tab="tech">http://feeds.feedburner.com/hackaday/LgoM/</url>
-  <url tab="tech">http://www.gcu-squad.org/feed/</url>
-  <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
-  <url tab="tech">http://createdigitalmusic.com/feed/</url>
-
-  <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
   <url tab="img">http://allcreatures.tumblr.com/rss/</url>
-  <url tab="img">http://www.gurumed.org/feed/</url>
+  <url tab="img">http://freecabinporn.com/rss/</url>
+  <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
   <url tab="img">http://generalelectric.tumblr.com/rss</url>
 
-  <url tab="int">http://www.yabiladi.com/rss/breves</url>
-  <url tab="int">http://www.aufaitmaroc.com/feeds/maroc.xml</url>
-  <url tab="int">http://feeds.feedburner.com/webdotn</url>
-  <url tab="int">http://www.magharebia.com/cocoon/awi/rss/fr/magharebia.rss</url>
-  <url tab="int">http://www.kabobfest.com/feed/</url>
-  <url tab="int">http://www.haaretz.com/cmlink/haaretz-com-headlines-rss-1.263335?localLinksEnabled=false</url>
-  <url tab="int">http://feeds.feedburner.com/MaghrebConfidentiel/</url>
+  <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
+  <url tab="tech">http://linuxfr.org/news.atom</url>
+  <url tab="tech">http://www.theverge.com/rss/index.xml</url>
+  <url tab="tech">http://rss.slashdot.org/Slashdot/slashdot</url>
 
-  <url tab="snd">http://planet.linuxaudio.org/rss20.xml</url>
-  <url tab="snd">http://feeds2.feedburner.com/PitchforkAlbumReviews/</url>
-  <url tab="snd">http://www.bide-et-musique.com/playlist.rss</url>
-  <url tab="snd">http://feeds.feedburner.com/LinuxJournalAudioVideo/</url>
-
-  <url tab="e">http://guisoboricua.tumblr.com/rss</url>
-  <url tab="x">http://coorafi.tumblr.com/rss</url>
-  <url tab="x">http://dailynudes.tumblr.com/rss/</url>
-  <url tab="x">http://porn4ladies.tumblr.com/rss</url>
-
-  <url tab="x">http://superchicas.tumblr.com/rss</url>
-  <url tab="x">http://beautiful-tangerine2.tumblr.com/rss</url>
-  <url tab="x">http://teentitstoday.tumblr.com/rss/</url>
-  <url tab="x">http://dutch-adult-playground.tumblr.com/rss</url>
-
-  <url tab="x">http://big-teen-tits.tumblr.com/rss/</url>
-  <url tab="x">http://boobsexploit.tumblr.com/rss/</url>
-  <url tab="x">http://sexy-yet-classy.tumblr.com/rss/</url>
-  <url tab="x">http://bbxxx.tumblr.com/rss</url>
-
-  <url tab="x">http://veryerotic.tumblr.com/rss/</url>
-  <url tab="x">http://emura.tumblr.com/rss/</url>
-  <url tab="x">http://uglygirlsexythoughts.tumblr.com/rss/</url>
-  <url tab="x">http://reallysexything.tumblr.com/rss/</url>
+  <url tab="00z">http://awkwardstockphotos.com/rss</url>
 
   <!-- disabled feeds
-       <url tab="x">http://fuckyeahsexytumblr.tumblr.com/rss/</url>
-       <url tab="img">http://freecabinporn.com/rss/</url>
-  -->
-
+<url tab="snd">http://planet.linuxaudio.org/rss20.xml</url>
+<url tab="snd">http://feeds2.feedburner.com/PitchforkAlbumReviews/</url>
+<url tab="snd">http://feeds.feedburner.com/LinuxJournalAudioVideo/</url>
+-->
 </feeds>
