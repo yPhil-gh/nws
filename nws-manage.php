@@ -164,7 +164,7 @@ for ($i=0; $i < $defUrlTagList->length ; $i++) {
     echo ' <a title="Delete this feed" class="feedDel" href="'.$_SERVER['PHP_SELF'].'?d='.$i.'" onClick="return confirm(\'Are you sure? This is definitive.\');">x</a>&nbsp;<a title="Promote this feed as 1st of its tab" class="feedUp" href="'.$_SERVER['PHP_SELF'].'?u='.$i.'">^</a><input type="hidden" name="idFeed" value="'.$i.'">
  <select title="Change this feed\'s tab" name="tabName">';
 
-        echo '<option value="'.$myTab.'" selected="yes">'.$myTab.'</option>';
+        echo '<option value="'.$myTab.'">'.$myTab.'</option>';
 
         foreach (array_unique($defUrlTabList) as $defUrlTab) {
             echo '<option value="'.$defUrlTab.'">'.$defUrlTab.'</option>';
