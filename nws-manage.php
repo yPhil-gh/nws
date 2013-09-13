@@ -46,10 +46,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 if (isset($_GET['d'])) $feedToDel = $_GET['d'];
-/* if (isset($_POST['d'])) $feedToDel = $_POST['d']; */
 if (isset($_GET['u'])) $feedToUp = $_GET['u'];
 
 if (isset($_POST['a']) && filter_var($_POST['a'], FILTER_VALIDATE_URL) && !empty($_POST['a'])) $feedToAdd = $_POST['a'];
+
+if (filter_var($_POST['a'], FILTER_VALIDATE_URL)) echo "zou";
+
+echo $_POST['a'];
 
 if (!empty($_POST['tabName'])) {
     $tabName = $_POST['tabName'];
@@ -96,7 +99,7 @@ $newUrlTagList = $domIn->getElementsByTagName('url');
 
 for ($i=0; $i < $newUrlTagList->length ; $i++) {
     $currentTab = $newUrlTagList->item($i)->getAttribute('tab');
-    $fedz[] = array ('tab' => $currentTab,  'url' => $newUrlTagList->item($i)->nodeValue);
+    $fedz[] = array ('tab' => $currentTab, 'url' => $newUrlTagList->item($i)->nodeValue);
 }
 
 if (isset($feedToAdd)) {
@@ -125,7 +128,6 @@ if (isset($feedToRetab)) {
 
 // re-creation of the file, new and promoted first
 foreach ($fedz as $fed) {
-
     $newTag = $domOut->createElement('url', $fed['url']);
 
     $oldAttribute = $domOut->createAttribute('tab');
@@ -144,18 +146,29 @@ foreach ($defUrlTagList as $defUrlTag) {
     $defUrlTabList[] = $defUrlTag->getAttribute('tab');
 }
 
+/* $myFeedz = array(); */
+
 for ($i=0; $i < $defUrlTagList->length ; $i++) {
 
-    $deffeedz[] = $defUrlTagList->item($i)->nodeValue;
-    $myFeedz[] = array("url" => $defUrlTagList->item($i)->nodeValue, "tab" => $defUrlTagList->item($i)->getAttribute('tab'));
-    $favicon = getFavicon($myFeedz[$i]['url']);
+    /* $deffeedz[] = $defUrlTagList->item($i)->nodeValue; */
+    /* $myFeedz["url"] = $defUrlTagList->item($i)->nodeValue; */
+ /* "tab" => $defUrlTagList->item($i)->getAttribute('tab'); */
+
+    /* var_dump($myFeedz); */
+
+    $myUrl = $defUrlTagList->item($i)->nodeValue;
+    $myTab = $defUrlTagList->item($i)->getAttribute('tab');
+    /* $favicon = getFavicon($myUrl); */
+
+    /* echo "<hr />myUrl : ".$myUrl."<br />"; */
+    /* echo "<hr />myTab : ".$myTab."<br />"; */
 
     echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
 
-    echo ' <a title="Delete this feed" class="feedDel" href="'.$_SERVER['PHP_SELF'].'?d='.$i.'" onClick="return confirm(\'You sure??\');">x</a>&nbsp;<a title="Promote this feed as 1st of its tab" class="feedUp" href="'.$_SERVER['PHP_SELF'].'?u='.$i.'">^</a><input type="hidden" name="idFeed" value="'.$i.'">
+    echo ' <a title="Delete this feed" class="feedDel" href="'.$_SERVER['PHP_SELF'].'?d='.$i.'" onClick="return confirm(\'Are you sure? This is definitive.\');">x</a>&nbsp;<a title="Promote this feed as 1st of its tab" class="feedUp" href="'.$_SERVER['PHP_SELF'].'?u='.$i.'">^</a><input type="hidden" name="idFeed" value="'.$i.'">
  <select title="Change this feed\'s tab" name="tabName" value="">';
 
-        echo '<option value="'.$myFeedz[$i]['tab'].'" selected="yes">'.$myFeedz[$i]['tab'].'</option>';
+        echo '<option value="'.$myTab.'" selected="yes">'.$myTab.'</option>';
 
         foreach (array_unique($defUrlTabList) as $defUrlTab) {
             echo '<option value="'.$defUrlTab.'">'.$defUrlTab.'</option>';
@@ -166,7 +179,7 @@ for ($i=0; $i < $defUrlTagList->length ; $i++) {
 <input title="New tab" type="text" size="6" name="newTabName" value="">
 <input type="submit" value="<">
 <img height="16" src="'.$favicon.'" />
-'.$myFeedz[$i]['url'].'
+'.$myUrl.'
 <br />';
         echo '</form>';
 }
