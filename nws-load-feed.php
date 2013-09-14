@@ -32,7 +32,8 @@ function str_img_src($html) {
         unset($imgsrc_regex);
         unset($html);
         if (is_array($matches) && !empty($matches)) {
-            $res = str_replace("//", "", $matches[2]);
+            $res = $matches[2];
+            /* $res = str_replace("//", "", $matches[2]); */
             /* echo "plop:".$res.")"; */
             return $res;
         } else {
@@ -102,8 +103,9 @@ function reparse($u) {
                 $elseSrx = htmlspecialchars_decode($item->description);
 
                 // Check if relative path
-                if (!CheckImageExists("http://".$elseSrc))
+                if (!CheckImageExists("http://".str_replace("//", "", $elseSrc)))
                     $elseSrc = $domain.$elseSrc;
+                /* $res = str_replace("//", "", $matches[2]); */
 
                 //Use that namespace
                 $namespaces = $item->getNameSpaces(true);
@@ -130,7 +132,6 @@ function reparse($u) {
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.str_replace("http://www.", "http://", $imgSrc).'" /></a>';
                 } elseif (!empty($elseSrc)) {
-                    echo "elseSrc : ".$elseSrc;
                     $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="http://'.$elseSrc.'" /></a>';
                     $description = $item->content;
                 } else {
