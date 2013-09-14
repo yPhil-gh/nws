@@ -7,13 +7,13 @@
 
 */
 
-// If the feed's URL contains one of those, it will be treated as a Photoblog (full img width)
-$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "xkcd.com");
-
 ini_set('display_errors', 'Off');
 
-include('nws-favicon.php');
+// If the feed's URL contains one of those, it will be treated as a Photoblog (full img width)
+$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "www.xkcd.com");
 
+
+include('nws-favicon.php');
 
 
 /**
@@ -32,7 +32,9 @@ function str_img_src($html) {
         unset($imgsrc_regex);
         unset($html);
         if (is_array($matches) && !empty($matches)) {
-            return $matches[2];
+            $res = str_replace("//", "", $matches[2]);
+            /* echo "plop:".$res.")"; */
+            return $res;
         } else {
             return false;
         }
@@ -54,7 +56,9 @@ function reparse($u) {
     $i=0;
     $url = parse_url($u);
     $subs = explode( '.', $url['host']);
-    $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1];
+    $domain = $subs[0].'.'.$subs[count($subs) -2].'.'.$subs[count($subs) -1];
+
+    /* var_dump($subs); */
 
     $favicon = getFavicon('http://'.$domain);
     /* $favicon = "img/nws.png"; */
@@ -90,26 +94,26 @@ function reparse($u) {
                 $imgSrc = str_img_src($item->description);
 
                 // Image
-
-                if (isset($imgSrc) || $imgSrc == "") {
+                if (isset($imgSrc) || $imgSrc == "")
                     list($width, $height) = getimagesize($imgSrc);
-                }
 
                 $atomImg = $item->enclosure['url'];
                 $elseSrc = str_img_src(strip_tags($item->content, "<img>"));
                 $elseSrx = htmlspecialchars_decode($item->description);
 
+                // Check if relative path
+                if (!CheckImageExists("http://".$elseSrc))
+                    $elseSrc = $domain.$elseSrc;
+
                 //Use that namespace
                 $namespaces = $item->getNameSpaces(true);
 
                 //Relative
-                if ($item->children($namespaces['media'])) {
+                if ($item->children($namespaces['media']))
                     $media = $item->children($namespaces['media']);
-                }
 
-                if (isset($media)) {
+                if (isset($media))
                     $mediaImg = $media->thumbnail->attributes()->url;
-                }
 
                 if ($photoblog || $title == "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
@@ -117,7 +121,7 @@ function reparse($u) {
                 } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3") {
-                        $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="snd.png" /></a>';
+                        $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="img/snd.png" /></a>';
                     } else {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                     }
@@ -126,7 +130,8 @@ function reparse($u) {
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.str_replace("http://www.", "http://", $imgSrc).'" /></a>';
                 } elseif (!empty($elseSrc)) {
-                    $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
+                    echo "elseSrc : ".$elseSrc;
+                    $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="http://'.$elseSrc.'" /></a>';
                     $description = $item->content;
                 } else {
                     $img = '';
