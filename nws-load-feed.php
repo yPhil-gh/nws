@@ -10,7 +10,7 @@
 ini_set('display_errors', 'Off');
 
 // If the feed's URL contains one of those, it will be treated as a Photoblog (full img width)
-$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "www.xkcd.com");
+$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "xkcd.com");
 
 
 include('nws-favicon.php');
@@ -103,8 +103,14 @@ function reparse($u) {
                 $elseSrx = htmlspecialchars_decode($item->description);
 
                 // Check if relative path
-                if (!CheckImageExists("http://".str_replace("//", "", $elseSrc)))
-                    $elseSrc = $domain.$elseSrc;
+                if (isset($elseSrc)) {
+                    if (!CheckImageExists("http://".str_replace("//", "", $elseSrc))) {
+                        $elseSrc = $domain.$elseSrc;
+                    } else {
+                        $elseSrc = "";
+                    }
+                    $imgSrc = $elseSrc;
+                }
                 /* $res = str_replace("//", "", $matches[2]); */
 
                 //Use that namespace
@@ -119,7 +125,7 @@ function reparse($u) {
 
                 if ($photoblog || $title == "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
-                    $title = $title;
+                    $title = $title."zz";
                 } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3") {
@@ -130,9 +136,10 @@ function reparse($u) {
                 } elseif (!empty($mediaImg)) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
-                    $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.str_replace("http://www.", "http://", $imgSrc).'" /></a>';
+                    $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
                 } elseif (!empty($elseSrc)) {
-                    $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="http://'.$elseSrc.'" /></a>';
+                    $img = '';
+                    /* $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="http://'.$elseSrc.'" /></a>'; */
                     $description = $item->content;
                 } else {
                     $img = '';
