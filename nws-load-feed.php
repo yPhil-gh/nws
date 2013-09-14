@@ -7,10 +7,14 @@
 
 */
 
+// If the feed's URL contains one of those, it will be treated as a Photoblog (full img width)
+$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "xkcd.com");
 
 ini_set('display_errors', 'Off');
 
 include('nws-favicon.php');
+
+
 
 /**
  * Searches for the first occurence of an html <img> element in a string
@@ -38,6 +42,13 @@ function str_img_src($html) {
 }
 
 function reparse($u) {
+
+    global $photoblog_domains;
+
+    foreach ($photoblog_domains as $photoblog_domain) {
+        if (strstr($u, $photoblog_domain)) $photoblog = true;
+    }
+
     $limit="18";
     $feedRss=simplexml_load_file($u);
     $i=0;
@@ -100,9 +111,9 @@ function reparse($u) {
                     $mediaImg = $media->thumbnail->attributes()->url;
                 }
 
-                if (strstr($imgSrc, ".tumblr.")) {
+                if ($photoblog || $title == "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
-                    $title = 'post';
+                    $title = $title;
                 } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3") {
@@ -113,11 +124,7 @@ function reparse($u) {
                 } elseif (!empty($mediaImg)) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
-                    /* $imgSrc = str_replace("http://www.", "http://", $imgSrc); */
                     $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.str_replace("http://www.", "http://", $imgSrc).'" /></a>';
-                } elseif ($title == "Photo") {
-                    $title = 'post';
-                    $img = '<a href="'.$imgSrc.'"><img class="full" alt="Photo" src="'.$imgSrc.'" /></a>';
                 } elseif (!empty($elseSrc)) {
                     $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
                     $description = $item->content;
