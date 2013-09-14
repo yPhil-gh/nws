@@ -10,10 +10,11 @@
 ini_set('display_errors', 'Off');
 
 // If the feed's URL contains one of those, it will be treated as a Photoblog (full img width)
-$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "xkcd.com");
+$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "www.xkcd.com");
 
 
 include('nws-favicon.php');
+
 
 
 /**
@@ -32,10 +33,7 @@ function str_img_src($html) {
         unset($imgsrc_regex);
         unset($html);
         if (is_array($matches) && !empty($matches)) {
-            $res = $matches[2];
-            /* $res = str_replace("//", "", $matches[2]); */
-            /* echo "plop:".$res.")"; */
-            return $res;
+            return $matches[2];
         } else {
             return false;
         }
@@ -95,51 +93,48 @@ function reparse($u) {
                 $imgSrc = str_img_src($item->description);
 
                 // Image
-                if (isset($imgSrc) || $imgSrc == "")
+
+                if (isset($imgSrc) || $imgSrc == "") {
                     list($width, $height) = getimagesize($imgSrc);
+                }
 
                 $atomImg = $item->enclosure['url'];
                 $elseSrc = str_img_src(strip_tags($item->content, "<img>"));
                 $elseSrx = htmlspecialchars_decode($item->description);
 
-                // Check if relative path
-                if (isset($elseSrc)) {
-                    if (!CheckImageExists("http://".str_replace("//", "", $elseSrc))) {
-                        $elseSrc = $domain.$elseSrc;
-                    } else {
-                        $elseSrc = "";
-                    }
-                    $imgSrc = $elseSrc;
-                }
-                /* $res = str_replace("//", "", $matches[2]); */
+                /* if (!filter_var($elseSrc, FILTER_VALIDATE_URL)) */
+                    /* $elseSrc = $domain.$elseSrc; */
+                    /* echo $elseSrc." is local "; */
 
                 //Use that namespace
                 $namespaces = $item->getNameSpaces(true);
 
                 //Relative
-                if ($item->children($namespaces['media']))
+                if ($item->children($namespaces['media'])) {
                     $media = $item->children($namespaces['media']);
+                }
 
-                if (isset($media))
+                if (isset($media)) {
                     $mediaImg = $media->thumbnail->attributes()->url;
+                }
 
                 if ($photoblog || $title == "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
-                    $title = $title."zz";
+                    $title = $title;
                 } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3") {
-                        $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="img/snd.png" /></a>';
+                        $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="snd.png" /></a>';
                     } else {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                     }
                 } elseif (!empty($mediaImg)) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
-                    $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
+                    $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.str_replace("http://www.", "http://", $imgSrc).'" /></a>';
                 } elseif (!empty($elseSrc)) {
-                    $img = '';
-                    /* $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="http://'.$elseSrc.'" /></a>'; */
+                    $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
+                    /* $img = ""; */
                     $description = $item->content;
                 } else {
                     $img = '';
