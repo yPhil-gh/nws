@@ -10,7 +10,7 @@
 ini_set('display_errors', 'Off');
 
 // If the feed's URL contains one of those, it will be treated as a Photoblog (full img width)
-$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "www.xkcd.com");
+$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "xkcd.com");
 
 
 include('nws-favicon.php');
@@ -102,6 +102,8 @@ function reparse($u) {
                 $elseSrc = str_img_src(strip_tags($item->content, "<img>"));
                 $elseSrx = htmlspecialchars_decode($item->description);
 
+                /* echo "imgSrc : ".$imgSrc; */
+
                 /* if (!filter_var($elseSrc, FILTER_VALIDATE_URL)) */
                     /* $elseSrc = $domain.$elseSrc; */
                     /* echo $elseSrc." is local "; */
@@ -118,6 +120,12 @@ function reparse($u) {
                     $mediaImg = $media->thumbnail->attributes()->url;
                 }
 
+                if (!empty($elseSrc)) {
+                    /* if (!CheckImageExists("http://".str_replace("//", "", $elseSrc))) */
+                    $imgSrc = "http://".$domain.$elseSrc;
+                    /* $imgSrc = $elseSrc; */
+                }
+
                 if ($photoblog || $title == "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
                     $title = $title;
@@ -131,10 +139,22 @@ function reparse($u) {
                 } elseif (!empty($mediaImg)) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
-                    $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.str_replace("http://www.", "http://", $imgSrc).'" /></a>';
+                    /* echo "slashdot!".$imgSrc; */
+                    $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
+                    /* $img = ""; */
                 } elseif (!empty($elseSrc)) {
+
+                    if (!CheckImageExists($elseSrc)) {
+                        $elseSrc = "http://".$elseSrc;
+                    }
+
+                    /* if (!CheckImageExists($elseSrc)) { */
+                    /*     $elseSrc = "http://".$domain.$elseSrc; */
+                    /* } */
+
                     $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
                     /* $img = ""; */
+                    /* echo "elseSrc :".$elseSrc; */
                     $description = $item->content;
                 } else {
                     $img = '';
@@ -148,12 +168,16 @@ function reparse($u) {
 
                 $description = htmlspecialchars_decode($description);
 
+                if ($previous_img == $img)
+                    $img = "";
+
                 echo '
                           <li title="'.$description.'">
                               <div class="all">'.$img.'<a target="_blank" href="'.$link.'">'.$title.'</a>
                                   <hr />
                               </div>
                           </li>';
+                $previous_img = $img;
             }
         }
         echo '
