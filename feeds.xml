@@ -5,6 +5,10 @@
   <url tab="news">http://feeds.bbci.co.uk/news/world/rss.xml</url>
   <url tab="news">http://rezo.net/backend/</url>
 
+  <url tab="sci">http://www.gurumed.org/feed/</url>
+  <url tab="sci">http://xkcd.com/rss.xml</url>
+  <url tab="sci">http://what-if.xkcd.com/feed.atom</url>
+
   <url tab="img">http://allcreatures.tumblr.com/rss/</url>
   <url tab="img">http://freecabinporn.com/rss/</url>
   <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
