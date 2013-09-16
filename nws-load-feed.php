@@ -23,16 +23,6 @@ $limit="18";
 
 include('nws-favicon.php');
 
-foreach($items as $item) {
-    if ($i++ < $limit) {
-        $link = htmlspecialchars($item->link);
-        $title = strip_tags($item->title);
-        $imgSrc = str_img_src($item->description);
-
-        echo $title;
-    }
-}
-
 /**
  * Searches for the first occurence of an html <img> element in a string
  * and extracts the src if it finds it. Returns boolean false if
@@ -198,7 +188,5 @@ function reparse($u) {
 }
 
 reparse($_GET['z']);
-
-echo $_GET['z'];
 
 ?>
