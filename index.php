@@ -29,9 +29,9 @@ $(function() {
 
     function pulse() {
         $('.moved').fadeIn(500);
-        $('.moved').fadeOut(50);
+        $('.moved').fadeOut(500);
     }
-    setInterval(pulse, 1800);
+    setInterval(pulse, 1000);
 
     $.ajaxSetup ({
         cache: true
@@ -114,7 +114,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "57b75c0f8aefa5ce87c1270265cace18a2347594";
+$ref_commit = "893cb9ad4ec3f920cfb3020d63ed449ced1a8d49";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
@@ -130,6 +130,6 @@ if (!strcmp($current_commit_minus1, $ref_commit)) {
 <span id="version" onClick="document.location.href='https://github.com/xaccrocheur/nws'" title="<? echo $version_message ?>">
     <span class="<? echo $version_class ?>">♼</span>
 </span>
-
+<br />
 </body>
 </html>
