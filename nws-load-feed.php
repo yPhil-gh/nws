@@ -139,7 +139,7 @@ function reparse($u) {
                 }
 
                 if ($photoblog || $title == "Photo") {
-                    $img = '<a href="'.$imgSrc.'"><img class="full" title="'.$title.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
+                    $img = '<a href="'.$imgSrc.'"><img class="full" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
                     $title = $title;
                 } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
