@@ -10,7 +10,14 @@
 ini_set('display_errors', 'Off');
 
 // If the feed's URL contains one of those, it will be treated as a Photoblog feed (full img width)
-$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "xkcd.com", "fe3.yql.bf1");
+$photoblog_domains = array(
+    ".tumblr.",
+    "cabinporn",
+    "bigpicture",
+    "xkcd.com",
+    "yahoo.com",
+    "penguinpetes.com"
+);
 
 $limit="18";
 
