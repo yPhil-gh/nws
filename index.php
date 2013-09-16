@@ -107,7 +107,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit = $commits[1]->sha;
-$ref_commit = "85a7d4fdddf8515de510f008c5befd8bb5221205";
+$ref_commit = "64d2f77db4969f9934f772f129d54dfd77726307";
 /* $current_commit = "plop"; */
 
 /* cc8f3a1bfcf58818c919e4d8374843b10fa32149 */
