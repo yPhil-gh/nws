@@ -55,7 +55,6 @@ $(function() {
 
 $urls = simplexml_load_file('feeds.xml');
 
-
 function outerContainer($u) {
     echo '
         <div class="outerContainer" style="" title ="'.$u.'">
