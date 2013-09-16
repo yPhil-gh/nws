@@ -5,7 +5,7 @@
   <url tab="news">http://feeds.bbci.co.uk/news/world/rss.xml</url>
   <url tab="news">http://rezo.net/backend/</url>
 
-  <url tab="sci">http://www.gurumed.org/feed/</url>
+  <url tab="sci">http://fe3.yql.bf1.yahoo.com/pipes/pipe.run?_id=feff1572a71d8e1d04465296edf5a537&amp;_render=rss</url>
   <url tab="sci">http://xkcd.com/rss.xml</url>
   <url tab="sci">http://what-if.xkcd.com/feed.atom</url>
 
@@ -27,5 +27,6 @@
        <url tab="snd">http://planet.linuxaudio.org/rss20.xml</url>
        <url tab="snd">http://feeds2.feedburner.com/PitchforkAlbumReviews/</url>
        <url tab="snd">http://feeds.feedburner.com/LinuxJournalAudioVideo/</url>
+       Remember to encode & with $amp; in your feed's URI
   -->
 </feeds>
