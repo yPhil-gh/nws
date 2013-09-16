@@ -28,10 +28,10 @@
 $(function() {
 
     function pulse() {
-        $('.moved').fadeIn(500);
-        $('.moved').fadeOut(500);
+        $('.moved').fadeIn(8000);
+        $('.moved').fadeOut(200);
     }
-    setInterval(pulse, 1000);
+    setInterval(pulse, 150);
 
     $.ajaxSetup ({
         cache: true
@@ -130,6 +130,5 @@ if (!strcmp($current_commit_minus1, $ref_commit)) {
 <span id="version" onClick="document.location.href='https://github.com/xaccrocheur/nws'" title="<? echo $version_message ?>">
     <span class="<? echo $version_class ?>">♼</span>
 </span>
-<br />
 </body>
 </html>

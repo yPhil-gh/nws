@@ -183,6 +183,7 @@ img.full {
     float:right;
     font-size:150%;
     cursor:pointer;
+    height:1.5em;
 }
 
 #version .unmoved {
