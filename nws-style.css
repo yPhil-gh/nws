@@ -88,7 +88,6 @@ a:active {
     float:left;
 }
 
-
 .feed ul li img.audio {
     width:10%;
     margin: 0 1% 1% 0;
@@ -97,16 +96,8 @@ a:active {
     float:left;
 }
 
-
 .favicon img {
     width:16px;
-}
-
-hr {
-    height:1px;
-    color:transparent;
-    margin:0;
-    clear:both;
 }
 
 img.full {
