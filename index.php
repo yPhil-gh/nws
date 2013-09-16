@@ -33,9 +33,11 @@ $(function() {
     var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />';
     var loadUrl = 'nws-load-feed.php';
 
+//    var myOtherUrl = "http://example.com/index.html?url=" + encodeURIComponent(myUrl);
+
     $('.reload').click(function(){
         var DivToReload = $(this).parent()
-        var myUrl = DivToReload.attr('title')
+        var myUrl = encodeURIComponent(DivToReload.attr('title'))
         DivToReload.children('div.innerContainer')
             .html(ajax_load)
             .load(loadUrl, "z="+myUrl);
@@ -51,7 +53,7 @@ $(function() {
 <div id="tabs">
 <?php
 
-$urls = simplexml_load_file("feeds.xml");
+$urls = simplexml_load_file('feeds.xml');
 
 function outerContainer($u) {
     echo '

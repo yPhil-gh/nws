@@ -9,10 +9,22 @@
 
 ini_set('display_errors', 'Off');
 
-// If the feed's URL contains one of those, it will be treated as a Photoblog (full img width)
-$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "xkcd.com");
+// If the feed's URL contains one of those, it will be treated as a Photoblog feed (full img width)
+$photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "xkcd.com", "fe3.yql.bf1");
+
+$limit="18";
 
 include('nws-favicon.php');
+
+foreach($items as $item) {
+    if ($i++ < $limit) {
+        $link = htmlspecialchars($item->link);
+        $title = strip_tags($item->title);
+        $imgSrc = str_img_src($item->description);
+
+        echo $title;
+    }
+}
 
 /**
  * Searches for the first occurence of an html <img> element in a string
@@ -47,14 +59,15 @@ function reparse($u) {
         if (strstr($u, $photoblog_domain)) $photoblog = true;
     }
 
-    $limit="18";
-    $feedRss=simplexml_load_file($u);
-    $i=0;
+    $limit = "18";
+    $feedRss = simplexml_load_file(urlencode($u)) or die("feed not loading");
+
+    /* var_dump($http_response_header); */
+
+    $i = 0;
     $url = parse_url($u);
     $subs = explode( '.', $url['host']);
     $domain = $subs[0].'.'.$subs[count($subs) -2].'.'.$subs[count($subs) -1];
-
-    /* var_dump($subs); */
 
     $favicon = getFavicon('http://'.$domain);
     /* $favicon = "img/nws.png"; */
@@ -98,12 +111,6 @@ function reparse($u) {
                 $atomImg = $item->enclosure['url'];
                 $elseSrc = str_img_src(strip_tags($item->content, "<img>"));
                 $elseSrx = htmlspecialchars_decode($item->description);
-
-                /* echo "imgSrc : ".$imgSrc; */
-
-                /* if (!filter_var($elseSrc, FILTER_VALIDATE_URL)) */
-                    /* $elseSrc = $domain.$elseSrc; */
-                    /* echo $elseSrc." is local "; */
 
                 //Use that namespace
                 $namespaces = $item->getNameSpaces(true);
@@ -185,6 +192,6 @@ function reparse($u) {
 
 reparse($_GET['z']);
 
-/* echo "plop"; */
+echo $_GET['z'];
 
 ?>
