@@ -106,7 +106,7 @@ echo '
 // Version Control
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
-$current_commit = $commits[1]->tree->sha;
+$current_commit = $commits[1]->sha;
 $ref_commit = "85a7d4fdddf8515de510f008c5befd8bb5221205";
 /* $current_commit = "plop"; */
 
