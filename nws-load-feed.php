@@ -180,16 +180,12 @@ function reparse($u) {
 
                 $description = htmlspecialchars_decode($description);
 
-                if ($previous_img == $img)
-                    $img = "";
-
                 echo '
                           <li title="'.$description.'">
                               <div>'.$img.'<a target="_blank" href="'.$link.'">'.$title.'</a>
                                   <br style="clear:both;"/>
                               </div>
                           </li>';
-                $previous_img = $img;
             }
         }
         echo '
