@@ -26,6 +26,18 @@
 <script>
 
 $(function() {
+
+    $('.moved').each(function() {
+        var elem = $(this);
+        setInterval(function() {
+            if (elem.css('visibility') == 'hidden') {
+                elem.css('visibility', 'visible');
+            } else {
+                elem.css('visibility', 'hidden');
+            }
+        }, 1000);
+    });
+
     $.ajaxSetup ({
         cache: true
     });
@@ -107,7 +119,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "e98be7c34956873cf95bb73eb1bd3aa10758ac45";
+$ref_commit = "30152ebe19491914a6d52948136a7badcc76dd83";
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
     $version_class = "unmoved";
@@ -119,6 +131,9 @@ if (!strcmp($current_commit_minus1, $ref_commit)) {
 
 ?>
 
-<span onClick="document.location.href='https://github.com/xaccrocheur/nws'" id="version" class="<? echo $version_class ?>" title="<? echo $version_message ?>">♼</span>
+<span id="version" onClick="document.location.href='https://github.com/xaccrocheur/nws'" title="<? echo $version_message ?>">
+<span class="<? echo $version_class ?>">♼</span>
+</span>
+
 </body>
 </html>
