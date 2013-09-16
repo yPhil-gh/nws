@@ -243,4 +243,5 @@ img.full {
 
 #version .moved {
     color:red;
+    display:invisible;
 }

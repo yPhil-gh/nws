@@ -27,16 +27,11 @@
 
 $(function() {
 
-    $('.moved').each(function() {
-        var elem = $(this);
-        setInterval(function() {
-            if (elem.css('visibility') == 'hidden') {
-                elem.css('visibility', 'visible');
-            } else {
-                elem.css('visibility', 'hidden');
-            }
-        }, 1000);
-    });
+    function pulse() {
+        $('.moved').fadeIn(500);
+        $('.moved').fadeOut(50);
+    }
+    setInterval(pulse, 1800);
 
     $.ajaxSetup ({
         cache: true
@@ -119,7 +114,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "f49517108fda5f7ea5d6f34e71eb218d0c1d6798";
+$ref_commit = "57b75c0f8aefa5ce87c1270265cace18a2347594";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
