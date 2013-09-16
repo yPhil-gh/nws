@@ -98,7 +98,9 @@ function reparse($u) {
         echo '
              <div class="feed" title ="'.$u.'">
                  <div class="feedTitle">
-                     <span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title="Displaying '.$display_items.' of '.$items_total.' items">'.$feedTitle.'</a>
+                     <span class="favicon">
+                         <img src="'.$favicon.'" />
+                     </span> <a href="'.$u.'" title="Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.'">'.$feedTitle.'</a>
                  </div>
                  <ul>';
 
