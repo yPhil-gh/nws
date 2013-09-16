@@ -120,7 +120,7 @@ $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccroche
 
 $current_commit_minus1 = $commits[1]->sha;
 $ref_commit = "31c554473b68d345745e4a6518ffa96cd4c8ce13";
-$commit_message = "last commit message : \"".$commits[0]->commit->message."\"";
+$commit_message = "last message : ".$commits[0]->commit->message.;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
     $version_class = "unmoved";
