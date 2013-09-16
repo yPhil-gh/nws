@@ -119,14 +119,15 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "2a797bf2334dbe4e6796435c3bc0a4cd3c77a4dd";
+$ref_commit = "31c554473b68d345745e4a6518ffa96cd4c8ce13";
+$commit_message = "last commit message : \"".$commits[0]->commit->message."\"";
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
     $version_class = "unmoved";
-    $version_message = "No new version available : (".$commits[0]->commit->message.")";
+    $version_message = "No new version available : (".$commit_message.")";
 } else {
     $version_class = "moved";
-    $version_message = "New version available : (".$commits[0]->commit->message.")";
+    $version_message = "New version available : (".$commit_message.")";
 }
 
 ?>
