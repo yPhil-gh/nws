@@ -129,7 +129,7 @@ function reparse($u) {
                 } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3") {
-                        $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="img/snd.png" /></a>';
+                        $img = '<a href="'.$atomImg.'"><span style="font-size:150%; color:orange; margin:0 .1em .1em 0" title="Audio content">♫</span></a>';
                     } else {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                     }
