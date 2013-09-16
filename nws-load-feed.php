@@ -88,13 +88,12 @@ function reparse($u) {
             }
         }
 
-        $items_in_feed = count($items);
-        echo "items_in_feed : ".$items_in_feed;
+        $items_total = count($items);
 
         echo '
              <div class="feed" title ="'.$u.'">
                  <div class="feedTitle">
-                     <span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title="'.$items_in_feed.' items total">'.$feedTitle.'</a>
+                     <span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title="'.$items_total.' items total">'.$feedTitle.'</a>
                  </div>
                  <ul>';
 
