@@ -186,6 +186,7 @@ function reparse($u) {
                 echo '
                           <li title="'.$description.'">
                               <div class="all">'.$img.'<a target="_blank" href="'.$link.'">'.$title.'</a>
+                                  <br style="clear:both;"/>
                               </div>
                           </li>';
                 $previous_img = $img;
