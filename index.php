@@ -115,6 +115,7 @@ else {
     $version_message = "No new version";
 }
 
+
 ?>
 
 <a href="nws-manage.php">Manage feeds</a>
