@@ -12,10 +12,7 @@ ini_set('display_errors', 'Off');
 // If the feed's URL contains one of those, it will be treated as a Photoblog (full img width)
 $photoblog_domains = array(".tumblr.", "cabinporn", "bigpicture", "xkcd.com");
 
-
 include('nws-favicon.php');
-
-
 
 /**
  * Searches for the first occurence of an html <img> element in a string
@@ -132,7 +129,7 @@ function reparse($u) {
                 } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3") {
-                        $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="snd.png" /></a>';
+                        $img = '<a href="'.$atomImg.'"><img class="feed audio" alt="Audio content" src="img/snd.png" /></a>';
                     } else {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                     }
