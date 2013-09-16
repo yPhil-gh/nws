@@ -20,7 +20,7 @@ $photoblog_domains = array(
 );
 
 // Number of items / feed
-$limit = "16";
+$items_limit = "16";
 
 
 include('nws-favicon.php');
@@ -53,7 +53,7 @@ function str_img_src($html) {
 function reparse($u) {
 
     global $photoblog_domains;
-    global $limit;
+    global $items_limit;
 
     foreach ($photoblog_domains as $photoblog_domain) {
         if (strstr($u, $photoblog_domain)) $photoblog = true;
@@ -90,15 +90,20 @@ function reparse($u) {
 
         $items_total = count($items);
 
+        if ($items_total > $items_limit)
+            $display_items = $items_limit;
+        else
+            $display_items = $items_total;
+
         echo '
              <div class="feed" title ="'.$u.'">
                  <div class="feedTitle">
-                     <span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title="'.$items_total.' items total">'.$feedTitle.'</a>
+                     <span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title="Displaying '.$display_items.' of '.$items_total.' items">'.$feedTitle.'</a>
                  </div>
                  <ul>';
 
         foreach($items as $item) {
-            if ($i++ < $limit) {
+            if ($i++ < $items_limit) {
                 $link = htmlspecialchars($item->link);
                 $title = strip_tags($item->title);
                 $imgSrc = str_img_src($item->description);
