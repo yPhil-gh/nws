@@ -104,7 +104,10 @@ echo '
 // Version Control
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
-if (!$commits[0]->sha == "cc8f3a1bfcf58818c919e4d8374843b10fa32149") {
+$current_commit = $commits[0]->sha;
+$ref_commit = "cc8f3a1bfcf58818c919e4d8374843b10fa32149";
+
+if (!$current_commit == $ref_commit) {
     $version_class = "moved";
     $moved = true;
     $version_message = "New version available!";
@@ -115,6 +118,8 @@ else {
     $version_message = "No new version";
 }
 
+echo "ref_commit : ".$ref_commit;
+echo "<br />current_commit : ".$current_commit;
 
 ?>
 
