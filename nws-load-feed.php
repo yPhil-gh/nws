@@ -19,7 +19,9 @@ $photoblog_domains = array(
     "penguinpetes.com"
 );
 
-$limit="18";
+// Number of items / feed
+$limit = "16";
+
 
 include('nws-favicon.php');
 
@@ -51,12 +53,12 @@ function str_img_src($html) {
 function reparse($u) {
 
     global $photoblog_domains;
+    global $limit;
 
     foreach ($photoblog_domains as $photoblog_domain) {
         if (strstr($u, $photoblog_domain)) $photoblog = true;
     }
 
-    $limit = "18";
     $feedRss = simplexml_load_file(urlencode($u)) or die("feed not loading");
 
     /* var_dump($http_response_header); */
@@ -86,10 +88,13 @@ function reparse($u) {
             }
         }
 
+        $items_in_feed = count($items);
+        echo "items_in_feed : ".$items_in_feed;
+
         echo '
              <div class="feed" title ="'.$u.'">
                  <div class="feedTitle">
-                     <span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title=""></span>'.$feedTitle.'</a>
+                     <span class="favicon"><img src="'.$favicon.'" /></span> <a href="'.$u.'" title="'.$items_in_feed.' items total">'.$feedTitle.'</a>
                  </div>
                  <ul>';
 
