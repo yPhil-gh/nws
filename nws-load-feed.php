@@ -25,7 +25,7 @@ $items_limit = "16";
 
 include('nws-favicon.php');
 
-/**
+/*
  * Searches for the first occurence of an html <img> element in a string
  * and extracts the src if it finds it. Returns boolean false if
  * <img> element is not found.
@@ -69,7 +69,6 @@ function reparse($u) {
     $domain = $subs[0].'.'.$subs[count($subs) -2].'.'.$subs[count($subs) -1];
 
     $favicon = getFavicon('http://'.$domain);
-    /* $favicon = "img/nws.png"; */
 
     if($feedRss) {
         if (isset($feedRss->channel->item)) {
@@ -100,7 +99,8 @@ function reparse($u) {
                  <div class="feedTitle">
                      <span class="favicon">
                          <img src="'.$favicon.'" />
-                     </span> <a href="'.$u.'" title="Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.'">'.$feedTitle.'</a>
+                     </span>
+                     <a href="'.$u.'" title="Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.'">'.$feedTitle.'</a>
                  </div>
                  <ul>';
 
