@@ -99,23 +99,29 @@ foreach (array_keys($tabGroups) as $tabName) {
 }
 
 echo '
-    </div>';
+    </div>
+<a href="nws-manage.php">Manage feeds</a>
+';
 
 // Version Control
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit = $commits[0]->sha;
-$ref_commit = "cc8f3a1bfcf58818c919e4d8374843b10fa32149";
+$ref_commit = "38be64f76f55ea6ce754e56b12063ec1a822a6cc";
+/* $current_commit = "plop"; */
 
-if (!$current_commit == $ref_commit) {
-    $version_class = "moved";
-    $moved = true;
-    $version_message = "New version available!";
-}
-else {
+/* cc8f3a1bfcf58818c919e4d8374843b10fa32149 */
+
+if (!strcmp($current_commit, $ref_commit)) {
     $version_class = "unmoved";
+    $moved = true;
+    echo "moved!";
+    $version_message = "Nothing moved.";
+} else {
+    echo "unmoved!";
+    $version_class = "moved";
     $moved = false;
-    $version_message = "No new version";
+    $version_message = "New version available!";
 }
 
 echo "ref_commit : ".$ref_commit;
@@ -123,7 +129,6 @@ echo "<br />current_commit : ".$current_commit;
 
 ?>
 
-<a href="nws-manage.php">Manage feeds</a>
-<span onClick="document.location.href='https://api.github.com/repos/xaccrocheur/'" id="version" class="<? echo $version_class ?>" title="<? echo $version_message ?>!">♼</span>
+<span onClick="document.location.href='https://github.com/xaccrocheur/nws'" id="version" class="<? echo $version_class ?>" title="<? echo $version_message ?>">♼</span>
 </body>
 </html>
