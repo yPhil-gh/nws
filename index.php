@@ -107,7 +107,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit = $commits[1]->sha;
-$ref_commit = "ad06da1324a2e5032e6696ad7d33a2b9a01cd913";
+$ref_commit = "f8e39d28df269aef828471fbb733a744217a572e";
 
 if (!strcmp($current_commit, $ref_commit)) {
     $version_class = "unmoved";
