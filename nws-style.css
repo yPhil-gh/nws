@@ -229,3 +229,19 @@ img.full {
 .feedUp:hover {
     color:green;
 }
+
+#version {
+    font-weight: bolder;
+    float:right;
+    font-size:150%;
+    cursor:pointer;
+}
+
+#version.unmoved {
+    color:green;
+}
+
+#version.moved {
+    color:red;
+    text-decoration: blink;
+}

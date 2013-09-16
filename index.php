@@ -98,9 +98,26 @@ foreach (array_keys($tabGroups) as $tabName) {
     </div>';
 }
 
+echo '
+    </div>';
+
+// Version Control
+$commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
+
+if (!$commits[0]->sha == "cc8f3a1bfcf58818c919e4d8374843b10fa32149") {
+    $version_class = "moved";
+    $moved = true;
+    $version_message = "New version available!";
+}
+else {
+    $version_class = "unmoved";
+    $moved = false;
+    $version_message = "No new version";
+}
+
 ?>
 
-</div>
 <a href="nws-manage.php">Manage feeds</a>
+<span onClick="document.location.href='https://api.github.com/repos/xaccrocheur/'" id="version" class="<? echo $version_class ?>" title="<? echo $version_message ?>!">♼</span>
 </body>
 </html>
