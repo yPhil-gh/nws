@@ -107,19 +107,19 @@ foreach (array_keys($tabGroups) as $tabName) {
 
 echo '
     </div>
-<a href="nws-manage.php">Manage feeds</a>
+<a href="nws-manage.php"><img src="img/nws.png" style="margin-top:.5em" /> Manage feeds</a>
 ';
 
 // Version Control
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "9db04d9116056d8f43706b877dfe35ae472ad761";
+$ref_commit = "c302cc38cb6cfb6f9b17a2cbe5803e80b30721bd";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
     $version_class = "unmoved";
-    $version_message = "No new version available : (".$commit_message.")";
+    $version_message = "NWS version is up-to-date : (".$commit_message.")";
 } else {
     $version_class = "moved";
     $version_message = "New version available : (".$commit_message.")";
