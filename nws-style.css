@@ -237,11 +237,10 @@ img.full {
     cursor:pointer;
 }
 
-#version.unmoved {
+#version .unmoved {
     color:green;
 }
 
-#version.moved {
+#version .moved {
     color:red;
-    text-decoration: blink;
 }
