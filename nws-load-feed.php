@@ -123,14 +123,22 @@ function reparse($u) {
                 //Use that namespace
                 $namespaces = $item->getNameSpaces(true);
 
+                /* foreach ($item->children($namespaces['media']) as $name => $value) */
+                /*     echo '<br />namespace: ' . $name.' value: ' . $value; */
+
                 //Relative
                 if ($item->children($namespaces['media'])) {
                     $media = $item->children($namespaces['media']);
                 }
 
-                if (isset($media)) {
+                /* if (isset($media)) { */
+                /*     echo "media is set!"; */
+                /*     /\* $mediaImg = $media->thumbnail->attributes()->url; *\/ */
+                /*     $mediaImg = $media->attributes()->url; */
+                /* } */
+
+                if (isset($media))
                     $mediaImg = $media->thumbnail->attributes()->url;
-                }
 
                 if (!empty($elseSrc)) {
                     /* if (!CheckImageExists("http://".str_replace("//", "", $elseSrc))) */

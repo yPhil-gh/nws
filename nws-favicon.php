@@ -9,12 +9,11 @@
 
 
 function CheckImageExists($imgUrl) {
-    if (@GetImageSize($imgUrl)) {
+    if (@GetImageSize($imgUrl))
         return true;
-    } else {
+    else
         return false;
-    };
-};
+}
 
 function getFavicon ($url) {
 
@@ -52,9 +51,7 @@ $fallback_favicon = "img/nws.png";
 
         $hrefs = array();
 
-        foreach ($elements as $link) {
-            $hrefs[] = $link->value;
-        }
+        foreach ($elements as $link) $hrefs[] = $link->value;
 
         $found_favicon = array();
         foreach ( $hrefs as $key => $value ) {
