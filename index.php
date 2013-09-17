@@ -63,7 +63,7 @@ $urls = simplexml_load_file('feeds.xml');
 
 function outerContainer($u) {
     echo '
-        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_COMPAT).'">
+        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'">
             <span class="reload" title="Reload '.$u.'">&#9889;</span>
             <div class="innerContainer"></div>
         </div>
@@ -109,7 +109,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "590d81277e3921f852e77a7f10a4c2ecef55c3ce";
+$ref_commit = "88b48bc8f54073ac3bb0eaa1bf2a4c034d108c66";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
