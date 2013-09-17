@@ -40,8 +40,6 @@ $(function() {
     var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />';
     var loadUrl = 'nws-load-feed.php';
 
-//    var myOtherUrl = "http://example.com/index.html?url=" + encodeURIComponent(myUrl);
-
     $('.reload').click(function(){
         var DivToReload = $(this).parent()
         var myUrl = encodeURIComponent(DivToReload.attr('title'))
@@ -58,6 +56,7 @@ $(function() {
 </script>
 
 <div id="tabs">
+
 <?php
 
 $urls = simplexml_load_file('feeds.xml');
@@ -73,16 +72,13 @@ function outerContainer($u) {
 
 foreach ($urls->url as $url) {
     $myUrls[] = $url;
-    foreach($url->attributes() as $attr => $val) {
-        if ($attr == 'tab') {
+    foreach($url->attributes() as $attr => $val)
+        if ($attr == 'tab')
             $myTabs[] = array('tab'=> (string) $val, 'url'=> (string) $url);
-        }
-    }
 }
 
-foreach($myTabs as $aRow){
+foreach($myTabs as $aRow)
     $tabGroups[$aRow['tab']][] = $aRow['url'];
-}
 
 echo '
     <ul>';
@@ -98,9 +94,8 @@ echo '
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
     <div id="tab-'.$tabName.'">';
-    foreach ($tabGroups[$tabName] as $tabUrl) {
-        outerContainer($tabUrl);
-    }
+        foreach ($tabGroups[$tabName] as $tabUrl)
+            outerContainer($tabUrl);
     echo '
     </div>';
 }
@@ -114,7 +109,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "26c0865dfe95c616faa5cf5accad52017f3e58ee";
+$ref_commit = "c819dda9ae4bbb8e36b9ad273f5520e10f6cd8be";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {

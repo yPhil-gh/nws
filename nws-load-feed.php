@@ -22,7 +22,6 @@ $photoblog_domains = array(
 // Number of items / feed
 $items_limit = "16";
 
-
 include('nws-favicon.php');
 
 /*
@@ -40,14 +39,12 @@ function str_img_src($html) {
         preg_match($imgsrc_regex, $html, $matches);
         unset($imgsrc_regex);
         unset($html);
-        if (is_array($matches) && !empty($matches)) {
+        if (is_array($matches) && !empty($matches))
             return $matches[2];
-        } else {
+        else
             return false;
-        }
-    } else {
+    } else
         return false;
-    }
 }
 
 function reparse($u) {
@@ -55,9 +52,8 @@ function reparse($u) {
     global $photoblog_domains;
     global $items_limit;
 
-    foreach ($photoblog_domains as $photoblog_domain) {
+    foreach ($photoblog_domains as $photoblog_domain)
         if (strstr($u, $photoblog_domain)) $photoblog = true;
-    }
 
     $feedRss = simplexml_load_file(urlencode($u)) or die("feed not loading");
 
@@ -112,9 +108,8 @@ function reparse($u) {
 
                 // Image
 
-                if (isset($imgSrc) || $imgSrc == "") {
+                if (isset($imgSrc) || $imgSrc == "")
                     list($width, $height) = getimagesize($imgSrc);
-                }
 
                 $atomImg = $item->enclosure['url'];
                 $elseSrc = str_img_src(strip_tags($item->content, "<img>"));
@@ -127,9 +122,8 @@ function reparse($u) {
                 /*     echo '<br />namespace: ' . $name.' value: ' . $value; */
 
                 //Relative
-                if ($item->children($namespaces['media'])) {
+                if ($item->children($namespaces['media']))
                     $media = $item->children($namespaces['media']);
-                }
 
                 /* if (isset($media)) { */
                 /*     echo "media is set!"; */
@@ -140,11 +134,8 @@ function reparse($u) {
                 if (isset($media))
                     $mediaImg = $media->thumbnail->attributes()->url;
 
-                if (!empty($elseSrc)) {
-                    /* if (!CheckImageExists("http://".str_replace("//", "", $elseSrc))) */
+                if (!empty($elseSrc))
                     $imgSrc = "http://".$domain.$elseSrc;
-                    /* $imgSrc = $elseSrc; */
-                }
 
                 if ($photoblog || $title == "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="full" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
@@ -161,16 +152,10 @@ function reparse($u) {
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
                     /* echo "slashdot!".$imgSrc; */
                     $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
-                    /* $img = ""; */
                 } elseif (!empty($elseSrc)) {
 
-                    if (!CheckImageExists($elseSrc)) {
+                    if (!CheckImageExists($elseSrc))
                         $elseSrc = "http://".$elseSrc;
-                    }
-
-                    /* if (!CheckImageExists($elseSrc)) { */
-                    /*     $elseSrc = "http://".$domain.$elseSrc; */
-                    /* } */
 
                     $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
                     /* $img = ""; */
