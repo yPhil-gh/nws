@@ -63,7 +63,7 @@ $urls = simplexml_load_file('feeds.xml');
 
 function outerContainer($u) {
     echo '
-        <div class="outerContainer" style="" title ="'.$u.'">
+        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_COMPAT).'">
             <span class="reload" title="Reload '.$u.'">&#9889;</span>
             <div class="innerContainer"></div>
         </div>
@@ -102,14 +102,14 @@ foreach (array_keys($tabGroups) as $tabName) {
 
 echo '
     </div>
-<a href="nws-manage.php"><img src="img/nws.png" style="margin-top:.5em" /> Manage feeds</a>
+<a href="nws-manage.php"><img src="img/nws.png" alt="manage" style="margin-top:.5em" /> Manage feeds</a>
 ';
 
 // Version Control
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "bbcfc068e6fa67d90660ec978622b5d6ae53b614";
+$ref_commit = "590d81277e3921f852e77a7f10a4c2ecef55c3ce";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
