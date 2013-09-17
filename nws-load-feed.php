@@ -142,11 +142,10 @@ function reparse($u) {
                     $title = $title;
                 } elseif (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
-                    if ($ext == "mp3") {
-                        $img = '<a href="'.$atomImg.'"><span style="font-size:150%; color:orange; margin:0 .1em .1em 0" title="Audio content">♫</span></a>';
-                    } else {
+                    if ($ext == "mp3")
+                        $img = '<a href="'.$atomImg.'"><span class="audio-note" title="Audio content">♫</span></a>';
+                    else
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
-                    }
                 } elseif (!empty($mediaImg)) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
@@ -158,20 +157,16 @@ function reparse($u) {
                         $elseSrc = "http://".$elseSrc;
 
                     $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
-                    /* $img = ""; */
-                    /* echo "elseSrc :".$elseSrc; */
                     $description = $item->content;
                 } else {
                     $img = '';
                 }
 
-                if (empty($link)) $link = htmlspecialchars($item->link['href']);
-                $fullDescription = strip_tags($item->description, "<img>, <p>");
+                if (empty($link))
+                    $link = htmlspecialchars($item->link['href']);
 
                 $description = (isset($item->description) ? $item->description : $item->content);
-                $description = htmlspecialchars(htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description)))), ENT_NOQUOTES);
-
-                $description = htmlspecialchars_decode($description);
+                $description = htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description))), ENT_NOQUOTES);
 
                 echo '
                           <li title="'.$description.'">

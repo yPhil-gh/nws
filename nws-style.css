@@ -131,6 +131,12 @@ img.full {
     width:100%;
 }
 
+.audio-note {
+    font-size:150%;
+    color:orange;
+    margin:0 .1em .1em 0
+}
+
 /* Tabs */
 .ui-tabs-selected span {
     color:#CD9E3F
