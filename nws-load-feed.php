@@ -24,15 +24,6 @@ $items_limit = "16";
 
 include('nws-favicon.php');
 
-/*
- * Searches for the first occurence of an html <img> element in a string
- * and extracts the src if it finds it. Returns boolean false if
- * <img> element is not found.
- * @param    string  $str    An HTML string
- * @return   mixed           The contents of the src attribute in the
- *                           found <img> or boolean false if no <img>
- *                           is found
- */
 function str_img_src($html) {
     if (stripos($html, '<img') !== false) {
         $imgsrc_regex = '#<\s*img [^\>]*src\s*=\s*(["\'])(.*?)\1#im';
