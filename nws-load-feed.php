@@ -48,7 +48,7 @@ function reparse($u) {
 
     $feedRss = simplexml_load_file(urlencode($u)) or die("feed not loading");
 
-    /* var_dump($http_response_header); */
+    // var_dump($http_response_header);
 
     $i = 0;
     $url = parse_url($u);
@@ -109,18 +109,18 @@ function reparse($u) {
                 //Use that namespace
                 $namespaces = $item->getNameSpaces(true);
 
-                /* foreach ($item->children($namespaces['media']) as $name => $value) */
-                /*     echo '<br />namespace: ' . $name.' value: ' . $value; */
+                // foreach ($item->children($namespaces['media']) as $name => $value)
+                //     echo '<br />namespace: ' . $name.' value: ' . $value;
 
                 //Relative
                 if ($item->children($namespaces['media']))
                     $media = $item->children($namespaces['media']);
 
-                /* if (isset($media)) { */
-                /*     echo "media is set!"; */
-                /*     /\* $mediaImg = $media->thumbnail->attributes()->url; *\/ */
-                /*     $mediaImg = $media->attributes()->url; */
-                /* } */
+                // if (isset($media)) {
+                //     echo "media is set!";
+                //     /\* $mediaImg = $media->thumbnail->attributes()->url; *\/
+                //     $mediaImg = $media->attributes()->url;
+                // }
 
                 if (isset($media))
                     $mediaImg = $media->thumbnail->attributes()->url;
@@ -140,7 +140,6 @@ function reparse($u) {
                 } elseif (!empty($mediaImg)) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
                 } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
-                    /* echo "slashdot!".$imgSrc; */
                     $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
                 } elseif (!empty($elseSrc)) {
 
