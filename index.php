@@ -27,7 +27,7 @@
 
 $(document).ready(function() {
 
-    $.ajaxSetup ({ cache: true });
+    $.ajaxSetup ({ cache: true })
 
     $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" })
 
@@ -39,9 +39,9 @@ $(document).ready(function() {
     $('body').keyup(function(e) {
 
         if (e.keyCode == 37)
-            direction = 'prev';
+            direction = 'prev'
         else if (e.keyCode == 39 || e.keyCode == 84)
-            direction = 'next';
+            direction = 'next'
 
         var active = $("#tabs").tabs("option", "active")
 
@@ -55,7 +55,7 @@ $(document).ready(function() {
                 if (active != 0)
                     $("#tabs").tabs("option", "active", active - 1)
 
-    });
+    })
 
     function pulse() {
         $('.moved').fadeIn(8000)
@@ -69,11 +69,11 @@ $(document).ready(function() {
         DivToReload.children('div.innerContainer')
             .html(ajax_load)
             .load(loadUrl, "z="+myUrl)
-    });
+    })
 
     $('.reload').trigger('click')
 
-});
+})
 
 </script>
 
@@ -131,7 +131,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "8a01b00bbef072973ef06c01c1356d958bcc26d3";
+$ref_commit = "a36c56a87ef8f90f897c82190b8f69e21b2fd518";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
