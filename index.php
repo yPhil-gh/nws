@@ -27,32 +27,14 @@
 
 $(document).ready(function() {
 
-    function pulse() {
-        $('.moved').fadeIn(8000)
-        $('.moved').fadeOut(200)
-    }
-    setInterval(pulse, 150)
-
-    $.ajaxSetup ({
-        cache: true
-    });
-
-    var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />'
-    var loadUrl = 'nws-load-feed.php'
-
-    $('.reload').click(function(){
-        var DivToReload = $(this).parent()
-        var myUrl = encodeURIComponent(DivToReload.attr('title'))
-        DivToReload.children('div.innerContainer')
-            .html(ajax_load)
-            .load(loadUrl, "z="+myUrl)
-    });
+    $.ajaxSetup ({ cache: true });
 
     $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" })
-    $('.reload').trigger('click')
 
     var totaltabs = $(".tabulators").find( "li" ).size()
     var direction = null
+    var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />'
+    var loadUrl = 'nws-load-feed.php'
 
     $('body').keyup(function(e) {
 
@@ -74,6 +56,22 @@ $(document).ready(function() {
                     $("#tabs").tabs("option", "active", active - 1)
 
     });
+
+    function pulse() {
+        $('.moved').fadeIn(8000)
+        $('.moved').fadeOut(200)
+    }
+    setInterval(pulse, 150)
+
+    $('.reload').click(function(){
+        var DivToReload = $(this).parent()
+        var myUrl = encodeURIComponent(DivToReload.attr('title'))
+        DivToReload.children('div.innerContainer')
+            .html(ajax_load)
+            .load(loadUrl, "z="+myUrl)
+    });
+
+    $('.reload').trigger('click')
 
 });
 
@@ -133,7 +131,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "7f7219cb2f5e9d6de87a0a89b995548b2ba69882";
+$ref_commit = "8a01b00bbef072973ef06c01c1356d958bcc26d3";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
