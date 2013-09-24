@@ -61,18 +61,18 @@ $(function() {
         else if (e.keyCode == 39 || e.keyCode == 84)
             direction = 'next';
 
-        if (direction != null) {
-            var active = $("#tabs").tabs("option", "active");
-            if (direction == 'next') {
+        var active = $("#tabs").tabs("option", "active");
+
+        if (direction != null)
+            if (direction == 'next')
                 if (active < totaltabs -1)
                     $("#tabs").tabs("option", "active", active + 1);
                 else
                     $("#tabs").tabs("option", "active", 0);
-            } else {
+            else
                 if (active != 0)
                     $("#tabs").tabs("option", "active", active - 1);
-            }
-        }
+
     });
 
 });
@@ -133,7 +133,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "e61b6b39c4e849e37d7235324c08d9942b0ca651";
+$ref_commit = "77447a1b4ef76304615422e4a8ed69253e48471d";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
