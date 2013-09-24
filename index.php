@@ -51,6 +51,30 @@ $(function() {
     $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
     $('.reload').trigger('click');
 
+    var totaltabs = $(".tabulators").find( "li" ).size();
+    var direction = null;
+
+    $('body').keyup(function(e) {
+
+        if (e.keyCode == 37)
+            direction = 'prev';
+        else if (e.keyCode == 39 || e.keyCode == 84)
+            direction = 'next';
+
+        if (direction != null) {
+            var active = $("#tabs").tabs("option", "active");
+            if (direction == 'next') {
+                if (active < totaltabs -1)
+                    $("#tabs").tabs("option", "active", active + 1);
+                else
+                    $("#tabs").tabs("option", "active", 0);
+            } else {
+                if (active != 0)
+                    $("#tabs").tabs("option", "active", active - 1);
+            }
+        }
+    });
+
 });
 
 </script>
@@ -81,7 +105,7 @@ foreach($myTabs as $aRow)
     $tabGroups[$aRow['tab']][] = $aRow['url'];
 
 echo '
-    <ul>';
+    <ul class="tabulators">';
 
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
@@ -109,7 +133,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "a5a82d444d6fefa975b207ceacda9fc5c3e16b7c";
+$ref_commit = "e61b6b39c4e849e37d7235324c08d9942b0ca651";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
