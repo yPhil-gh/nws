@@ -38,7 +38,7 @@ $(document).ready(function() {
 
     $('body').keyup(function(e) {
 
-        if (e.keyCode == 37)
+        if (e.keyCode == 37 || e.keyCode == 82)
             direction = 'prev'
         else if (e.keyCode == 39 || e.keyCode == 84)
             direction = 'next'
@@ -54,6 +54,8 @@ $(document).ready(function() {
             else
                 if (active != 0)
                     $("#tabs").tabs("option", "active", active - 1)
+                else
+                    $("#tabs").tabs("option", "active", totaltabs - 1)
 
     })
 
@@ -131,7 +133,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "a36c56a87ef8f90f897c82190b8f69e21b2fd518";
+$ref_commit = "0fbc088e6c4f7c6b1de4ad41ebe23e7b01c9aaf4";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
