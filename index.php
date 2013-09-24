@@ -33,8 +33,8 @@ $(document).ready(function() {
 
     var totaltabs = $(".tabulators").find( "li" ).size()
     var direction = null
-    var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />'
-    var loadUrl = 'nws-load-feed.php'
+    var ajax_loader = 'nws-load-feed.php'
+    var ajax_spinner = '<img src="img/loading.gif" class="loading" alt="loading..." />'
 
     $('body').keyup(function(e) {
 
@@ -43,17 +43,17 @@ $(document).ready(function() {
         else if (e.keyCode == 39 || e.keyCode == 84)
             direction = 'next'
 
-        var active = $("#tabs").tabs("option", "active")
+        var active_tab = $("#tabs").tabs("option", "active")
 
         if (direction != null)
             if (direction == 'next')
-                if (active < totaltabs -1)
-                    $("#tabs").tabs("option", "active", active + 1)
+                if (active_tab < totaltabs -1)
+                    $("#tabs").tabs("option", "active", active_tab + 1)
                 else
                     $("#tabs").tabs("option", "active", 0)
             else
-                if (active != 0)
-                    $("#tabs").tabs("option", "active", active - 1)
+                if (active_tab != 0)
+                    $("#tabs").tabs("option", "active", active_tab - 1)
                 else
                     $("#tabs").tabs("option", "active", totaltabs - 1)
 
@@ -66,11 +66,11 @@ $(document).ready(function() {
     setInterval(pulse, 150)
 
     $('.reload').click(function(){
-        var DivToReload = $(this).parent()
-        var myUrl = encodeURIComponent(DivToReload.attr('title'))
-        DivToReload.children('div.innerContainer')
-            .html(ajax_load)
-            .load(loadUrl, "z="+myUrl)
+        var div_to_reload = $(this).parent()
+        var feed_url = encodeURIComponent(div_to_reload.attr('title'))
+        div_to_reload.children('div.innerContainer')
+            .html(ajax_spinner)
+            .load(ajax_loader, "z=" + feed_url)
     })
 
     $('.reload').trigger('click')
@@ -133,7 +133,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "0fbc088e6c4f7c6b1de4ad41ebe23e7b01c9aaf4";
+$ref_commit = "e9429f3ab47b660b74edc5f37161c28e2153a646";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
