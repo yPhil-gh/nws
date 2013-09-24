@@ -25,34 +25,34 @@
 
 <script>
 
-$(function() {
+$(document).ready(function() {
 
     function pulse() {
-        $('.moved').fadeIn(8000);
-        $('.moved').fadeOut(200);
+        $('.moved').fadeIn(8000)
+        $('.moved').fadeOut(200)
     }
-    setInterval(pulse, 150);
+    setInterval(pulse, 150)
 
     $.ajaxSetup ({
         cache: true
     });
 
-    var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />';
-    var loadUrl = 'nws-load-feed.php';
+    var ajax_load = '<img src="img/loading.gif" class="loading" alt="loading..." />'
+    var loadUrl = 'nws-load-feed.php'
 
     $('.reload').click(function(){
         var DivToReload = $(this).parent()
         var myUrl = encodeURIComponent(DivToReload.attr('title'))
         DivToReload.children('div.innerContainer')
             .html(ajax_load)
-            .load(loadUrl, "z="+myUrl);
+            .load(loadUrl, "z="+myUrl)
     });
 
-    $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });
-    $('.reload').trigger('click');
+    $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" })
+    $('.reload').trigger('click')
 
-    var totaltabs = $(".tabulators").find( "li" ).size();
-    var direction = null;
+    var totaltabs = $(".tabulators").find( "li" ).size()
+    var direction = null
 
     $('body').keyup(function(e) {
 
@@ -61,17 +61,17 @@ $(function() {
         else if (e.keyCode == 39 || e.keyCode == 84)
             direction = 'next';
 
-        var active = $("#tabs").tabs("option", "active");
+        var active = $("#tabs").tabs("option", "active")
 
         if (direction != null)
             if (direction == 'next')
                 if (active < totaltabs -1)
-                    $("#tabs").tabs("option", "active", active + 1);
+                    $("#tabs").tabs("option", "active", active + 1)
                 else
-                    $("#tabs").tabs("option", "active", 0);
+                    $("#tabs").tabs("option", "active", 0)
             else
                 if (active != 0)
-                    $("#tabs").tabs("option", "active", active - 1);
+                    $("#tabs").tabs("option", "active", active - 1)
 
     });
 
