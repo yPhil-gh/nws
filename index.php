@@ -45,8 +45,6 @@ $(document).ready(function() {
         else
             return
 
-        alert('e.keyCode :' + e.keyCode)
-
         var active_tab = $("#tabs").tabs("option", "active")
 
         if (direction != null)
@@ -137,7 +135,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "d984a71c213a8644ac1577ac0cd759495f491487";
+$ref_commit = "195d8a3fd1539d5d2d9e0ae64747aa5e6b473294";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
