@@ -42,6 +42,10 @@ $(document).ready(function() {
             direction = 'prev'
         else if (e.keyCode == 39 || e.keyCode == 84)
             direction = 'next'
+        else
+            return
+
+        alert('e.keyCode :' + e.keyCode)
 
         var active_tab = $("#tabs").tabs("option", "active")
 
@@ -133,7 +137,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "e9429f3ab47b660b74edc5f37161c28e2153a646";
+$ref_commit = "d984a71c213a8644ac1577ac0cd759495f491487";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
