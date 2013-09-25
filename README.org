@@ -28,6 +28,7 @@
      - Optional : Move the .access out of the http server root, and edit .htaccess to reflect this change.
 
 *** Usage
+   - Navigate the tabs with < left and > right arrow keys (and r & t)
    - Use the "Manage feeds" link to access the "back office"
      - Use the "add a new feed" text entry field at the bottom to enter a new feed
      - Use the "new tab" text entry field to create a new category
