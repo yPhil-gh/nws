@@ -1,4 +1,4 @@
-<?
+<?php
 /*
   MGMT : Manage (add, categorise, promote, delete) feeds
 
@@ -16,7 +16,7 @@
 <body>
     <div>
 
-<?
+<?php
 
 include('nws-favicon.php');
 

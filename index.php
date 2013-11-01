@@ -1,4 +1,4 @@
-<?
+<?php
 /*
   index : View all feeds
 

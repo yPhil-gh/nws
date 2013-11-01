@@ -1,4 +1,4 @@
-<?
+<?php
 /*
   nws-favicon : Get site's favicon using various strategies
 
