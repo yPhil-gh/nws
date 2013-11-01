@@ -148,7 +148,7 @@ if (!strcmp($current_commit_minus1, $ref_commit)) {
 
 ?>
 
-<span id="version" onClick="document.location.href='https://github.com/xaccrocheur/nws'" title="<? echo $version_message ?>">
+<span id="version" onClick="document.location.href='https://github.com/xaccrocheur/nws'" title="<?php echo $version_message ?>">
     <span class="<?php echo $version_class ?>">♼</span>
 </span>
 </body>
