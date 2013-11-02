@@ -72,9 +72,10 @@ $(document).ready(function() {
         var feed_url = encodeURIComponent(div_to_reload.attr('title'))
         var feed_num_item = div_to_reload.attr('data-numItems')
         var feed_img_mode = div_to_reload.attr('data-img')
+        var feed_photo_mode = div_to_reload.attr('data-photo')
         div_to_reload.children('div.innerContainer')
             .html(ajax_spinner)
-            .load(ajax_loader, "n=" + feed_num_item + "&i="+feed_img_mode+"&z=" + feed_url)
+            .load(ajax_loader, "n=" + feed_num_item + "&i="+feed_img_mode+"&p="+feed_photo_mode+"&z=" + feed_url)
     })
 
     $('.reload').trigger('click')
@@ -90,9 +91,9 @@ $(document).ready(function() {
 $urls = simplexml_load_file('feeds.xml');
 $img_modes=array('none'=> 'none', 'all'=> 'all', 'first'=> 'first');
 
-function outerContainer($u, $numItems, $img) {
+function outerContainer($u, $numItems, $img, $photo) {
     echo '
-        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'" data-img="'.$img.'">
+        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'" data-img="'.$img.'" data-photo="'.$photo.'">
             <span class="reload" title="Reload '.htmlspecialchars($u).'">&#9889;</span>
             <div class="innerContainer"></div>
         </div>
@@ -103,6 +104,7 @@ foreach ($urls->url as $url) {
     $myAttributes = $url->attributes();
     $numItems = "16";
     $img = 'all';
+    $photo = '';
     $tab=NULL;
     foreach($myAttributes as $attr => $val) {
         if ($attr == 'numItems')
@@ -111,15 +113,17 @@ foreach ($urls->url as $url) {
             $tab = $val;
         if ($attr == 'img')
             $img = $val;
+        if ($attr == 'photo')
+            $photo = $val;
     }
 
     if (isset($tab)) {
-        $myTabs[] = array('tab'=> (string) $tab, 'url'=> (string) $url, 'numItems'=> (string) $numItems , 'img'=> (string) $img);
+        $myTabs[] = array('tab'=> (string) $tab, 'url'=> (string) $url, 'numItems'=> (string) $numItems , 'img'=> (string) $img, 'photo'=> (string) $photo);
     }
 }
 
 foreach($myTabs as $aRow) 
-    $tabGroups[$aRow['tab']][] = array('url'=> $aRow['url'], 'numItems'=> $aRow['numItems'], 'img'=> $aRow['img']);
+    $tabGroups[$aRow['tab']][] = array('url'=> $aRow['url'], 'numItems'=> $aRow['numItems'], 'img'=> $aRow['img'], 'photo'=> $aRow['photo']);
 
 echo '
     <ul class="tabulators">';
@@ -136,7 +140,7 @@ foreach (array_keys($tabGroups) as $tabName) {
     echo '
     <div id="tab-'.$tabName.'">';
         foreach ($tabGroups[$tabName] as $tabUrl)
-            outerContainer($tabUrl['url'],$tabUrl['numItems'],$tabUrl['img']);
+            outerContainer($tabUrl['url'],$tabUrl['numItems'],$tabUrl['img'],$tabUrl['photo']);
     echo '
     </div>';
 }

@@ -9,7 +9,8 @@
 
 ini_set('display_errors', 'Off');
 
-// If the feed's URL contains one of those, it will be treated as a Photoblog feed (full img width)
+// If the feed's URL contains one of those, it will be treated as a Photoblog feed (full img width) 
+// Unless the call forces photoblog mode to true or false
 $photoblog_domains = array(
     ".tumblr.",
     "cabinporn",
@@ -38,12 +39,7 @@ function str_img_src($html) {
         return false;
 }
 
-function reparse($u, $numItems, $imgMode) {
-
-    global $photoblog_domains;
-
-    foreach ($photoblog_domains as $photoblog_domain)
-        if (strstr($u, $photoblog_domain)) $photoblog = true;
+function reparse($u, $numItems, $imgMode, $photoblog) {
 
     $feedRss = simplexml_load_file(urlencode($u)) or die("feed not loading");
 
@@ -98,7 +94,7 @@ function reparse($u, $numItems, $imgMode) {
 
                 // Image
 
-                if (isset($imgSrc) || $imgSrc == "")
+                if (isset($imgSrc) && $imgSrc != "")
                     list($width, $height) = getimagesize($imgSrc);
 
                 $atomImg = $item->enclosure['url'];
@@ -146,7 +142,7 @@ function reparse($u, $numItems, $imgMode) {
                 } elseif (!empty($elseSrc)) {
 
                     if (!CheckImageExists($elseSrc))
-                        $elseSrc = "http://".$elseSrc;
+                        $elseSrc = "http://".$domain.$elseSrc;
 
                     $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
                     $description = $item->content;
@@ -184,6 +180,15 @@ if (isset($_GET['i']))
 else
     $imgMode='all';
 
-reparse($_GET['z'],$numItems,$imgMode);
+$photoblog = false;
+foreach ($photoblog_domains as $photoblog_domain)
+    if (strstr($_GET['z'], $photoblog_domain)) $photoblog = true;
+
+if (isset($_GET['p'])) {
+    if ($_GET['p'] == "true") $photoblog = true;
+    elseif ($_GET['p'] == "false") $photoblog = false;
+}
+
+reparse($_GET['z'],$numItems,$imgMode,$photoblog);
 
 ?>
