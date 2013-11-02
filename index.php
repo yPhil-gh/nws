@@ -70,9 +70,10 @@ $(document).ready(function() {
     $('.reload').click(function(){
         var div_to_reload = $(this).parent()
         var feed_url = encodeURIComponent(div_to_reload.attr('title'))
+        var feed_num_item = div_to_reload.attr('data-numItems')
         div_to_reload.children('div.innerContainer')
             .html(ajax_spinner)
-            .load(ajax_loader, "z=" + feed_url)
+            .load(ajax_loader, "n=" + feed_num_item + "&z=" + feed_url)
     })
 
     $('.reload').trigger('click')
@@ -87,9 +88,9 @@ $(document).ready(function() {
 
 $urls = simplexml_load_file('feeds.xml');
 
-function outerContainer($u) {
+function outerContainer($u, $numItems) {
     echo '
-        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'">
+        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'">
             <span class="reload" title="Reload '.htmlspecialchars($u).'">&#9889;</span>
             <div class="innerContainer"></div>
         </div>
@@ -97,14 +98,22 @@ function outerContainer($u) {
 }
 
 foreach ($urls->url as $url) {
-    $myUrls[] = $url;
-    foreach($url->attributes() as $attr => $val)
+    $myAttributes = $url->attributes();
+    $numItems = "16";
+    $tab=NULL;
+    foreach($myAttributes as $attr => $val) {
+        if ($attr == 'numItems')
+            $numItems = $val;
         if ($attr == 'tab')
-            $myTabs[] = array('tab'=> (string) $val, 'url'=> (string) $url);
+            $tab = $val;
+    }
+    if (isset($tab)) {
+        $myTabs[] = array('tab'=> (string) $tab, 'url'=> (string) $url, 'numItems'=> (string) $numItems);
+    }
 }
 
-foreach($myTabs as $aRow)
-    $tabGroups[$aRow['tab']][] = $aRow['url'];
+foreach($myTabs as $aRow) 
+    $tabGroups[$aRow['tab']][] = array('url'=> $aRow['url'], 'numItems'=> $aRow['numItems']);
 
 echo '
     <ul class="tabulators">';
@@ -121,7 +130,7 @@ foreach (array_keys($tabGroups) as $tabName) {
     echo '
     <div id="tab-'.$tabName.'">';
         foreach ($tabGroups[$tabName] as $tabUrl)
-            outerContainer($tabUrl);
+            outerContainer($tabUrl['url'],$tabUrl['numItems']);
     echo '
     </div>';
 }

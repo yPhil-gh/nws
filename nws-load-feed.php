@@ -38,10 +38,9 @@ function str_img_src($html) {
         return false;
 }
 
-function reparse($u) {
+function reparse($u, $numItems) {
 
     global $photoblog_domains;
-    global $items_limit;
 
     foreach ($photoblog_domains as $photoblog_domain)
         if (strstr($u, $photoblog_domain)) $photoblog = true;
@@ -76,8 +75,8 @@ function reparse($u) {
 
         $items_total = count($items);
 
-        if ($items_total > $items_limit)
-            $display_items = $items_limit;
+        if ($items_total > $numItems)
+            $display_items = $numItems;
         else
             $display_items = $items_total;
 
@@ -92,7 +91,7 @@ function reparse($u) {
                  <ul>';
 
         foreach($items as $item) {
-            if ($i++ < $items_limit) {
+            if ($i++ < $numItems) {
                 $link = htmlspecialchars($item->link);
                 $title = strip_tags($item->title);
                 $imgSrc = str_img_src($item->description);
@@ -113,7 +112,7 @@ function reparse($u) {
                 //     echo '<br />namespace: ' . $name.' value: ' . $value;
 
                 //Relative
-                if ($item->children($namespaces['media']))
+                if (isset($namespaces['media']) && $item->children($namespaces['media']))
                     $media = $item->children($namespaces['media']);
 
                 // if (isset($media)) {
@@ -172,6 +171,9 @@ function reparse($u) {
     }
 }
 
-reparse($_GET['z']);
+if (isset($_GET['n']))
+    reparse($_GET['z'],$_GET['n']);
+else
+    reparse($_GET['z'],$items_limit);
 
 ?>
