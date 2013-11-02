@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feeds>
-  <url tab="news" numItems="5">http://www.arretsurimages.net/tous-les-contenus.rss</url>
+  <url tab="news" numItems="5" img="first">http://www.arretsurimages.net/tous-les-contenus.rss</url>
   <url tab="news">http://www.acrimed.org/spip.php?page=backend</url>
-  <url tab="news" numItems="8">http://feeds.bbci.co.uk/news/world/rss.xml</url>
+  <url tab="news" numItems="8" img="first">http://feeds.bbci.co.uk/news/world/rss.xml</url>
   <url tab="news">http://rezo.net/backend/</url>
 
   <url tab="sci" numItems="3">http://fe3.yql.bf1.yahoo.com/pipes/pipe.run?_id=feff1572a71d8e1d04465296edf5a537&amp;_render=rss</url>
@@ -19,7 +19,7 @@
   <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
   <url tab="tech">http://linuxfr.org/news.atom</url>
   <url tab="tech">http://www.theverge.com/rss/index.xml</url>
-  <url tab="tech">http://rss.slashdot.org/Slashdot/slashdot</url>
+  <url tab="tech" img="none">http://rss.slashdot.org/Slashdot/slashdot</url>
 
   <url tab="00z">http://awkwardstockphotos.com/rss</url>
 

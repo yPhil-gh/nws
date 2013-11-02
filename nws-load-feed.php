@@ -38,7 +38,7 @@ function str_img_src($html) {
         return false;
 }
 
-function reparse($u, $numItems) {
+function reparse($u, $numItems, $imgMode) {
 
     global $photoblog_domains;
 
@@ -127,7 +127,10 @@ function reparse($u, $numItems) {
                 if (!empty($elseSrc))
                     $imgSrc = "http://".$domain.$elseSrc;
 
-                if ($photoblog || $title == "Photo") {
+                if ($imgMode == 'none' || ($imgMode == 'first' && $i > 1)) {
+                    $img = '';
+                }
+                elseif ($photoblog || $title == "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="full" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
                     $title = $title;
                 } elseif (!empty($atomImg)) {
@@ -172,8 +175,15 @@ function reparse($u, $numItems) {
 }
 
 if (isset($_GET['n']))
-    reparse($_GET['z'],$_GET['n']);
+    $numItems=$_GET['n'];
 else
-    reparse($_GET['z'],$items_limit);
+    $numItems=$items_limit;
+
+if (isset($_GET['i']))
+    $imgMode=$_GET['i'];
+else
+    $imgMode='all';
+
+reparse($_GET['z'],$numItems,$imgMode);
 
 ?>

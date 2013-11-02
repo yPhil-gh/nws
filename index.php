@@ -71,9 +71,10 @@ $(document).ready(function() {
         var div_to_reload = $(this).parent()
         var feed_url = encodeURIComponent(div_to_reload.attr('title'))
         var feed_num_item = div_to_reload.attr('data-numItems')
+        var feed_img_mode = div_to_reload.attr('data-img')
         div_to_reload.children('div.innerContainer')
             .html(ajax_spinner)
-            .load(ajax_loader, "n=" + feed_num_item + "&z=" + feed_url)
+            .load(ajax_loader, "n=" + feed_num_item + "&i="+feed_img_mode+"&z=" + feed_url)
     })
 
     $('.reload').trigger('click')
@@ -87,10 +88,11 @@ $(document).ready(function() {
 <?php
 
 $urls = simplexml_load_file('feeds.xml');
+$img_modes=array('none'=> 'none', 'all'=> 'all', 'first'=> 'first');
 
-function outerContainer($u, $numItems) {
+function outerContainer($u, $numItems, $img) {
     echo '
-        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'">
+        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'" data-img="'.$img.'">
             <span class="reload" title="Reload '.htmlspecialchars($u).'">&#9889;</span>
             <div class="innerContainer"></div>
         </div>
@@ -100,20 +102,24 @@ function outerContainer($u, $numItems) {
 foreach ($urls->url as $url) {
     $myAttributes = $url->attributes();
     $numItems = "16";
+    $img = 'all';
     $tab=NULL;
     foreach($myAttributes as $attr => $val) {
         if ($attr == 'numItems')
             $numItems = $val;
         if ($attr == 'tab')
             $tab = $val;
+        if ($attr == 'img')
+            $img = $val;
     }
+
     if (isset($tab)) {
-        $myTabs[] = array('tab'=> (string) $tab, 'url'=> (string) $url, 'numItems'=> (string) $numItems);
+        $myTabs[] = array('tab'=> (string) $tab, 'url'=> (string) $url, 'numItems'=> (string) $numItems , 'img'=> (string) $img);
     }
 }
 
 foreach($myTabs as $aRow) 
-    $tabGroups[$aRow['tab']][] = array('url'=> $aRow['url'], 'numItems'=> $aRow['numItems']);
+    $tabGroups[$aRow['tab']][] = array('url'=> $aRow['url'], 'numItems'=> $aRow['numItems'], 'img'=> $aRow['img']);
 
 echo '
     <ul class="tabulators">';
@@ -130,7 +136,7 @@ foreach (array_keys($tabGroups) as $tabName) {
     echo '
     <div id="tab-'.$tabName.'">';
         foreach ($tabGroups[$tabName] as $tabUrl)
-            outerContainer($tabUrl['url'],$tabUrl['numItems']);
+            outerContainer($tabUrl['url'],$tabUrl['numItems'],$tabUrl['img']);
     echo '
     </div>';
 }
