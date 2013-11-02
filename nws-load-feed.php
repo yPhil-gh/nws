@@ -117,7 +117,7 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
                 //     $mediaImg = $media->attributes()->url;
                 // }
 
-                if (isset($media))
+                if (isset($media) && isset($media->thumbnail))
                     $mediaImg = $media->thumbnail->attributes()->url;
 
                 if (!empty($elseSrc))
@@ -137,7 +137,7 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                 } elseif (!empty($mediaImg)) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
-                } elseif (!empty($imgSrc) && $width > 2 && $title != "Photo") {
+                } elseif (!empty($imgSrc) && isset($width) && $width > 2 && $title != "Photo") {
                     $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
                 } elseif (!empty($elseSrc)) {
 
