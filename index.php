@@ -34,6 +34,7 @@ $(document).ready(function() {
     var totaltabs = $(".tabulators").find( "li" ).size()
     var direction = null
     var ajax_loader = 'nws-load-feed.php'
+    var feed_max_age = 3600;
     var ajax_spinner = '<img src="img/loading.gif" class="loading" alt="loading..." />'
 
     $('body').keyup(function(e) {
@@ -75,11 +76,11 @@ $(document).ready(function() {
         var feed_photo_mode = div_to_reload.attr('data-photo')
         div_to_reload.children('div.innerContainer')
             .html(ajax_spinner)
-            .load(ajax_loader, "n=" + feed_num_item + "&i="+feed_img_mode+"&p="+feed_photo_mode+"&z=" + feed_url)
+            .load(ajax_loader, "n=" + feed_num_item + "&i="+feed_img_mode+"&p="+feed_photo_mode+"&age="+feed_max_age+"&z=" + feed_url)
     })
 
     $('.reload').trigger('click')
-
+    feed_max_age = 10; // allow to force reloading the feed
 })
 
 </script>

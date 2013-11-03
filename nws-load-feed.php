@@ -22,6 +22,7 @@ $photoblog_domains = array(
 
 // Number of items / feed
 $items_limit = "16";
+$cache_dir = "cache/";
 
 include('nws-favicon.php');
 
@@ -62,9 +63,59 @@ function get_link($links) {
     }
 }
 
-function reparse($u, $numItems, $imgMode, $photoblog) {
+// getfile() : 
+//      $url        : string, should already be urlencoded
+//      $max_age    : integer, number of seconds
+function get_file($url, $max_age) {
+    global $cache_dir;
+    
+    if (file_exists($cache_dir)) {
+        $cache_ok = true;
+    }
+    else {
+        $cache_ok = @mkdir($cache_dir);
+    }
 
-    $feedRss = simplexml_load_file(urlencode($u)) or die("feed not loading");
+    // cache file should not contain '://' otherwise it will be considered as an url
+    // simplifiying by looking for 'http://' or 'https://'
+    $url_decoded = urldecode($url);
+    if ($cache_ok && (substr($url_decoded, 0, strlen('http://')) == 'http://')) {
+        $cache_file = substr($url_decoded, strlen('http://'));
+    } 
+    elseif ($cache_ok && (substr($url_decoded, 0, strlen('https://')) == 'https://')) {
+        $cache_file = substr($url_decoded, strlen('https://'));
+    }
+    else {
+        $cache_ok = false;
+    }
+    
+    if (!$cache_ok) { // abort cache feature
+        $rssfeed = file_get_contents($url) or die("feed cannot be read");
+        return $rssfeed;
+    }
+    // reencod to avoid specials symbols (like '/')
+    $cache_file = urlencode($cache_file);
+    $cache_file = $cache_dir.$cache_file;
+    
+    if (file_exists($cache_file) && (filemtime($cache_file) > (time() - $max_age)) ) {
+        $rssfeed = file_get_contents($cache_file) or die("feed cannot be read from cache");
+    }
+    else {
+        $rssfeed = file_get_contents($url) or die("feed cannot be read");
+        $fh = fopen($cache_file, 'w');
+        if ($fh !== false) {
+            fwrite($fh, $rssfeed);
+            fclose($fh);
+        }
+    }
+    return $rssfeed;
+    
+}
+
+function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
+    // $u is already urlencoded (comming from a GET request)
+    $xmlrss = get_file($u, $max_age);
+    $feedRss = simplexml_load_string($xmlrss) or die("feed not loading");
 
     // var_dump($http_response_header);
 
@@ -127,9 +178,6 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
 
                 // Image
 
-                if (isset($imgSrc) && $imgSrc != "")
-                    list($width, $height) = getimagesize($imgSrc);
-
                 $atomImg = $item->enclosure['url'];
                 $elseSrc = str_img_src(strip_tags($item->content, "<img>"));
                 $elseSrx = htmlspecialchars_decode($item->description);
@@ -170,15 +218,14 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                 } elseif (!empty($mediaImg)) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
-                } elseif (!empty($imgSrc) && isset($width) && $width > 2 && $title != "Photo") {
-                    $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
                 } elseif (!empty($elseSrc)) {
-
-                    if (!CheckImageExists($elseSrc))
-                        $elseSrc = "http://".$domain.$elseSrc;
-
-                    $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
-                    $description = $item->content;
+                    list($width, $height) = getimagesize($imgSrc);
+                    if (isset($width) && $width > 2 && $title != "Photo") {
+                        $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
+                    } else {
+                        $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
+                        $description = $item->content;
+                    }
                 } else {
                     $img = '';
                 }
@@ -196,6 +243,7 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
                               </div>
                           </li>';
             }
+            else break;
         }
         echo '
                       </ul>
@@ -213,6 +261,11 @@ if (isset($_GET['i']))
 else
     $imgMode='all';
 
+if (isset($_GET['age']))
+    $max_age = (int) $_GET['age'];
+else
+    $max_age = 3600;
+
 $photoblog = false;
 foreach ($photoblog_domains as $photoblog_domain)
     if (strstr($_GET['z'], $photoblog_domain)) $photoblog = true;
@@ -222,6 +275,6 @@ if (isset($_GET['p'])) {
     elseif ($_GET['p'] == "false") $photoblog = false;
 }
 
-reparse($_GET['z'],$numItems,$imgMode,$photoblog);
+reparse($_GET['z'],$numItems,$imgMode,$photoblog, $max_age);
 
 ?>
