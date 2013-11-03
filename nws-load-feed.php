@@ -148,9 +148,6 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                 $feedLink = get_link($feedRss->link);
             }
         }
-//        echo '<!--
-//feedLink = '.print_r($feedLink,true).'
-//-->';
         if (empty($feedLink))  $feedLink = $u;
 
         $items_total = count($items);
@@ -180,7 +177,6 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
 
                 $atomImg = $item->enclosure['url'];
                 $elseSrc = str_img_src(strip_tags($item->content, "<img>"));
-                $elseSrx = htmlspecialchars_decode($item->description);
 
                 //Use that namespace
                 $namespaces = $item->getNameSpaces(true);
@@ -201,8 +197,18 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                 if (isset($media) && isset($media->thumbnail))
                     $mediaImg = $media->thumbnail->attributes()->url;
 
-                if (!empty($elseSrc))
-                    $imgSrc = "http://".$domain.$elseSrc;
+                if (!empty($elseSrc)) {
+                    if (substr($elseSrc, 0, strlen('//')) == '//') {
+                        $elseSrc = 'http:'.$elseSrc;
+                    }
+                    elseif ((substr($elseSrc, 0, strlen('http://')) != 'http://') 
+                        &&  (substr($elseSrc, 0, strlen('https://')) != 'https://')
+                        ) {
+                        $elseSrc = 'http://'.$domain.$elseSrc;
+                    }
+                }
+                if (empty($imgSrc) && !empty($elseSrc))
+                    $imgSrc = $elseSrc;
 
                 if ($imgMode == 'none' || ($imgMode == 'first' && $i > 1)) {
                     $img = '';
@@ -218,14 +224,12 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                         $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
                 } elseif (!empty($mediaImg)) {
                     $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
-                } elseif (!empty($elseSrc)) {
+                } elseif (!empty($imgSrc)) {
                     list($width, $height) = getimagesize($imgSrc);
-                    if (isset($width) && $width > 2 && $title != "Photo") {
+                    if (isset($width) && $width > 2) {
                         $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
-                    } else {
-                        $img = '<a href="'.$elseSrc.'"><img class="feed" alt="else" src="'.$elseSrc.'" /></a>';
-                        $description = $item->content;
                     }
+                    else $img = '';
                 } else {
                     $img = '';
                 }
