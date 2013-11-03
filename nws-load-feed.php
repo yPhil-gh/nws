@@ -39,6 +39,29 @@ function str_img_src($html) {
         return false;
 }
 
+function get_link($links) {
+    if (count($links) > 1) {
+        foreach($links as $link) {
+            $myAttributes = $link->attributes();
+            if (isset($myAttributes['href']))
+                $res = $myAttributes['href'];
+            if (strlen($link)>0) 
+                $res = $link;
+            if (isset($myAttributes['type']) && ($myAttributes['type'] == 'text/html')) // bingo
+                return $res;
+        }
+        if (isset($res)) return $res;
+        else return '';
+    }
+    else {
+        $myAttributes = $links->attributes();
+        if (isset($myAttributes['href']))
+            return $myAttributes['href'];
+        else
+            return $links;
+    }
+}
+
 function reparse($u, $numItems, $imgMode, $photoblog) {
 
     $feedRss = simplexml_load_file(urlencode($u)) or die("feed not loading");
@@ -56,6 +79,9 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
         if (isset($feedRss->channel->item)) {
             $items = $feedRss->channel->item;
             $feedTitle = $feedRss->channel->title;
+            if (isset($feedRss->channel->link)) {
+                $feedLink = get_link($feedRss->channel->link);
+            }
         }
         else {
             if (isset($feedRss->item)) {
@@ -67,7 +93,14 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
                 $items = $feedRss->entry;
                 $feedTitle = $feedRss->title;
             }
+            if (isset($feedRss->link)) {
+                $feedLink = get_link($feedRss->link);
+            }
         }
+//        echo '<!--
+//feedLink = '.print_r($feedLink,true).'
+//-->';
+        if (empty($feedLink))  $feedLink = $u;
 
         $items_total = count($items);
 
@@ -77,12 +110,12 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
             $display_items = $items_total;
 
         echo '
-             <div class="feed" title ="'.$u.'">
+             <div class="feed" title ="'.$feedLink.'">
                  <div class="feedTitle">
                      <span class="favicon">
                          <img src="'.$favicon.'" />
                      </span>
-                     <a href="'.$u.'" title="Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.'">'.$feedTitle.'</a>
+                     <a href="'.$feedLink.'" title="Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.'">'.$feedTitle.'</a>
                  </div>
                  <ul>';
 
