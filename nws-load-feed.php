@@ -113,6 +113,7 @@ function get_file($url, $max_age) {
 }
 
 function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
+    $time_start = microtime(true);
     // $u is already urlencoded (comming from a GET request)
     $xmlrss = get_file($u, $max_age);
     $feedRss = simplexml_load_string($xmlrss) or die("feed not loading");
@@ -253,6 +254,8 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                       </ul>
                       </div>';
     }
+    $time_end = microtime(true);
+    echo '<!-- time = '.((string) 1000*($time_end-$time_start)).' ms -->';
 }
 
 if (isset($_GET['n']))
