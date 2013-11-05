@@ -43,8 +43,13 @@ $fallback_favicon = "img/nws.png";
     if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 NOT FOUND' || $file_headers[0] == 'HTTP/1.1 301 Moved Permanently') {
 
         $fileContent = @file_get_contents("http://".$domain);
+        if ($fileContent === false) 
+            return $fallback_favicon; // unable to read file (domain name without explicit page)
 
         $dom = @DOMDocument::loadHTML($fileContent);
+        if ($dom === false)
+            return $fallback_favicon; // file was empty ?
+
         $xpath = new DOMXpath($dom);
 
         $elements = $xpath->query("head/link//@href");
