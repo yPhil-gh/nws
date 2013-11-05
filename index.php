@@ -1,4 +1,4 @@
-<?
+<?php
 /*
   index : View all feeds
 
@@ -34,6 +34,7 @@ $(document).ready(function() {
     var totaltabs = $(".tabulators").find( "li" ).size()
     var direction = null
     var ajax_loader = 'nws-load-feed.php'
+    var feed_max_age = 3600;
     var ajax_spinner = '<img src="img/loading.gif" class="loading" alt="loading..." />'
 
     $('body').keyup(function(e) {
@@ -70,13 +71,16 @@ $(document).ready(function() {
     $('.reload').click(function(){
         var div_to_reload = $(this).parent()
         var feed_url = encodeURIComponent(div_to_reload.attr('title'))
+        var feed_num_item = div_to_reload.attr('data-numItems')
+        var feed_img_mode = div_to_reload.attr('data-img')
+        var feed_photo_mode = div_to_reload.attr('data-photo')
         div_to_reload.children('div.innerContainer')
             .html(ajax_spinner)
-            .load(ajax_loader, "z=" + feed_url)
+            .load(ajax_loader, "n=" + feed_num_item + "&i="+feed_img_mode+"&p="+feed_photo_mode+"&age="+feed_max_age+"&z=" + feed_url)
     })
 
     $('.reload').trigger('click')
-
+    feed_max_age = 10; // allow to force reloading the feed
 })
 
 </script>
@@ -86,10 +90,11 @@ $(document).ready(function() {
 <?php
 
 $urls = simplexml_load_file('feeds.xml');
+$img_modes=array('none'=> 'none', 'all'=> 'all', 'first'=> 'first');
 
-function outerContainer($u) {
+function outerContainer($u, $numItems, $img, $photo) {
     echo '
-        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'">
+        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'" data-img="'.$img.'" data-photo="'.$photo.'">
             <span class="reload" title="Reload '.htmlspecialchars($u).'">&#9889;</span>
             <div class="innerContainer"></div>
         </div>
@@ -97,14 +102,29 @@ function outerContainer($u) {
 }
 
 foreach ($urls->url as $url) {
-    $myUrls[] = $url;
-    foreach($url->attributes() as $attr => $val)
+    $myAttributes = $url->attributes();
+    $numItems = "16";
+    $img = 'all';
+    $photo = '';
+    $tab=NULL;
+    foreach($myAttributes as $attr => $val) {
+        if ($attr == 'numItems')
+            $numItems = $val;
         if ($attr == 'tab')
-            $myTabs[] = array('tab'=> (string) $val, 'url'=> (string) $url);
+            $tab = $val;
+        if ($attr == 'img')
+            $img = $val;
+        if ($attr == 'photo')
+            $photo = $val;
+    }
+
+    if (isset($tab)) {
+        $myTabs[] = array('tab'=> (string) $tab, 'url'=> (string) $url, 'numItems'=> (string) $numItems , 'img'=> (string) $img, 'photo'=> (string) $photo);
+    }
 }
 
-foreach($myTabs as $aRow)
-    $tabGroups[$aRow['tab']][] = $aRow['url'];
+foreach($myTabs as $aRow) 
+    $tabGroups[$aRow['tab']][] = array('url'=> $aRow['url'], 'numItems'=> $aRow['numItems'], 'img'=> $aRow['img'], 'photo'=> $aRow['photo']);
 
 echo '
     <ul class="tabulators">';
@@ -121,7 +141,7 @@ foreach (array_keys($tabGroups) as $tabName) {
     echo '
     <div id="tab-'.$tabName.'">';
         foreach ($tabGroups[$tabName] as $tabUrl)
-            outerContainer($tabUrl);
+            outerContainer($tabUrl['url'],$tabUrl['numItems'],$tabUrl['img'],$tabUrl['photo']);
     echo '
     </div>';
 }
@@ -148,8 +168,8 @@ if (!strcmp($current_commit_minus1, $ref_commit)) {
 
 ?>
 
-<span id="version" onClick="document.location.href='https://github.com/xaccrocheur/nws'" title="<? echo $version_message ?>">
-    <span class="<? echo $version_class ?>">♼</span>
+<span id="version" onClick="document.location.href='https://github.com/xaccrocheur/nws'" title="<?php echo $version_message ?>">
+    <span class="<?php echo $version_class ?>">♼</span>
 </span>
 </body>
 </html>
