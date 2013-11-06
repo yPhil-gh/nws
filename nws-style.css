@@ -44,12 +44,11 @@ a:active {
 .feedTitle {
     height:1.5em;
     overflow:hidden;
-    text-overflow: "ellipsis";
     color:#CD9E3F;
     background:#2e3436;
     padding:.2em .2em 0;
     white-space:nowrap;
-    text-overflow:"...";
+    text-overflow: "ellipsis";
 }
 
 .feed {
