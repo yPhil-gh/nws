@@ -213,7 +213,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                 if ($imgMode == 'none' || ($imgMode == 'first' && $i > 1)) {
                     $img = '';
                 }
-                elseif ($photoblog || $title == "Photo") {
+                elseif ($photoblog) {
                     $img = '<a href="'.$imgSrc.'"><img class="full" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
                     $title = $title;
                 } elseif (!empty($atomImg)) {
