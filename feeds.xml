@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feeds>
-<!-- 
+<!--
     img can be either { none first all }
     photo can be either {true false}
 -->
@@ -18,6 +18,16 @@
   <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
   <url tab="img">http://generalelectric.tumblr.com/rss</url>
 
+  <url tab="img">http://allcreatures.tumblr.com/rss/</url>
+  <url tab="img">http://freecabinporn.com/rss/</url>
+  <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
+  <url tab="img">http://generalelectric.tumblr.com/rss</url>
+
+  <url tab="img">http://allcreatures.tumblr.com/rss/</url>
+  <url tab="img">http://freecabinporn.com/rss/</url>
+  <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
+  <url tab="img">http://generalelectric.tumblr.com/rss</url>
+
   <url tab="vid">https://gdata.youtube.com/feeds/base/users/doublebiceps/uploads</url>
 
   <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
@@ -26,6 +36,7 @@
   <url tab="tech" img="none">http://rss.slashdot.org/Slashdot/slashdot</url>
 
   <url tab="00z">http://awkwardstockphotos.com/rss</url>
+  <url tab="00z">http://dailynudes.tumblr.com/rss/</url>
 
   <!-- disabled feeds
        <url tab="snd">http://planet.linuxaudio.org/rss20.xml</url>
