@@ -40,6 +40,8 @@ a:active {
     color:#f00;
 }
 
+
+
 /* Feed Item */
 .feedTitle {
     height:1.5em;
@@ -124,6 +126,10 @@ a:active {
 
 /* Images */
 .favicon img {
+    /* color:none; */
+    /* font-weight:normal; */
+    /* text-decoration:none; */
+    margin:.1em;
     width:16px;
 }
 

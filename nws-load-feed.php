@@ -9,7 +9,7 @@
 
 ini_set('display_errors', 'Off');
 
-// If the feed's URL contains one of those, it will be treated as a Photoblog feed (full img width) 
+// If the feed's URL contains one of those, it will be treated as a Photoblog feed (full img width)
 // Unless the call forces photoblog mode to true or false
 $photoblog_domains = array(
     ".tumblr.",
@@ -46,7 +46,7 @@ function get_link($links) {
             $myAttributes = $link->attributes();
             if (isset($myAttributes['href']))
                 $res = $myAttributes['href'];
-            if (strlen($link)>0) 
+            if (strlen($link)>0)
                 $res = $link;
             if (isset($myAttributes['type']) && ($myAttributes['type'] == 'text/html')) // bingo
                 return $res;
@@ -63,12 +63,12 @@ function get_link($links) {
     }
 }
 
-// getfile() : 
+// getfile() :
 //      $url        : string, should already be urlencoded
 //      $max_age    : integer, number of seconds
 function get_file($url, $max_age) {
     global $cache_dir;
-    
+
     if (file_exists($cache_dir)) {
         $cache_ok = true;
     }
@@ -81,14 +81,14 @@ function get_file($url, $max_age) {
     $url_decoded = urldecode($url);
     if ($cache_ok && (substr($url_decoded, 0, strlen('http://')) == 'http://')) {
         $cache_file = substr($url_decoded, strlen('http://'));
-    } 
+    }
     elseif ($cache_ok && (substr($url_decoded, 0, strlen('https://')) == 'https://')) {
         $cache_file = substr($url_decoded, strlen('https://'));
     }
     else {
         $cache_ok = false;
     }
-    
+
     if (!$cache_ok) { // abort cache feature
         $rssfeed = file_get_contents($url) or die("feed cannot be read");
         return $rssfeed;
@@ -96,7 +96,7 @@ function get_file($url, $max_age) {
     // reencod to avoid specials symbols (like '/')
     $cache_file = urlencode($cache_file);
     $cache_file = $cache_dir.$cache_file;
-    
+
     if (file_exists($cache_file) && (filemtime($cache_file) > (time() - $max_age)) ) {
         $rssfeed = file_get_contents($cache_file) or die("feed cannot be read from cache");
     }
@@ -109,7 +109,7 @@ function get_file($url, $max_age) {
         }
     }
     return $rssfeed;
-    
+
 }
 
 function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
@@ -162,12 +162,11 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
              <div class="feed" title ="'.$feedLink.'">
                  <div class="feedTitle">
                      <span class="favicon">
-                         <img src="'.$favicon.'" />
+                         <a href="'.$u.'"><img src="'.$favicon.'" /></a>
                      </span>
                      <a href="'.$feedLink.'" title="Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.'">'.$feedTitle.'</a>
                  </div>
                  <ul>';
-
         foreach($items as $item) {
             if ($i++ < $numItems) {
                 $link = htmlspecialchars($item->link);
@@ -202,7 +201,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                     if (substr($elseSrc, 0, strlen('//')) == '//') {
                         $elseSrc = 'http:'.$elseSrc;
                     }
-                    elseif ((substr($elseSrc, 0, strlen('http://')) != 'http://') 
+                    elseif ((substr($elseSrc, 0, strlen('http://')) != 'http://')
                         &&  (substr($elseSrc, 0, strlen('https://')) != 'https://')
                         ) {
                         $elseSrc = 'http://'.$domain.$elseSrc;

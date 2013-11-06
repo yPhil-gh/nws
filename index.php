@@ -123,7 +123,7 @@ foreach ($urls->url as $url) {
     }
 }
 
-foreach($myTabs as $aRow) 
+foreach($myTabs as $aRow)
     $tabGroups[$aRow['tab']][] = array('url'=> $aRow['url'], 'numItems'=> $aRow['numItems'], 'img'=> $aRow['img'], 'photo'=> $aRow['photo']);
 
 echo '
@@ -155,7 +155,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "648bcdcfd4eb19d9fc0030a22997e07b11431779";
+$ref_commit = "c3e4d0773f5f7ff5fd913131480be9a720efb3bc";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
