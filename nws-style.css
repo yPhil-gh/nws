@@ -48,7 +48,7 @@ a:active {
     background:#2e3436;
     padding:.2em .2em 0;
     white-space:nowrap;
-    text-overflow: "ellipsis";
+    text-overflow: ellipsis;
 }
 
 .feed {
