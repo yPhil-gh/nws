@@ -38,37 +38,80 @@
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="nws" class="anchor" href="#nws"><span class="octicon octicon-link"></span></a>NWS</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<h2>
+<a name="nws-is-an-online-news-reader" class="anchor" href="#nws-is-an-online-news-reader"><span class="octicon octicon-link"></span></a>NWS is an online news reader</h2>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p><img src="https://raw.github.com/xaccrocheur/nws/master/screenshot.png" alt="NWS screenshot">
+   NWS is a php CMS to manage various XML (RSS, aTom, etc) news feeds
+   and present them in a nice, ergonomic fashion. I made it to replace the online
+   news services that I use up until around 2007, when they became bloated and
+   crippled with spyware. It's really a [[<a href="https://github.com/xaccrocheur/nws/blob/master/screenshot.png%5D%5Bbarebones%5D">https://github.com/xaccrocheur/nws/blob/master/screenshot.png][barebones]</a>] system, but I've
+   been using it for +weeks+ years now, and it basically does what I want.</p>
+
+<h3>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h3>
+
+<ul>
+<li>AJAX (asynchronous) loading of the feeds (ie reload one single feed w/o reloading the whole page)</li>
+<li>Handles any charset encoding/langage</li>
+<li>Grabs the most out of the description text and displays it as standard tooltip on mouse hover</li>
+<li>Does its best to parse any given feed and identify it w/o questions</li>
+<li>Plays nice with different resolutions &amp; ergonomics, ie phones, tablets, etc</li>
+<li>Directly links to any included image (and sound file)</li>
+<li>If any, displays item image, wrapped around text (displays it full width if it's the only item's element, or if it comes from a photoblog - set those up [[<a href="https://github.com/xaccrocheur/nws/blob/master/nws-load-feed.php%5D%5Bhere%5D%5D">https://github.com/xaccrocheur/nws/blob/master/nws-load-feed.php][here]]</a>)</li>
+<li>Totally self-contained. No linked librairies, online commodities or, heaven forbid, "statistics" trackers</li>
+<li>Lightweight and standard (valid HTML5 code)</li>
+</ul><h3>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<ul>
+<li>Copy the files in a directory within a webserver root.</li>
+<li>Point your browser to that webserver's directory. That's it.</li>
+<li>Recommended : Protect (restrict access to) the back-office
+
+<ul>
+<li>Use <a href="You%20can%20also%20create%20user/password%20pair(s">[https://duckduckgo.com/?q%3Dhtpassword%2Bgenerator][a trusted online htpassword generator]</a> directly on the server with the command "htpasswd -b .access username password")</li>
+<li>Paste this user/password pair in a file, and upload it as nws/.access (or another - secure - location, see below)</li>
+<li>Optional : Move the .access out of the http server root, and edit .htaccess to reflect this change.</li>
+</ul>
+</li>
+</ul><h3>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<ul>
+<li>Navigate the tabs with &lt; left and &gt; right arrow keys (and r &amp; t)</li>
+<li>Use the "Manage feeds" link to access the "back office"
+
+<ul>
+<li>Use the "add a new feed" text entry field at the bottom to enter a new feed</li>
+<li>Use the "new tab" text entry field to create a new category</li>
+<li>Use the "change this feed's tab" menu to re-categorize the feed</li>
+<li>Use the "promote this feed" (^) link to bump up a feed as 1st of its tab</li>
+<li>Use the "delete this feed" (x) link to delete a feed</li>
+</ul>
+</li>
+<li>Or directly edit <a href="way%20faster">[https://github.com/xaccrocheur/nws/blob/master/feeds.xml][feeds.xml]</a>.</li>
+<li>Use "Pin tab" in your browser to prevent tab clutter</li>
+<li>Use [[<a href="http://www.firefoxfacts.com/2013/08/14/back-is-close/%5D%5BBack">http://www.firefoxfacts.com/2013/08/14/back-is-close/][Back</a> is close]] to quickly go back to where you were</li>
+</ul><h3>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>LICENSE</h3>
+
+<pre><code>This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 </code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
       </section>
 
     </div>
