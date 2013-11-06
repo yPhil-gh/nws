@@ -155,7 +155,7 @@ echo '
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
 $current_commit_minus1 = $commits[1]->sha;
-$ref_commit = "1573a1eb27862410ed48977d7c39b9bda21c8218";
+$ref_commit = "440943991466fb89c60d6df704bb420d8f355334";
 $commit_message = "last message : ".$commits[0]->commit->message;
 
 if (!strcmp($current_commit_minus1, $ref_commit)) {
