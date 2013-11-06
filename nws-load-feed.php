@@ -162,9 +162,9 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
              <div class="feed" title ="'.$feedLink.'">
                  <div class="feedTitle">
                      <span class="favicon">
-                         <a href="'.$u.'"><img src="'.$favicon.'" /></a>
+                         <a href="'.$u.'"><img src="'.$favicon.'" /></a>&nbsp;<a href="'.$feedLink.'" title="Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.'">'.$feedTitle.'</a>
                      </span>
-                     <a href="'.$feedLink.'" title="Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.'">'.$feedTitle.'</a>
+
                  </div>
                  <ul>';
         foreach($items as $item) {
