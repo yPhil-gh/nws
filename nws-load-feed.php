@@ -17,7 +17,7 @@ $photoblog_domains = array(
     "bigpicture",
     "xkcd.com",
     "yahoo.com",
-    "penguinpetes.com"
+    "penguinpetes.com",
     "awkwardstockphotos.com"
 );
 
