@@ -18,6 +18,7 @@ $photoblog_domains = array(
     "xkcd.com",
     "yahoo.com",
     "penguinpetes.com"
+    "awkwardstockphotos.com"
 );
 
 // Number of items / feed
