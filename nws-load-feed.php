@@ -90,7 +90,7 @@ function get_file($url, $max_age) {
     }
 
     if (!$cache_ok) { // abort cache feature
-        $rssfeed = file_get_contents($url) or die("feed cannot be read");
+        $rssfeed = file_get_contents($url) or die("Feed cannot load");
         return $rssfeed;
     }
     // reencod to avoid specials symbols (like '/')
