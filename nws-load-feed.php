@@ -42,18 +42,35 @@ function str_img_src($html) {
 }
 
 function get_link($links) {
+    $res_score = 0;
+    $res_link = '';
     if (count($links) > 1) {
         foreach($links as $link) {
             $myAttributes = $link->attributes();
-            if (isset($myAttributes['href']))
-                $res = $myAttributes['href'];
-            if (strlen($link)>0)
-                $res = $link;
-            if (isset($myAttributes['type']) && ($myAttributes['type'] == 'text/html')) // bingo
-                return $res;
+            $current_score = 0;
+            $current_link = '';
+            
+            if (isset($myAttributes['href'])) {
+                $current_link = $myAttributes['href'];
+                $current_score = 1;
+            }
+            elseif (strlen($link)>0) {
+                $current_link = $link;
+                $current_score = 1;
+            }
+            if ($current_link != '') {
+                if (isset($myAttributes['type']) && ($myAttributes['type'] == 'text/html')) 
+                    $current_score = $current_score + 1;
+                if (isset($myAttributes['rel']) && ($myAttributes['rel'] == 'alternate')) 
+                    $current_score = $current_score + 1;
+                
+                if ($current_score > $res_score) {
+                    $res_link = $current_link;
+                    $res_score = $current_score;
+                }
+            }
         }
-        if (isset($res)) return $res;
-        else return '';
+        return $res_link;
     }
     else {
         $myAttributes = $links->attributes();
@@ -170,7 +187,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                  <ul>';
         foreach($items as $item) {
             if ($i++ < $numItems) {
-                $link = htmlspecialchars($item->link);
+                $link = htmlspecialchars(get_link($item->link));
                 $title = strip_tags($item->title);
                 $imgSrc = str_img_src($item->description);
 
@@ -235,7 +252,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                     $img = '';
                 }
 
-                if (empty($link))
+                if (empty($link)) // should not be usefull anymore
                     $link = htmlspecialchars($item->link['href']);
 
                 $description = (isset($item->description) ? $item->description : $item->content);
