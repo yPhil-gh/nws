@@ -49,7 +49,7 @@ function get_link($links) {
             $myAttributes = $link->attributes();
             $current_score = 0;
             $current_link = '';
-            
+
             if (isset($myAttributes['href'])) {
                 $current_link = $myAttributes['href'];
                 $current_score = 1;
@@ -59,11 +59,11 @@ function get_link($links) {
                 $current_score = 1;
             }
             if ($current_link != '') {
-                if (isset($myAttributes['type']) && ($myAttributes['type'] == 'text/html')) 
+                if (isset($myAttributes['type']) && ($myAttributes['type'] == 'text/html'))
                     $current_score = $current_score + 1;
-                if (isset($myAttributes['rel']) && ($myAttributes['rel'] == 'alternate')) 
+                if (isset($myAttributes['rel']) && ($myAttributes['rel'] == 'alternate'))
                     $current_score = $current_score + 1;
-                
+
                 if ($current_score > $res_score) {
                     $res_link = $current_link;
                     $res_score = $current_score;
@@ -199,18 +199,9 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                 //Use that namespace
                 $namespaces = $item->getNameSpaces(true);
 
-                // foreach ($item->children($namespaces['media']) as $name => $value)
-                //     echo '<br />namespace: ' . $name.' value: ' . $value;
-
                 //Relative
                 if (isset($namespaces['media']) && $item->children($namespaces['media']))
                     $media = $item->children($namespaces['media']);
-
-                // if (isset($media)) {
-                //     echo "media is set!";
-                //     /\* $mediaImg = $media->thumbnail->attributes()->url; *\/
-                //     $mediaImg = $media->attributes()->url;
-                // }
 
                 if (isset($media) && isset($media->thumbnail))
                     $mediaImg = $media->thumbnail->attributes()->url;
