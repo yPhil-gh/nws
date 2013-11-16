@@ -109,31 +109,51 @@ function get_file($url, $max_age) {
 
     if (!$cache_ok) { // abort cache feature
         $rssfeed = file_get_contents($url) or die("Feed cannot load");
-        return $rssfeed;
+        $age = 0;
+        return array($rssfeed, $age);
     }
     // reencod to avoid specials symbols (like '/')
     $cache_file = urlencode($cache_file);
     $cache_file = $cache_dir.$cache_file;
-
-    if (file_exists($cache_file) && (filemtime($cache_file) > (time() - $max_age)) ) {
-        $rssfeed = file_get_contents($cache_file) or die("feed cannot be read from cache");
+    
+    $rssfeed = false;
+    if (file_exists($cache_file)) {
+        $age = time() - filemtime($cache_file);
+        if ($age < $max_age)
+            $rssfeed = file_get_contents($cache_file);
     }
-    else {
-        $rssfeed = file_get_contents($url) or die("feed cannot be read");
-        $fh = fopen($cache_file, 'w');
-        if ($fh !== false) {
-            fwrite($fh, $rssfeed);
-            fclose($fh);
+    
+    if ($rssfeed === false) { // either unreadable cache file, or cache file is too old
+        $rssfeed = file_get_contents($url);
+        $age = 0;
+        if ($rssfeed !== false) {
+            $fh = fopen($cache_file, 'w');
+            if ($fh !== false) {
+                fwrite($fh, $rssfeed);
+                fclose($fh);
+            }
+        } 
+    }
+    
+    if ($rssfeed === false) {
+        // feed can't be fetched, remote site might be too busy...
+        if (file_exists($cache_file)) {
+            // ok, we have an (old) version in cache
+            $age = time() - filemtime($cache_file);
+            $rssfeed = file_get_contents($cache_file) or die("feed cannot be read from cache");
+        } else {
+            // can't do anything
+            die("feed cannot be read");
         }
     }
-    return $rssfeed;
+    return array($rssfeed, $age);
 
 }
 
 function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
     $time_start = microtime(true);
     // $u is already urlencoded (comming from a GET request)
-    $xmlrss = get_file($u, $max_age);
+    list($xmlrss,$xmlrss_age) = get_file($u, $max_age);
     $feedRss = simplexml_load_string($xmlrss) or die("feed not loading");
 
     // var_dump($http_response_header);
@@ -175,12 +195,31 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
             $display_items = $numItems;
         else
             $display_items = $items_total;
+        
+        if ($xmlrss_age > $max_age) {
+            // there's been a problem somewhere (unreachable remote host ?)
+            if ($xmlrss_age > 3600) {
+                $age_str = ((int) ($xmlrss_age / 3600)).' hours old';
+            }
+            elseif ($xmlrss_age > 60) {
+                $age_str = ((int) ($xmlrss_age / 60)).' minutes old';
+            }
+            else {
+                $age_str = $xmlrss_age.' seconds old';
+            }
+            $title_link = 'Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.' (cached, '.$age_str.')';
+            $title_class= 'feedTitleCached';
+        }
+        else {
+            $title_link = 'Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle;
+            $title_class= 'feedTitle';
+        }
 
         echo '
              <div class="feed" title ="'.$feedLink.'">
-                 <div class="feedTitle">
+                 <div class="'.$title_class.'">
                      <span class="favicon">
-                         <a href="'.$u.'"><img src="'.$favicon.'" /></a>&nbsp;<a href="'.$feedLink.'" title="Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.'">'.$feedTitle.'</a>
+                         <a href="'.$u.'"><img src="'.$favicon.'" /></a>&nbsp;<a href="'.$feedLink.'" title="'.$title_link.'">'.$feedTitle.'</a>
                      </span>
 
                  </div>
