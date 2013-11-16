@@ -242,8 +242,14 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                 if (isset($namespaces['media']) && $item->children($namespaces['media']))
                     $media = $item->children($namespaces['media']);
 
-                if (isset($media) && isset($media->thumbnail))
-                    $mediaImg = $media->thumbnail->attributes()->url;
+                if (isset($media)) {
+                    if (isset($media->thumbnail))
+                        $mediaImg = $media->thumbnail->attributes()->url;
+                    elseif (    isset($media->content) 
+                            &&  isset($media->content->attributes()->medium) 
+                            && ($media->content->attributes()->medium == 'image'))
+                        $mediaImg = $media->content->attributes()->url;
+                }
 
                 if (!empty($elseSrc)) {
                     if (substr($elseSrc, 0, strlen('//')) == '//') {
