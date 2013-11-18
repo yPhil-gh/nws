@@ -41,8 +41,8 @@ function get_favicon ($url) {
         $doc->strictErrorChecking = FALSE;
         $doc->loadHTML(file_get_contents($url));
         $xml = simplexml_import_dom($doc);
-        $query = $xml->xpath('//link[@rel="shortcut icon"]');
-        $arr = (empty($query) ? $xml->xpath('//link[@rel="icon"]') : $query);
+
+        $arr = $xml->xpath('//link[@rel="icon" or @rel="shortcut icon"]');
 
         $favicon = $arr[0]['href'];
 
