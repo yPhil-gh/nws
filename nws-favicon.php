@@ -46,28 +46,18 @@ function get_favicon ($url) {
 
         $favicon = $arr[0]['href'];
 
-        if (isset($favicon)) {
-            if (!image_exists($favicon)) {
-                $favicon = $fallback_favicon;
-                $method = "fallback";
-            }
-        } else {
+        if (isset($favicon))
+            $favicon = ((image_exists($favicon)) ? $favicon : $fallback_favicon);
+        else
             $favicon = $fallback_favicon;
-            $method = "fallback";
-        }
 
     } else {
-        $favicon = $file;
-        $method = "classic";
 
-        if (!image_exists($file)) {
-            $favicon = $fallback_favicon;
-            $method = "fallback";
-        }
-
+        $favicon = ((image_exists($file)) ? $file : $fallback_favicon);
     }
+
     return $favicon;
-    echo $method;
+
 }
 
 ?>
