@@ -11,8 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>nws</title>
+<title>NWS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="noindex,nofollow">
     <link rel="shortcut icon" type="image/x-icon" href="img/nws.png" />
     <link href="libs/jquery-ui.css" rel="stylesheet" type="text/css" />
     <style type="text/css" media="screen">@import "nws-style.css";</style>
@@ -79,6 +80,10 @@ $(document).ready(function() {
             .load(ajax_loader, "n=" + feed_num_item + "&i="+feed_img_mode+"&p="+feed_photo_mode+"&age="+feed_max_age+"&z=" + feed_url)
     })
 
+    $('.tabName').click(function(){
+        document.title = "NWS : " + $(this).html()
+    })
+
     $('.reload').trigger('click')
     feed_max_age = 10; // allow to force reloading the feed
 })
@@ -131,7 +136,7 @@ echo '
 
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
-        <li><a title="'.$tabName.', Drag to re-order" href="#tab-'.$tabName.'"><span>'.$tabName.'</span></a></li>';
+        <li><a title="'.$tabName.', Drag to re-order" href="#tab-'.$tabName.'"><span class="tabName">'.$tabName.'</span></a></li>';
 }
 
 echo '
@@ -154,7 +159,7 @@ echo '
 // Version Control
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
-$ref_commit = "0b82dac81ad0b998bc3f5215e3efbdad9c60f32f";
+$ref_commit = "45953d403f5a3ca1d25408640ef8c5be1a502f1b";
 
 $current_commit_minus1 = $commits[1]->sha;
 $commit_message = "last message : ".$commits[0]->commit->message;
