@@ -108,21 +108,21 @@ function get_file($url, $max_age) {
     }
 
     if (!$cache_ok) { // abort cache feature
-        $rssfeed = file_get_contents($url) or die("Feed cannot load");
+        $rssfeed = file_get_contents($url) or die("Load / read error");
         $age = 0;
         return array($rssfeed, $age);
     }
     // reencod to avoid specials symbols (like '/')
     $cache_file = urlencode($cache_file);
     $cache_file = $cache_dir.$cache_file;
-    
+
     $rssfeed = false;
     if (file_exists($cache_file)) {
         $age = time() - filemtime($cache_file);
         if ($age < $max_age)
             $rssfeed = file_get_contents($cache_file);
     }
-    
+
     if ($rssfeed === false) { // either unreadable cache file, or cache file is too old
         $rssfeed = file_get_contents($url);
         $age = 0;
@@ -132,18 +132,17 @@ function get_file($url, $max_age) {
                 fwrite($fh, $rssfeed);
                 fclose($fh);
             }
-        } 
+        }
     }
-    
+
     if ($rssfeed === false) {
         // feed can't be fetched, remote site might be too busy...
         if (file_exists($cache_file)) {
             // ok, we have an (old) version in cache
             $age = time() - filemtime($cache_file);
-            $rssfeed = file_get_contents($cache_file) or die("feed cannot be read from cache");
+            $rssfeed = file_get_contents($cache_file) or die("Load / read error (cache)");
         } else {
-            // can't do anything
-            die("feed cannot be read");
+            die("Load / read error (cache)");
         }
     }
     return array($rssfeed, $age);
@@ -154,7 +153,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
     $time_start = microtime(true);
     // $u is already urlencoded (comming from a GET request)
     list($xmlrss,$xmlrss_age) = get_file($u, $max_age);
-    $feedRss = simplexml_load_string($xmlrss) or die("feed not loading");
+    $feedRss = simplexml_load_string($xmlrss) or die("Load / read error");
 
     // var_dump($http_response_header);
 
@@ -195,7 +194,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
             $display_items = $numItems;
         else
             $display_items = $items_total;
-        
+
         if ($xmlrss_age > $max_age) {
             // there's been a problem somewhere (unreachable remote host ?)
             if ($xmlrss_age > 3600) {
@@ -245,9 +244,9 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                 if (isset($media)) {
                     if (isset($media->thumbnail))
                         $mediaImg = $media->thumbnail->attributes()->url;
-                    elseif (    isset($media->content) 
-                            &&  isset($media->content->attributes()->medium) 
-                            && ($media->content->attributes()->medium == 'image'))
+                    elseif (    isset($media->content)
+                    &&  isset($media->content->attributes()->medium)
+                    && ($media->content->attributes()->medium == 'image'))
                         $mediaImg = $media->content->attributes()->url;
                 }
 
@@ -256,8 +255,8 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                         $elseSrc = 'http:'.$elseSrc;
                     }
                     elseif ((substr($elseSrc, 0, strlen('http://')) != 'http://')
-                        &&  (substr($elseSrc, 0, strlen('https://')) != 'https://')
-                        ) {
+                    &&  (substr($elseSrc, 0, strlen('https://')) != 'https://')
+                    ) {
                         $elseSrc = 'http://'.$domain.$elseSrc;
                     }
                 }
