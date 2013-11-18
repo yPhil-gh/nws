@@ -154,7 +154,7 @@ echo '
 // Version Control
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
-$ref_commit = "39607094f3657753b4beaf9b37328bc92cb46ccf";
+$ref_commit = "a30b9dcf8d0d69741d03d83e9096b6721343a407";
 
 $current_commit_minus1 = $commits[1]->sha;
 $commit_message = "last message : ".$commits[0]->commit->message;

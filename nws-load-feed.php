@@ -162,7 +162,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
     $subs = explode( '.', $url['host']);
     $domain = $subs[0].'.'.$subs[count($subs) -2].'.'.$subs[count($subs) -1];
 
-    $favicon = getFavicon('http://'.$domain);
+    $favicon = get_favicon('http://'.$domain);
 
     if($feedRss) {
         if (isset($feedRss->channel->item)) {

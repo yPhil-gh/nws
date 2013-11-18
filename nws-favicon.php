@@ -8,29 +8,16 @@
 */
 
 
-function CheckImageExists($imgUrl) {
+function image_exists($imgUrl) {
     if (@GetImageSize($imgUrl))
         return true;
     else
         return false;
 }
 
-function getFavicon ($url) {
+function get_favicon ($url) {
 
-$fallback_favicon = "img/nws.png";
-
-    $dom = new DOMDocument();
-    @$dom->loadHTML($url);
-    $links = $dom->getElementsByTagName('link');
-    $l = $links->length;
-    $favicon = "/favicon.ico";
-    for( $i=0; $i<$l; $i++) {
-        $item = $links->item($i);
-        if( strcasecmp($item->getAttribute("rel"),"shortcut icon") === 0) {
-            $favicon = $item->getAttribute("href");
-            break;
-        }
-    }
+    $fallback_favicon = "img/nws.png";
 
     $u = parse_url($url);
 
@@ -43,46 +30,24 @@ $fallback_favicon = "img/nws.png";
     if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 NOT FOUND' || $file_headers[0] == 'HTTP/1.1 301 Moved Permanently') {
 
         $fileContent = @file_get_contents("http://".$domain);
-        if ($fileContent === false) 
+        if ($fileContent === false)
             return $fallback_favicon; // unable to read file (domain name without explicit page)
 
         $dom = @DOMDocument::loadHTML($fileContent);
         if ($dom === false)
             return $fallback_favicon; // file was empty ?
 
-        $xpath = new DOMXpath($dom);
+        $doc = new DOMDocument();
+        $doc->strictErrorChecking = FALSE;
+        $doc->loadHTML(file_get_contents($url));
+        $xml = simplexml_import_dom($doc);
+        $query = $xml->xpath('//link[@rel="shortcut icon"]');
+        $arr = (empty($query) ? $xml->xpath('//link[@rel="icon"]') : $query);
 
-        $elements = $xpath->query("head/link//@href");
-
-        $hrefs = array();
-
-        foreach ($elements as $link) $hrefs[] = $link->value;
-
-        $found_favicon = array();
-        foreach ( $hrefs as $key => $value ) {
-            if( substr_count($value, 'favicon.ico') > 0 ) {
-                $found_favicon[] = $value;
-                $icon_key = $key;
-            }
-        }
-
-        $found_http = array();
-        foreach ( $found_favicon as $key => $value ) {
-            if( substr_count($value, 'http') > 0 ) {
-                $found_http[] = $value;
-                $favicon = $hrefs[$icon_key];
-                $method = "xpath";
-            } else {
-                $favicon = $domain.$hrefs[$icon_key];
-                if (substr($favicon, 0, 4) != 'http') {
-                    $favicon = 'http://' . $favicon;
-                    $method = "xpath+http";
-                }
-            }
-        }
+        $favicon = $arr[0]['href'];
 
         if (isset($favicon)) {
-            if (!CheckImageExists($favicon)) {
+            if (!image_exists($favicon)) {
                 $favicon = $fallback_favicon;
                 $method = "fallback";
             }
@@ -95,13 +60,14 @@ $fallback_favicon = "img/nws.png";
         $favicon = $file;
         $method = "classic";
 
-        if (!CheckImageExists($file)) {
+        if (!image_exists($file)) {
             $favicon = $fallback_favicon;
             $method = "fallback";
         }
 
     }
     return $favicon;
+    echo $method;
 }
 
 ?>
