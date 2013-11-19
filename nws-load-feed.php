@@ -158,13 +158,11 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
     // var_dump($http_response_header);
 
     $i = 0;
+    $url = parse_url($u);
+    $subs = explode( '.', $url['host']);
+    $domain = $subs[0].'.'.$subs[count($subs) -2].'.'.$subs[count($subs) -1];
 
-    /* $url = parse_url($u); */
-    /* $subs = explode( '.', $url['host']); */
-    /* $domain = $subs[0].'.'.$subs[count($subs) -2].'.'.$subs[count($subs) -1]; */
-
-    $favicon = get_favicon($u);
-    /* $favicon = ""; */
+    $favicon = get_favicon('http://'.$domain);
 
     if($feedRss) {
         if (isset($feedRss->channel->item)) {
