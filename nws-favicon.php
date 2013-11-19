@@ -9,10 +9,7 @@
 
 
 function image_exists($imgUrl) {
-    if (@GetImageSize($imgUrl))
-        return true;
-    else
-        return false;
+    return ((@GetImageSize($imgUrl)) ? true : false);
 }
 
 function get_favicon ($url) {
@@ -20,44 +17,52 @@ function get_favicon ($url) {
     $fallback_favicon = "img/nws.png";
 
     $u = parse_url($url);
-
     $subs = explode( '.', $u['host']);
-    $domain = $subs[count($subs) -2].'.'.$subs[count($subs) -1];
+    $full_url = "http://".implode('.', $subs);
+    $short_url = "http://".$subs[count($subs) -2].'.'.$subs[count($subs) -1];
 
-    $file = "http://".$domain."/favicon.ico";
-    $file_headers = @get_headers($file);
+    $full_url_favicon = $full_url."/favicon.ico";
+    $base_domain_favicon = $short_url."/favicon.ico";
 
-    if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 NOT FOUND' || $file_headers[0] == 'HTTP/1.1 301 Moved Permanently') {
+    $doc = new DOMDocument();
+    $doc->strictErrorChecking = FALSE;
+    $doc->loadHTML(file_get_contents($full_url));
+    $xml = simplexml_import_dom($doc);
 
-        $fileContent = @file_get_contents("http://".$domain);
-        if ($fileContent === false)
-            return $fallback_favicon; // unable to read file (domain name without explicit page)
+    if (!image_exists($full_url_favicon)) {
 
-        $dom = @DOMDocument::loadHTML($fileContent);
-        if ($dom === false)
-            return $fallback_favicon; // file was empty ?
+        if (image_exists($base_domain_favicon)) {
 
-        $doc = new DOMDocument();
-        $doc->strictErrorChecking = FALSE;
-        $doc->loadHTML(file_get_contents($url));
-        $xml = simplexml_import_dom($doc);
+            $arr = $xml->xpath('//link[@rel="icon" or @rel="shortcut icon"]');
+            $favicon = $arr[0]['href'];
 
-        $arr = $xml->xpath('//link[@rel="icon" or @rel="shortcut icon"]');
+            if (image_exists($favicon)) {
+                $favicon = $favicon;
+            } else {
+                $favicon = ((image_exists($full_url.$favicon)) ? $full_url.$favicon : $base_domain_favicon);
+            }
+        } else {
 
-        $favicon = $arr[0]['href'];
+            $arr = $xml->xpath('//link[@rel="icon" or @rel="shortcut icon"]');
+            $favicon = $arr[0]['href'];
 
-        if (isset($favicon))
-            $favicon = ((image_exists($favicon)) ? $favicon : $fallback_favicon);
-        else
-            $favicon = $fallback_favicon;
+            if (image_exists($favicon)) {
+                $favicon = $favicon;
+            } else {
+                $favicon = ((image_exists($full_url.$favicon)) ? $full_url.$favicon : $fallback_favicon);
+            }
+        }
 
     } else {
-
-        $favicon = ((image_exists($file)) ? $file : $fallback_favicon);
+        $favicon = $full_url_favicon;
     }
 
-    return $favicon;
+    /* echo $url."<hr />"; */
+    /* echo $full_url."<hr />"; */
+    /* echo $short_url."<hr />"; */
+    /* echo $favicon."<hr />"; */
 
+    return $favicon;
 }
 
 ?>
