@@ -63,6 +63,12 @@ $(document).ready(function() {
 
     })
 
+
+    $("#tabs").bind("tabsactivate", function (event, ui) {
+        document.title = "NWS : " + ui.newTab.text()
+    });
+
+
     function pulse() {
         $('.moved').fadeIn(8000)
         $('.moved').fadeOut(200)
@@ -78,10 +84,6 @@ $(document).ready(function() {
         div_to_reload.children('div.innerContainer')
             .html(ajax_spinner)
             .load(ajax_loader, "n=" + feed_num_item + "&i="+feed_img_mode+"&p="+feed_photo_mode+"&age="+feed_max_age+"&z=" + feed_url)
-    })
-
-    $('.tabName').click(function(){
-        document.title = "NWS : " + $(this).html()
     })
 
     $('.reload').trigger('click')
@@ -159,7 +161,7 @@ echo '
 // Version Control
 $commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
 
-$ref_commit = "45953d403f5a3ca1d25408640ef8c5be1a502f1b";
+$ref_commit = "5999097e2aae1afa0606930247176a5fe3a09241";
 
 $current_commit_minus1 = $commits[1]->sha;
 $commit_message = "last message : ".$commits[0]->commit->message;
