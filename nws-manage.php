@@ -177,7 +177,7 @@ echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'">';
             <input type="text" title="Add a new feed" name="a">
             <input type="submit" name="submit" value="+">
         </form>
-        <a href="./">nws</a>
+        <a href="./">NWS</a> | <a href="./nws-clean-cache.php">Cache cleanup</a>
     </div>
 </body>
 </html>
