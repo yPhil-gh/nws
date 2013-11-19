@@ -1,18 +1,18 @@
 <?php
 /*
   clean-cache : remove outdated files from cache
-  
+
   normally cache files are updated everytime the feed is accessed
   however if a feed get removed from configuration (feed.xml), cache files
   are not anymore updated but not removed.
-  
+
   This script is part of NWS
   https://github.com/xaccrocheur/nws/
 
 */
 
 $cache_dir = "cache/";
-$max_age = 3600;    
+$max_age = 3600;
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,11 +58,11 @@ $max_age = 3600;
 		                $age_days = (int) $age;
 		                $age_str = $age_days.' days '.$age_hour.' hours '.$age_min.' minutes';
 		            }
-		            echo 'Deleting file '.urldecode($file).' (age = '.$age_str.")<br />\n";
+		            echo '<span class="monospace">Deleting&nbsp;</span>'.urldecode($file).' (age = '.$age_str.")<br />";
 		            unlink($cache_dir.$file);
 		            $nb_erase = $nb_erase + 1;
 		        } else {
-		            echo 'keeping '.urldecode($file)."<br />\n";
+		            echo '<span class="monospace">keeping&nbsp;&nbsp;</span>'.urldecode($file).'<br />';
 		        }
 		    }
 		}
@@ -71,5 +71,6 @@ $max_age = 3600;
 	    echo "Can't read cache directory<br />\n";
 	}
 ?>
+<a href="./"><img src="img/nws.png" alt="NWS" style="margin-top:.5em" /> NWS</a> | <a href="./nws-manage.php">Manage feeds</a>
 </body>
 </html>

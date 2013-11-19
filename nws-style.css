@@ -40,6 +40,10 @@ a:active {
     color:#f00;
 }
 
+h1 {
+    margin:0 0 .2em 0;
+}
+
 /* Feed Item */
 
 .outerContainer {
@@ -223,4 +227,8 @@ img.full {
 #version .moved {
     color:red;
     display:invisible;
+}
+
+.monospace {
+    font-family: monospace;
 }
