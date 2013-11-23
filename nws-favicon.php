@@ -12,7 +12,11 @@ function image_exists($imgUrl) {
     return ((@GetImageSize($imgUrl)) ? true : false);
 }
 
+
+$fallback_favicon = "img/nws.png";
+
 function get_favicon_cached($url, $force_update = false, $max_age = 604800) {
+    global $fallback_favicon;
     $favicon_cache_dir = "cache/favicon/";
     $cache_ok = false;
     
@@ -38,7 +42,7 @@ function get_favicon_cached($url, $force_update = false, $max_age = 604800) {
         $favicon = file_get_contents($cache_file);
 
         if ($age >= $max_age) { // too old : check if icon is still reachable
-            if (image_exists($favicon)) {
+            if (($favicon != $fallback_favicon) && (image_exists($favicon))) {
                 @touch($cache_file);
             } else {
                 $favicon = false;
@@ -59,7 +63,7 @@ function get_favicon_cached($url, $force_update = false, $max_age = 604800) {
 
 function get_favicon ($url) {
 
-    $fallback_favicon = "img/nws.png";
+    global $fallback_favicon;
 
     $u = parse_url($url);
     $subs = explode( '.', $u['host']);
