@@ -13,7 +13,6 @@ function image_exists($imgUrl) {
 }
 
 function get_favicon_cached($url, $force_update = false, $max_age = 604800) {
-    global $fallback_favicon;
     $favicon_cache_dir = "cache/favicon/";
     $cache_ok = false;
     
