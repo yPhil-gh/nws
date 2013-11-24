@@ -220,6 +220,10 @@ img.full {
     height:1.5em;
 }
 
+#version .unknown {
+    color:orange;
+}
+
 #version .unmoved {
     color:green;
 }
