@@ -159,19 +159,25 @@ echo '
 ';
 
 // Version Control
-$commits = json_decode(file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits"));
+$current_commits = @file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits");
+if ($current_commits !== false) {
+    $commits = json_decode($current_commits);
 
-$ref_commit = "0e80ed234f2ce5502c3391cab986189afe7a0b29";
+    $ref_commit = "0e80ed234f2ce5502c3391cab986189afe7a0b29";
 
-$current_commit_minus1 = $commits[1]->sha;
-$commit_message = "last message : ".$commits[0]->commit->message;
+    $current_commit_minus1 = $commits[1]->sha;
+    $commit_message = "last message : ".$commits[0]->commit->message;
 
-if (!strcmp($current_commit_minus1, $ref_commit)) {
-    $version_class = "unmoved";
-    $version_message = "NWS version is up-to-date : (".$commit_message.")";
+    if (!strcmp($current_commit_minus1, $ref_commit)) {
+        $version_class = "unmoved";
+        $version_message = "NWS version is up-to-date : (".$commit_message.")";
+    } else {
+        $version_class = "moved";
+        $version_message = "New version available : (".$commit_message.")";
+    }
 } else {
-    $version_class = "moved";
-    $version_message = "New version available : (".$commit_message.")";
+        $version_class = "unknown";
+        $version_message = "can't read NWS version status";
 }
 
 ?>

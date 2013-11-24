@@ -162,8 +162,6 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
     $subs = explode( '.', $url['host']);
     $domain = $subs[0].'.'.$subs[count($subs) -2].'.'.$subs[count($subs) -1];
 
-    $favicon = get_favicon('http://'.$domain);
-
     if($feedRss) {
         if (isset($feedRss->channel->item)) {
             $items = $feedRss->channel->item;
@@ -187,6 +185,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
             }
         }
         if (empty($feedLink))  $feedLink = $u;
+        $favicon = get_favicon_cached($feedLink);
 
         $items_total = count($items);
 
