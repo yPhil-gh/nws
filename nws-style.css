@@ -132,7 +132,7 @@ h1 {
     background: #333;
 }
 
-.reload {
+.reload, .gallery {
     cursor:pointer;
     float:right;
     line-height:.8em;
@@ -140,7 +140,7 @@ h1 {
     font-size:150%;
 }
 
-.reload:hover {
+.reload:hover, .gallery:hover {
     color:orange;
 }
 
@@ -235,4 +235,153 @@ img.full {
 
 .monospace {
     font-family: monospace;
+}
+
+/* Galleryshow  */
+
+#viewer {
+    z-index: 1000;
+    position: fixed;
+    display: none;
+    overflow: hidden;
+
+    /* position: absolute; */
+    top:0 !important;
+    bottom: 0;
+    left: 0 !important;
+    right: 0;
+
+    margin: auto;
+
+}
+
+#viewer-img {
+    border: 5px solid #FFFFFF;
+    /* width: 500px; */
+}
+
+#viewer span {
+    padding: 10px;
+    position: absolute;
+    font-size: 20px;
+    color: #333333;
+    z-index: 1001;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0;
+    -moz-transition: .3s;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+
+#viewer span:hover {
+    box-shadow: 0px 0px 5px 2px #333333;
+}
+
+#viewer:hover span {
+    opacity: 1;
+}
+
+#viewer #cross {
+    top: 0px;
+    right: 10px;
+}
+
+#viewer #previous {
+    top: 150px;
+    left: -20px;
+}
+
+#viewer #next {
+    top: 150px;
+    right: -20px;
+}
+
+#viewer #pause, #play {
+    bottom: 20px;
+    left: 250px;
+}
+
+#pause {
+	display: none;
+}
+
+#viewer #img-name
+{
+    bottom: 30px;
+    /* left: -200px; */
+    font-size: 14px;
+    text-align: left;
+    border-radius: 0 5px 5px 0;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+}
+
+#viewer:hover #cross {
+    top: 10px;
+}
+#viewer:hover #previous {
+    left: 10px;
+}
+#viewer:hover #next {
+    right: 10px;
+}
+#viewer:hover #img-name {
+    left: 5px;
+}
+
+.icon-home, .icon-play, .icon-pause, .icon-previous, .icon-next, .icon-arrow-left, .icon-close {
+	/* font-family: 'icomoon'; */
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-home:before {
+	content: "\e000";
+}
+.icon-play:before {
+	content: "►";
+}
+.icon-pause:before {
+	content: "||";
+}
+.icon-previous:before {
+	content: "<";
+}
+.icon-next:before {
+	content: ">";
+}
+.icon-arrow-left:before {
+	content: "\e006";
+}
+.icon-close:before {
+	content: "x";
+}
+
+/* ► Play. ▌▌ Pause. ■ Stop. */
+
+#img-name {
+    text-overflow: ellipsis;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.8;
+    z-index: 500;
 }

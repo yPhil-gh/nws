@@ -28,6 +28,8 @@
 
 $(document).ready(function() {
 
+    var overlay = jQuery('<div id="overlay"> </div>');
+
     $.ajaxSetup ({ cache: true })
 
     $( "#tabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" })
@@ -60,7 +62,6 @@ $(document).ready(function() {
                     $("#tabs").tabs("option", "active", active_tab - 1)
                 else
                     $("#tabs").tabs("option", "active", totaltabs - 1)
-
     })
 
 
@@ -86,6 +87,164 @@ $(document).ready(function() {
             .load(ajax_loader, "n=" + feed_num_item + "&i="+feed_img_mode+"&p="+feed_photo_mode+"&age="+feed_max_age+"&z=" + feed_url)
     })
 
+    // GALLERY
+
+    var viewportWidth = $(window).width()
+    var viewportHeight = $(window).height()
+
+    // alert(viewportWidth)
+
+    $("#viewer").css("top", ((viewportHeight / 2) - 150) + "px")
+    $("#viewer").css("left", ((viewportWidth / 2) - 250) + "px")
+
+    var i      //For storing the image index
+
+    //Slideshow functions
+    $('#play').click(function (e, simulated) {
+        if (!simulated) {
+            autoAdvance()
+            $("#pause").css("display", "block")
+            $("#play").css("display", "none")
+        }
+    })
+
+    function autoAdvance() {
+        $('#next').trigger('click', [true]);
+        timeOut = setTimeout(autoAdvance, 3000);
+    }
+
+    var timeOut = null;
+    $('#pause, #previous, #next, #cross').click(function (e, simulated) {
+        if (!simulated) {
+            clearTimeout(timeOut);
+            $("#pause").css("display", "none")
+            $("#play").css("display", "block")
+        }
+    })
+
+    function img_gallery(i, div_id) {
+
+        viewportWidth = $(window).width()
+        viewportHeight = $(window).height()
+
+        var images = $( "#" + div_id).find('img')
+        var count = (images.length - 1)
+        var current_img = images.eq(i)
+
+        var theImage = new Image()
+        theImage.src = current_img.attr("src")
+
+        var curr_img_width = theImage.width
+        var curr_img_height = theImage.height
+
+        // alert("Width: " + curr_img_width)
+        // alert("Height: " + curr_img_height + "viewportHeight:" + viewportHeight)
+
+        // you should check here if the image has finished loading
+        // this can be done with theImage.complete
+
+        $("#viewer").css("display", "block")
+
+        // $("#viewer").css("max-width", (curr_img_width - 10))
+        // $("#viewer").css("max-height", (curr_img_height - 10))
+
+        $("#viewer").css("width", (curr_img_width + 20))
+        $("#viewer").css("height", (curr_img_height + 20))
+        // $("#viewer").css("opacity", 1);
+
+        $("#viewer-img").attr("src", current_img.attr("src"))
+
+        $("#viewer-img").css("max-width", viewportWidth)
+        $("#viewer-img").css("max-height", (viewportHeight - 10))
+
+        $("#viewer-img").css("width", (curr_img_width + 10))
+        $("#viewer-img").css("height", (curr_img_height + 10))
+
+        $("#viewer-img").fadeOut(0)
+        $("#viewer-img").fadeIn(500)
+
+        $("#viewer-img").attr("alt", i + " of " + count)
+        $("#viewer-img").attr("data-index", i)
+        $("#viewer-img").attr("data-count", count)
+        $("#viewer-img").attr("data-id", div_id)
+        $("#img-name").text(current_img.attr("alt") + " - [#" + i + " of " + count + "]")
+        $("#link-img").attr("href", current_img.attr("src"))
+    }
+
+    $('.gallery').click(function(){
+        overlay.appendTo(document.body)
+        var div_id = $(this).parent().attr("id")
+        img_gallery(1, div_id)
+    })
+
+
+    // Reposition and resize the image according to viewport
+    $(window).resize(function () {
+        viewportWidth = $(window).width()
+        viewportHeight = $(window).height()
+
+        $("#viewer").css("top", ((viewportHeight / 2) - 150) + "px")
+        $("#viewer").css("left", ((viewportWidth / 2) - 250) + "px")
+
+        if (viewportWidth < 500) {
+            $("#viewer").css("left", "0px")
+            $("#viewer").css("width", viewportWidth + "px")
+            $("#viewer-img").css("width", (viewportWidth - 10) + "px")
+        }
+
+    })
+
+    $("#previous").click(function () {
+
+        var myindex = $(this).parent().find("img").attr("data-index")
+        var mycount = $(this).parent().find("img").attr("data-count")
+        var mydiv_id = $("#viewer-img").attr("data-id")
+        myindex = parseInt(myindex)
+        mycount = parseInt(mycount)
+
+        if (myindex > mycount) {
+            myindex = mycount
+        } else {
+            if (myindex > 1) {
+                myindex = (myindex - 1)
+            } else {
+                myindex = mycount
+            }
+        }
+        img_gallery(myindex, mydiv_id)
+    })
+
+    $("#next").click(function () {
+
+        var myindex = $(this).parent().find("img").attr("data-index")
+        var mycount = $(this).parent().find("img").attr("data-count")
+        var mydiv_id = $("#viewer-img").attr("data-id")
+        myindex = parseInt(myindex)
+
+        if (myindex < mycount) {
+            myindex = (myindex + 1)
+        }
+        else {
+            myindex = 1
+        }
+
+        img_gallery(myindex, mydiv_id)
+    })
+
+    $("#cross").click(function () {
+        close_viewer()
+    })
+
+    $("#overlay").click(function () {
+        alert("plop")
+        close_viewer()
+    })
+
+    function close_viewer() {
+        $("#viewer").css("display", "none");
+        $( "#overlay" ).remove();
+    }
+
     $('.reload').trigger('click')
     feed_max_age = 10; // allow to force reloading the feed
 })
@@ -100,9 +259,17 @@ $urls = simplexml_load_file('feeds.xml');
 $img_modes=array('none'=> 'none', 'all'=> 'all', 'first'=> 'first');
 
 function outerContainer($u, $numItems, $img, $photo) {
+
+    $div_id = substr(htmlspecialchars($u, ENT_QUOTES), 7, strlen(htmlspecialchars($u, ENT_QUOTES)));
+    $pos = strpos($div_id, '/');
+    $div_id = str_replace(".", "", substr($div_id, 0, $pos));
+
+    /* $div_id = "plop"; */
+
     echo '
-        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'" data-img="'.$img.'" data-photo="'.$photo.'">
+        <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'" data-img="'.$img.'" data-photo="'.$photo.'" id="'.$div_id.'">
             <span class="reload" title="Reload '.htmlspecialchars($u).'">&#9889;</span>
+            <span class="gallery">►</span>
             <div class="innerContainer"></div>
         </div>
 ';
@@ -154,6 +321,17 @@ foreach (array_keys($tabGroups) as $tabName) {
 }
 
 echo '
+        <div id="viewer">
+            <a id="link-img">
+                <img id="viewer-img" />
+            </a>
+            <span id="cross" title="Close" aria-hidden="true" class="icon-close"></span>
+            <span id="img-name"></span>
+            <span id="previous" title="Previous" aria-hidden="true" class="icon-previous"></span>
+            <span id="next" title="next" aria-hidden="true" class="icon-next"></span>
+            <span id="pause" title="Pause Slideshow" aria-hidden="true" class="icon-pause"></span>
+            <span id="play" title="Start Slideshow" aria-hidden="true" class="icon-play"></span>
+        </div>
     </div>
 <a href="nws-manage.php"><img src="img/nws.png" alt="manage" style="margin-top:.5em" /> Manage feeds</a>
 ';

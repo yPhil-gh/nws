@@ -16,7 +16,6 @@ $photoblog_domains = array(
     "cabinporn",
     "bigpicture",
     "xkcd.com",
-    "yahoo.com",
     "penguinpetes.com",
     "awkwardstockphotos.com"
 );
@@ -155,7 +154,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
     list($xmlrss,$xmlrss_age) = get_file($u, $max_age);
     $feedRss = simplexml_load_string($xmlrss) or die("Load / read error");
 
-    // var_dump($http_response_header);
+    /* var_dump($photoblog); */
 
     $i = 0;
     $url = parse_url($u);
@@ -222,6 +221,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
 
                  </div>
                  <ul>';
+
         foreach($items as $item) {
             if ($i++ < $numItems) {
                 $link = htmlspecialchars(get_link($item->link));
@@ -266,23 +266,24 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                 if ($imgMode == 'none' || ($imgMode == 'first' && $i > 1)) {
                     $img = '';
                 }
-                if ($photoblog) {
-                    $img = '<a href="'.$imgSrc.'"><img class="full" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
-                    $title = $title;
-                }
+
+                $img_class = ($photoblog ? "full" : "feed");
+
+                $description = (isset($item->description) ? $item->description : $item->content);
+                $description = htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description))), ENT_NOQUOTES);
 
                 if (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
                     if ($ext == "mp3")
                         $img = '<a href="'.$atomImg.'"><span class="audio-note" title="Audio content">♫</span></a>';
                     else
-                        $img = '<a href="'.$atomImg.'"><img class="feed" alt="'.$ext.' - atomImg" src="'.$atomImg.'" /></a>';
+                        $img = '<a href="'.$atomImg.'"><img class="'.$img_class.'" alt="'.$title.' - atomImg" src="'.$atomImg.'" /></a>';
                 } elseif (!empty($mediaImg)) {
-                    $img = '<a href="'.$mediaImg.'"><img class="feed" alt="media" src="'.$mediaImg.'" /></a>';
+                    $img = '<a href="'.$mediaImg.'"><img class="'.$img_class.'" alt="'.$title.'" src="'.$mediaImg.'" /></a>';
                 } elseif (!empty($imgSrc)) {
                     list($width, $height) = getimagesize($imgSrc);
                     if (isset($width) && $width > 2) {
-                        $img = '<a href="'.$imgSrc.'"><img class="feed" alt="regexp" src="'.$imgSrc.'" /></a>';
+                        $img = '<a href="'.$imgSrc.'"><img class="'.$img_class.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
                     }
                     else $img = '';
                 } else {
@@ -292,8 +293,6 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                 if (empty($link)) // should not be usefull anymore
                     $link = htmlspecialchars($item->link['href']);
 
-                $description = (isset($item->description) ? $item->description : $item->content);
-                $description = htmlspecialchars_decode(trim(htmlspecialchars(strip_tags($description))), ENT_NOQUOTES);
 
                 echo '
                           <li title="'.$description.'">
