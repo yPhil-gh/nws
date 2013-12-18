@@ -243,21 +243,20 @@ img.full {
     z-index: 1000;
     position: fixed;
     display: none;
-    overflow: hidden;
+    /* overflow: hidden; */
 
-    /* position: absolute; */
     top:0 !important;
     bottom: 0;
     left: 0 !important;
     right: 0;
 
     margin: auto;
-
+    /* min-width: 300px; */
 }
 
 #viewer-img {
-    border: 5px solid #FFFFFF;
     /* width: 500px; */
+    border: 1px solid #FFFFFF;
 }
 
 #viewer span {
@@ -265,10 +264,11 @@ img.full {
     position: absolute;
     font-size: 20px;
     color: #333333;
-    z-index: 1001;
+    background-color: #000;
+    /* z-index: 1001; */
     background-color: #FFFFFF;
     cursor: pointer;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     opacity: 0;
     -moz-transition: .3s;
     -webkit-transition: .3s;
@@ -285,27 +285,27 @@ img.full {
 }
 
 #viewer #cross {
-    top: 0px;
-    right: 10px;
+    top: 10px;
+    left: 10px;
 }
 
 #viewer #previous {
-    top: 150px;
-    left: -20px;
-}
-
-#viewer #next {
-    top: 150px;
-    right: -20px;
+    top: 10px;
+    left: 60px;
 }
 
 #viewer #pause, #play {
-    bottom: 20px;
-    left: 250px;
+    top: 10px;
+    left: 110px;
+}
+
+#viewer #next {
+    top: 10px;
+    left: 160px;
 }
 
 #pause {
-	display: none;
+    display: none;
 }
 
 #viewer #img-name
@@ -321,15 +321,20 @@ img.full {
     transition: .5s;
 }
 
-#viewer:hover #cross {
-    top: 10px;
-}
-#viewer:hover #previous {
-    left: 10px;
-}
-#viewer:hover #next {
-    right: 10px;
-}
+/*
+ * #viewer:hover #cross {
+ *     top: 10px;
+ * }
+ *
+ * #viewer:hover #previous {
+ *     top: 10px;
+ * }
+ *
+ * #viewer:hover #next {
+ *     top: 10px;
+ * }
+ */
+
 #viewer:hover #img-name {
     left: 5px;
 }
@@ -344,24 +349,31 @@ img.full {
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
 }
+
 .icon-home:before {
 	content: "\e000";
 }
+
 .icon-play:before {
-	content: "►";
+	content: ">";
 }
+
 .icon-pause:before {
 	content: "||";
 }
+
 .icon-previous:before {
-	content: "<";
+	content: "<<";
 }
+
 .icon-next:before {
-	content: ">";
+	content: ">>";
 }
+
 .icon-arrow-left:before {
-	content: "\e006";
+	content: "?";
 }
+
 .icon-close:before {
 	content: "x";
 }
@@ -374,6 +386,7 @@ img.full {
 
 #overlay {
     position: fixed;
+    display: none;
     top: 0;
     left: 0;
     width: 100%;

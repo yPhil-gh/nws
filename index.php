@@ -137,26 +137,30 @@ $(document).ready(function() {
         var curr_img_width = theImage.width
         var curr_img_height = theImage.height
 
-        // if (curr_img_width > curr_img_height){
-        //     if (viewportWidth > curr_img_width) {
-        //         $("#viewer-img").css("max-width", viewportWidth)
-        //         $("#viewer-img").css("width", (curr_img_width - 10))
-        //     }
-        //     if (viewportHeight > curr_img_height) {
-        //         $("#viewer-img").css("max-height", (viewportHeight - 10))
-        //         $("#viewer-img").css("height", (curr_img_height - 10))
-        //     }
-        //     // alert("horiz!")
-        // } else {
-        //     if (viewportHeight > curr_img_height) {
-        //         $("#viewer-img").css("max-height", (viewportHeight - 10))
-        //         $("#viewer-img").css("height", (curr_img_height - 10))
-        //     }
-        //     // alert("vert!!")
-        // }
+        if (curr_img_width > curr_img_height){
+            // if (viewportWidth > curr_img_width) {
+            //     $("#viewer-img").css("max-width", viewportWidth)
+            //     $("#viewer-img").css("width", (curr_img_width - 10))
+            // }
+            if (curr_img_height > viewportHeight) {
+                $("#viewer").css("max-height", viewportHeight)
+                $("#viewer-img").css("max-height", (viewportHeight - 2))
+                // $("#viewer").css("width", $("#viewer-img").width())
+                // $("#viewer-img").css("max-height", (viewportHeight - 10))
+                // alert((current_img - viewportWidth))
+            }
+            // alert("horiz!")
+        } else {
+            if (viewportHeight > curr_img_height) {
+                $("#viewer-img").css("max-height", (viewportHeight - 10))
+                $("#viewer-img").css("height", (curr_img_height - 10))
+            }
+            // alert("vert!!")
+        }
 
         // alert("H: " + curr_img_height + " viewportHeight: " + viewportHeight +
-        //       " W: " + curr_img_width + " viewportWidth: " + viewportWidth)
+        //       " W: " + curr_img_width + " viewportWidth: " + viewportWidth +
+        //      "modulo :" + (curr_img_width - viewportWidth))
 
         // you should check here if the image has finished loading
         // this can be done with theImage.complete
