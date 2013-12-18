@@ -28,7 +28,7 @@
 
 $(document).ready(function() {
 
-    var overlay = jQuery('<div id="overlay"> </div>');
+    // var overlay = jQuery('<div id="overlay"> </div>');
 
     $.ajaxSetup ({ cache: true })
 
@@ -185,7 +185,8 @@ $(document).ready(function() {
     }
 
     $('.gallery').click(function(){
-        overlay.appendTo(document.body)
+        // overlay.appendTo(document.body)
+        $("#overlay").show()
         var div_id = $(this).parent().attr("id")
         img_gallery(1, div_id)
     })
@@ -249,13 +250,12 @@ $(document).ready(function() {
     })
 
     $("#overlay").click(function () {
-        alert("plop")
         close_viewer()
     })
 
     function close_viewer() {
         $("#viewer").css("display", "none");
-        $( "#overlay" ).remove();
+        $("#overlay").hide()
     }
 
     $('.reload').trigger('click')
@@ -376,7 +376,7 @@ if ($current_commits !== false) {
 }
 
 ?>
-
+<div id="overlay"> </div>
 <span id="version" onClick="document.location.href='https://github.com/xaccrocheur/nws'" title="<?php echo $version_message ?>">
     <span class="<?php echo $version_class ?>">♼</span>
 </span>
