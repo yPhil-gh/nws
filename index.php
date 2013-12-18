@@ -137,8 +137,26 @@ $(document).ready(function() {
         var curr_img_width = theImage.width
         var curr_img_height = theImage.height
 
-        // alert("Width: " + curr_img_width)
-        // alert("Height: " + curr_img_height + "viewportHeight:" + viewportHeight)
+        // if (curr_img_width > curr_img_height){
+        //     if (viewportWidth > curr_img_width) {
+        //         $("#viewer-img").css("max-width", viewportWidth)
+        //         $("#viewer-img").css("width", (curr_img_width - 10))
+        //     }
+        //     if (viewportHeight > curr_img_height) {
+        //         $("#viewer-img").css("max-height", (viewportHeight - 10))
+        //         $("#viewer-img").css("height", (curr_img_height - 10))
+        //     }
+        //     // alert("horiz!")
+        // } else {
+        //     if (viewportHeight > curr_img_height) {
+        //         $("#viewer-img").css("max-height", (viewportHeight - 10))
+        //         $("#viewer-img").css("height", (curr_img_height - 10))
+        //     }
+        //     // alert("vert!!")
+        // }
+
+        // alert("H: " + curr_img_height + " viewportHeight: " + viewportHeight +
+        //       " W: " + curr_img_width + " viewportWidth: " + viewportWidth)
 
         // you should check here if the image has finished loading
         // this can be done with theImage.complete
@@ -151,14 +169,9 @@ $(document).ready(function() {
         $("#viewer").css("width", (curr_img_width + 20))
         $("#viewer").css("height", (curr_img_height + 20))
         // $("#viewer").css("opacity", 1);
-
         $("#viewer-img").attr("src", current_img.attr("src"))
 
-        $("#viewer-img").css("max-width", viewportWidth)
-        $("#viewer-img").css("max-height", (viewportHeight - 10))
 
-        $("#viewer-img").css("width", (curr_img_width + 10))
-        $("#viewer-img").css("height", (curr_img_height + 10))
 
         $("#viewer-img").fadeOut(0)
         $("#viewer-img").fadeIn(500)
@@ -260,11 +273,15 @@ $img_modes=array('none'=> 'none', 'all'=> 'all', 'first'=> 'first');
 
 function outerContainer($u, $numItems, $img, $photo) {
 
-    $div_id = substr(htmlspecialchars($u, ENT_QUOTES), 7, strlen(htmlspecialchars($u, ENT_QUOTES)));
-    $pos = strpos($div_id, '/');
-    $div_id = str_replace(".", "", substr($div_id, 0, $pos));
+    /* $div_id = substr(htmlspecialchars($u, ENT_QUOTES), 7, strlen(htmlspecialchars($u, ENT_QUOTES))); */
+    $div_id = substr($u, 7, strlen($u));
 
-    /* $div_id = "plop"; */
+    $illegal_chars = array(".", "?", "=", "/", "&", "_", "-", ";", ",", "+");
+
+    $pos = strlen($div_id);
+    /* $div_id = str_replace($illegal_chars, "", substr($div_id, 0, $pos)); */
+
+    $div_id = htmlspecialchars(str_replace($illegal_chars, "", substr($div_id, 0, $pos)), ENT_QUOTES);
 
     echo '
         <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'" data-img="'.$img.'" data-photo="'.$photo.'" id="'.$div_id.'">
