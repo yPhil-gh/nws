@@ -260,13 +260,14 @@ img.full {
 }
 
 #viewer span {
-    padding: 10px;
+    padding: 2px;
     position: absolute;
+    margin-right:5px;
     font-size: 20px;
+    font-weight: bold;
     color: #333333;
-    background-color: #000;
+    /* background-color: #ccc; */
     /* z-index: 1001; */
-    background-color: #FFFFFF;
     cursor: pointer;
     /* border-radius: 50%; */
     opacity: 0;
@@ -277,7 +278,8 @@ img.full {
 }
 
 #viewer span:hover {
-    box-shadow: 0px 0px 5px 2px #333333;
+    /* box-shadow: 0px 0px 2px 1px #333333; */
+    color: red;
 }
 
 #viewer:hover span {
@@ -285,23 +287,23 @@ img.full {
 }
 
 #viewer #cross {
-    top: 10px;
-    left: 10px;
+    top: 4px;
+    left: 4px;
 }
 
-#viewer #previous {
-    top: 10px;
-    left: 60px;
+#viewer #prev {
+    top: 2px;
+    left: 25px;
 }
 
 #viewer #pause, #play {
-    top: 10px;
-    left: 110px;
+    top: 2px;
+    left: 46px;
 }
 
 #viewer #next {
-    top: 10px;
-    left: 160px;
+    top: 2px;
+    left: 68px;
 }
 
 #pause {
@@ -310,6 +312,8 @@ img.full {
 
 #viewer #img-name
 {
+    font-weight: normal;
+    background-color: #ccc;
     bottom: 30px;
     /* left: -200px; */
     font-size: 14px;
@@ -321,25 +325,27 @@ img.full {
     transition: .5s;
 }
 
-/*
- * #viewer:hover #cross {
- *     top: 10px;
- * }
- *
- * #viewer:hover #previous {
- *     top: 10px;
- * }
- *
- * #viewer:hover #next {
- *     top: 10px;
- * }
- */
-
-#viewer:hover #img-name {
-    left: 5px;
+#viewer:hover #cross {
+    left: 4px;
 }
 
-.icon-home, .icon-play, .icon-pause, .icon-previous, .icon-next, .icon-arrow-left, .icon-close {
+#viewer:hover #prev {
+    left: 25px;
+}
+
+#viewer:hover #play {
+    left: 46px;
+}
+
+#viewer:hover #next {
+    left: 64px;
+}
+
+#viewer:hover #img-name {
+    left: 1px;
+}
+
+.icon-home, .icon-play, .icon-pause, .icon-prev, .icon-next, .icon-arrow-left, .icon-close {
 	/* font-family: 'icomoon'; */
 	speak: none;
 	font-style: normal;
@@ -355,19 +361,19 @@ img.full {
 }
 
 .icon-play:before {
-	content: ">";
+	content: "▶";
 }
 
 .icon-pause:before {
-	content: "||";
+	content: "■";
 }
 
-.icon-previous:before {
-	content: "<<";
+.icon-prev:before {
+	content: "◁";
 }
 
 .icon-next:before {
-	content: ">>";
+	content: "▷";
 }
 
 .icon-arrow-left:before {
@@ -375,8 +381,12 @@ img.full {
 }
 
 .icon-close:before {
-	content: "x";
+	content: "✖";
 }
+
+/* ◁ ▶ ▷ ■ */
+
+►
 
 /* ► Play. ▌▌ Pause. ■ Stop. */
 

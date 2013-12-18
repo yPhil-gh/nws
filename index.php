@@ -42,12 +42,27 @@ $(document).ready(function() {
 
     $('body').keyup(function(e) {
 
+        // alert(e.keyCode)
+
         if (e.keyCode == 37 || e.keyCode == 82)
-            direction = 'prev'
-        else if (e.keyCode == 39 || e.keyCode == 84)
-            direction = 'next'
-        else
-            return
+            if( $("#viewer").is(':visible') ) {
+                $("#prev").trigger('click')
+                direction = null
+            } else {
+                direction = 'prev'
+            }
+
+        if (e.keyCode == 39 || e.keyCode == 84)
+            if( $("#viewer").is(':visible') ) {
+                $("#next").trigger('click')
+                direction = null
+            } else {
+                direction = 'next'
+            }
+
+        if (e.keyCode == 27) {
+            close_viewer()
+        }
 
         var active_tab = $("#tabs").tabs("option", "active")
 
@@ -89,32 +104,28 @@ $(document).ready(function() {
 
     // GALLERY
 
-    var viewportWidth = $(window).width()
-    var viewportHeight = $(window).height()
+    var viewport_width = $(window).width()
+    var viewport_height = $(window).height()
+    var i
+    var timeOut = null;
 
-    // alert(viewportWidth)
+    $("#viewer").css("top", ((viewport_height / 2) - 150) + "px")
+    $("#viewer").css("left", ((viewport_width / 2) - 250) + "px")
 
-    $("#viewer").css("top", ((viewportHeight / 2) - 150) + "px")
-    $("#viewer").css("left", ((viewportWidth / 2) - 250) + "px")
-
-    var i      //For storing the image index
-
-    //Slideshow functions
     $('#play').click(function (e, simulated) {
         if (!simulated) {
-            autoAdvance()
+            auto_play()
             $("#pause").css("display", "block")
             $("#play").css("display", "none")
         }
     })
 
-    function autoAdvance() {
+    function auto_play() {
         $('#next').trigger('click', [true]);
-        timeOut = setTimeout(autoAdvance, 3000);
+        timeOut = setTimeout(auto_play, 3000);
     }
 
-    var timeOut = null;
-    $('#pause, #previous, #next, #cross').click(function (e, simulated) {
+    $('#pause, #prev, #next, #cross').click(function (e, simulated) {
         if (!simulated) {
             clearTimeout(timeOut);
             $("#pause").css("display", "none")
@@ -124,12 +135,15 @@ $(document).ready(function() {
 
     function img_gallery(i, div_id) {
 
-        viewportWidth = $(window).width()
-        viewportHeight = $(window).height()
+        viewport_width = $(window).width()
+        viewport_height = $(window).height()
 
         var images = $( "#" + div_id).find('img')
         var count = (images.length - 1)
         var current_img = images.eq(i)
+
+        if (count < 1)
+            exit
 
         var theImage = new Image()
         theImage.src = current_img.attr("src")
@@ -137,45 +151,28 @@ $(document).ready(function() {
         var curr_img_width = theImage.width
         var curr_img_height = theImage.height
 
-        if (curr_img_width > curr_img_height){
-            // if (viewportWidth > curr_img_width) {
-            //     $("#viewer-img").css("max-width", viewportWidth)
-            //     $("#viewer-img").css("width", (curr_img_width - 10))
-            // }
-            if (curr_img_height > viewportHeight) {
-                $("#viewer").css("max-height", viewportHeight)
-                $("#viewer-img").css("max-height", (viewportHeight - 2))
-                // $("#viewer").css("width", $("#viewer-img").width())
-                // $("#viewer-img").css("max-height", (viewportHeight - 10))
-                // alert((current_img - viewportWidth))
-            }
-            // alert("horiz!")
-        } else {
-            if (viewportHeight > curr_img_height) {
-                $("#viewer-img").css("max-height", (viewportHeight - 10))
-                $("#viewer-img").css("height", (curr_img_height - 10))
-            }
-            // alert("vert!!")
-        }
+        $("#viewer").css("width", curr_img_width + "px")
+        $("#viewer").css("height", curr_img_height + "px")
 
-        // alert("H: " + curr_img_height + " viewportHeight: " + viewportHeight +
-        //       " W: " + curr_img_width + " viewportWidth: " + viewportWidth +
-        //      "modulo :" + (curr_img_width - viewportWidth))
+        // if (curr_img_width > curr_img_height){
+        //     if (curr_img_height > viewport_height) {
+        //         $("#viewer").css("max-height", viewport_height)
+        //         $("#viewer-img").css("max-height", (viewport_height - 15))
+        //     }
+        // } else {
+        //     if (curr_img_width > viewport_width) {
+        //         $("#viewer").css("max-width", viewport_width)
+        //         $("#viewer-img").css("max-width", (viewport_width - 5))
+        //     }
+        // }
 
-        // you should check here if the image has finished loading
-        // this can be done with theImage.complete
+        // alert("H: " + curr_img_height + " viewport_height: " + viewport_height +
+        //       " W: " + curr_img_width + " viewport_width: " + viewport_width +
+        //      "modulo :" + (curr_img_width - viewport_width))
+
 
         $("#viewer").css("display", "block")
-
-        // $("#viewer").css("max-width", (curr_img_width - 10))
-        // $("#viewer").css("max-height", (curr_img_height - 10))
-
-        $("#viewer").css("width", (curr_img_width + 20))
-        $("#viewer").css("height", (curr_img_height + 20))
-        // $("#viewer").css("opacity", 1);
         $("#viewer-img").attr("src", current_img.attr("src"))
-
-
 
         $("#viewer-img").fadeOut(0)
         $("#viewer-img").fadeIn(500)
@@ -198,21 +195,21 @@ $(document).ready(function() {
 
     // Reposition and resize the image according to viewport
     $(window).resize(function () {
-        viewportWidth = $(window).width()
-        viewportHeight = $(window).height()
+        viewport_width = $(window).width()
+        viewport_height = $(window).height()
 
-        $("#viewer").css("top", ((viewportHeight / 2) - 150) + "px")
-        $("#viewer").css("left", ((viewportWidth / 2) - 250) + "px")
+        $("#viewer").css("top", ((viewport_height / 2) - 150) + "px")
+        $("#viewer").css("left", ((viewport_width / 2) - 250) + "px")
 
-        if (viewportWidth < 500) {
+        if (viewport_width < 500) {
             $("#viewer").css("left", "0px")
-            $("#viewer").css("width", viewportWidth + "px")
-            $("#viewer-img").css("width", (viewportWidth - 10) + "px")
+            $("#viewer").css("width", viewport_width + "px")
+            $("#viewer-img").css("width", (viewport_width - 10) + "px")
         }
 
     })
 
-    $("#previous").click(function () {
+    $("#prev").click(function () {
 
         var myindex = $(this).parent().find("img").attr("data-index")
         var mycount = $(this).parent().find("img").attr("data-count")
@@ -348,7 +345,7 @@ echo '
             </a>
             <span id="cross" title="Close" aria-hidden="true" class="icon-close"></span>
             <span id="img-name"></span>
-            <span id="previous" title="Previous" aria-hidden="true" class="icon-previous"></span>
+            <span id="prev" title="Previous" aria-hidden="true" class="icon-prev"></span>
             <span id="next" title="next" aria-hidden="true" class="icon-next"></span>
             <span id="pause" title="Pause Slideshow" aria-hidden="true" class="icon-pause"></span>
             <span id="play" title="Start Slideshow" aria-hidden="true" class="icon-play"></span>

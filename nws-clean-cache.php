@@ -13,7 +13,7 @@
 
 $cache_dir = "cache/";
 $favicon_cache_dir = "cache/favicon/";
-$max_age = 3600;
+$max_age = 3;
 ?>
 <!DOCTYPE html>
 <html>
