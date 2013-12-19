@@ -105,7 +105,8 @@ $(document).ready(function() {
     var viewport_width = $(window).width()
     var viewport_height = $(window).height()
     var i
-    var timeOut = null;
+    var timeOut = null
+    var debug = "empty"
 
     $("#viewer").css("top", ((viewport_height / 2) - 150) + "px")
     $("#viewer").css("left", ((viewport_width / 2) - 250) + "px")
@@ -139,12 +140,15 @@ $(document).ready(function() {
         var images = $( "#" + div_id).find('img')
         var count = (images.length - 1)
         var current_img = images.eq(i)
+        var post_url = current_img.parent().attr("url")
 
         if (count < 1){
-            $("#viewer").css("width", 150 + "px")
-            $("#viewer").css("height", 150 + "px")
-            $("#viewer").html("No images")
-            $("#viewer").css("display", "block")
+            $("#overlay").html('<div class="error">No images</div>')
+            $('#overlay div').css({
+                position:'absolute',
+                left: ($(window).width() - $('.className').outerWidth())/2,
+                top: ($(window).height() - $('.className').outerHeight())/2
+            });
             exit
         }
 
@@ -154,48 +158,44 @@ $(document).ready(function() {
         var curr_img_width = theImage.width
         var curr_img_height = theImage.height
 
-        // $("#viewer").css("width", curr_img_width + "px")
-        // $("#viewer").css("height", curr_img_height + "px")
+        if (curr_img_width < 320) {
+            debug = "resized!"
+            $("#viewer").css("width", 320 + "px")
+            $("#viewer-img").css("width", 320 + "px")
+            $("#viewer-img").css("height", 240 + "px")
+        } else {
+            $("#viewer").css("width", (curr_img_width - 10) + "px")
+            $("#viewer").css("height", (curr_img_height - 10) + "px")
 
-        $("#viewer").css("width", (curr_img_width - 100) + "px")
-        $("#viewer").css("height", (curr_img_height - 10) + "px")
+            $("#viewer-img").css("width", (curr_img_width - 10) + "px")
+            $("#viewer-img").css("height", (curr_img_height - 10) + "px")
+        }
 
-        $("#viewer-img").css("width", (curr_img_width - 40) + "px")
-        $("#viewer-img").css("height", (curr_img_height - 10) + "px")
+        if (curr_img_height > viewport_height) {
+            $("#viewer").css("max-height", viewport_height + "px")
+            $("#viewer-img").css("height", (viewport_height - 5) + "px" + "!important")
+            $("#viewer-img").css("max-height", (viewport_height - 2) + "px")
+            $("#viewer-img").css("width", "")
+        }
 
-        // if (curr_img_width > curr_img_height){
-        //     if (curr_img_height > viewport_height) {
-        //         $("#viewer").css("max-height", viewport_height)
-        //         $("#viewer-img").css("width", 80 + "px")
-        //         $("#viewer-img").css("max-height", (viewport_height - 15))
-        //     }
-        // } else {
-        //     if (curr_img_width > viewport_width) {
-        //         $("#viewer").css("max-width", viewport_width)
-        //         $("#viewer-img").css("max-width", (viewport_width - 5))
-        //     }
-        // }
-
-        // alert("H: " + curr_img_height + " viewport_height: " + viewport_height +
-        //       " W: " + curr_img_width + " viewport_width: " + viewport_width +
-        //      "modulo :" + (curr_img_width - viewport_width))
+        debug = "W: " + curr_img_width + " / " + viewport_width + " H: " + curr_img_height + " / " + viewport_height + " - "
 
         $("#viewer").css("display", "block")
         $("#viewer-img").attr("src", current_img.attr("src"))
 
         $("#viewer-img").fadeOut(0)
-        $("#viewer-img").fadeIn(500)
+        $("#viewer-img").fadeIn(400)
 
-        $("#viewer-img").attr("alt", i + " of " + count)
         $("#viewer-img").attr("data-index", i)
         $("#viewer-img").attr("data-count", count)
         $("#viewer-img").attr("data-id", div_id)
-        $("#img-name").text(current_img.attr("alt") + " - [#" + i + " of " + count + "]")
+        $("#img-name a").text(debug + "[#" + i + " of " + count + "] " + current_img.attr("alt"))
+        $("#img-name a").attr("href", current_img.attr("data-link"))
+        $("#img-name a").attr("title", current_img.attr("alt"))
         $("#link-img").attr("href", current_img.attr("src"))
     }
 
     $('.gallery').click(function(){
-        // overlay.appendTo(document.body)
         $("#overlay").show()
         var div_id = $(this).parent().attr("id")
         img_gallery(1, div_id)
@@ -269,6 +269,7 @@ $(document).ready(function() {
         $("#play").css("display", "block")
         $("#viewer").css("display", "none");
         $("#overlay").hide()
+        $("#overlay").html('')
     }
 
     $('.reload').trigger('click')
@@ -356,7 +357,7 @@ echo '
                 <img id="viewer-img" />
             </a>
             <span id="cross" title="Close" aria-hidden="true" class="icon-close"></span>
-            <span id="img-name"></span>
+            <span id="img-name"><a></a></span>
             <span id="prev" title="Previous" aria-hidden="true" class="icon-prev"></span>
             <span id="next" title="next" aria-hidden="true" class="icon-next"></span>
             <span id="pause" title="Pause Slideshow" aria-hidden="true" class="icon-pause"></span>
