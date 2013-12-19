@@ -42,8 +42,6 @@ $(document).ready(function() {
 
     $('body').keyup(function(e) {
 
-        // alert(e.keyCode)
-
         if (e.keyCode == 37 || e.keyCode == 82)
             if( $("#viewer").is(':visible') ) {
                 $("#prev").trigger('click')
@@ -142,8 +140,13 @@ $(document).ready(function() {
         var count = (images.length - 1)
         var current_img = images.eq(i)
 
-        if (count < 1)
+        if (count < 1){
+            $("#viewer").css("width", 150 + "px")
+            $("#viewer").css("height", 150 + "px")
+            $("#viewer").html("No images")
+            $("#viewer").css("display", "block")
             exit
+        }
 
         var theImage = new Image()
         theImage.src = current_img.attr("src")
@@ -151,12 +154,19 @@ $(document).ready(function() {
         var curr_img_width = theImage.width
         var curr_img_height = theImage.height
 
-        $("#viewer").css("width", curr_img_width + "px")
-        $("#viewer").css("height", curr_img_height + "px")
+        // $("#viewer").css("width", curr_img_width + "px")
+        // $("#viewer").css("height", curr_img_height + "px")
+
+        $("#viewer").css("width", (curr_img_width - 100) + "px")
+        $("#viewer").css("height", (curr_img_height - 10) + "px")
+
+        $("#viewer-img").css("width", (curr_img_width - 40) + "px")
+        $("#viewer-img").css("height", (curr_img_height - 10) + "px")
 
         // if (curr_img_width > curr_img_height){
         //     if (curr_img_height > viewport_height) {
         //         $("#viewer").css("max-height", viewport_height)
+        //         $("#viewer-img").css("width", 80 + "px")
         //         $("#viewer-img").css("max-height", (viewport_height - 15))
         //     }
         // } else {
@@ -169,7 +179,6 @@ $(document).ready(function() {
         // alert("H: " + curr_img_height + " viewport_height: " + viewport_height +
         //       " W: " + curr_img_width + " viewport_width: " + viewport_width +
         //      "modulo :" + (curr_img_width - viewport_width))
-
 
         $("#viewer").css("display", "block")
         $("#viewer-img").attr("src", current_img.attr("src"))
@@ -255,6 +264,9 @@ $(document).ready(function() {
     })
 
     function close_viewer() {
+        clearTimeout(timeOut);
+        $("#pause").css("display", "none")
+        $("#play").css("display", "block")
         $("#viewer").css("display", "none");
         $("#overlay").hide()
     }
