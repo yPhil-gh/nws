@@ -176,8 +176,9 @@ $(document).ready(function() {
         $("#viewer-img").fadeOut(0)
 
         if (curr_img_width < 320) {
-            debug = "resized!"
+            debug = debug + " - resized - "
             $("#viewer").css("width", 320 + "px")
+            $("#viewer").css("height", 240 + "px")
             $("#viewer-img").css("width", 320 + "px")
             $("#viewer-img").css("height", 240 + "px")
             $("#viewer-img").css("height", "")
@@ -413,7 +414,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "7fda92c03932cf7c3236ca92ce7b9c7606216467";
+    $ref_commit = "3263d5e420c53449f8941af1e89ebe319a5fe7ef";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
