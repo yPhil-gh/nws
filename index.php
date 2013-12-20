@@ -396,12 +396,24 @@ echo '
 <a href="nws-manage.php"><img src="img/nws.png" alt="manage" style="margin-top:.5em" /> Manage feeds</a>
 ';
 
+
 // Version Control
-$current_commits = @file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits");
+
+$opts = array(
+  'http'=>array(
+    'method'=>"GET",
+    'header'=>"User-Agent: nws"
+  )
+);
+
+$context = stream_context_create($opts);
+
+$current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/nws/commits", false, $context);
+
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "353d60ed6be6e966daea66b8eb2c9a12403a1714";
+    $ref_commit = "7fda92c03932cf7c3236ca92ce7b9c7606216467";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
@@ -415,7 +427,7 @@ if ($current_commits !== false) {
     }
 } else {
         $version_class = "unknown";
-        $version_message = "can't read NWS version status";
+        $version_message = "Can't read NWS version status";
 }
 
 ?>
