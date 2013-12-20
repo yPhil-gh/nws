@@ -132,15 +132,23 @@ $(document).ready(function() {
         }
     })
 
-    function img_gallery(i, div_id) {
+    function img_gallery(i, div_id, tab_id) {
+
+        if (!tab_id == '') {
+            var images = $( "#" + tab_id).find('img')
+            $("#viewer-img").attr("data-tab", tab_id)
+        } else {
+            var images = $( "#" + div_id).find('img')
+        }
 
         viewport_width = $(window).width()
         viewport_height = $(window).height()
 
-        var images = $( "#" + div_id).find('img')
         var count = (images.length - 1)
         var current_img = images.eq(i)
         var post_url = current_img.parent().attr("url")
+
+        // alert("yow, " + count)
 
         if (count < 1){
             $("#overlay").html('<div class="error">No images</div>')
@@ -158,17 +166,20 @@ $(document).ready(function() {
         var curr_img_width = theImage.width
         var curr_img_height = theImage.height
 
+        $("#viewer-img").fadeOut(0)
+
         if (curr_img_width < 320) {
             debug = "resized!"
             $("#viewer").css("width", 320 + "px")
             $("#viewer-img").css("width", 320 + "px")
             $("#viewer-img").css("height", 240 + "px")
+            $("#viewer-img").css("height", "")
         } else {
-            $("#viewer").css("width", (curr_img_width - 10) + "px")
-            $("#viewer").css("height", (curr_img_height - 10) + "px")
+            $("#viewer").css("width", (curr_img_width - 5) + "px")
+            $("#viewer").css("height", (curr_img_height - 5) + "px")
 
-            $("#viewer-img").css("width", (curr_img_width - 10) + "px")
-            $("#viewer-img").css("height", (curr_img_height - 10) + "px")
+            $("#viewer-img").css("width", (curr_img_width - 5) + "px")
+            $("#viewer-img").css("height", (curr_img_height - 5) + "px")
         }
 
         if (curr_img_height > viewport_height) {
@@ -183,8 +194,6 @@ $(document).ready(function() {
         $("#viewer").css("display", "block")
         $("#viewer-img").attr("src", current_img.attr("src"))
 
-        $("#viewer-img").fadeOut(0)
-        $("#viewer-img").fadeIn(400)
 
         $("#viewer-img").attr("data-index", i)
         $("#viewer-img").attr("data-count", count)
@@ -193,12 +202,24 @@ $(document).ready(function() {
         $("#img-name a").attr("href", current_img.attr("data-link"))
         $("#img-name a").attr("title", current_img.attr("alt"))
         $("#link-img").attr("href", current_img.attr("src"))
+
+        $("#viewer-img").fadeIn(400)
     }
 
-    $('.gallery').click(function(){
+    $('.gallery-feed').click(function(){
         $("#overlay").show()
         var div_id = $(this).parent().attr("id")
-        img_gallery(1, div_id)
+        var tab_id = ''
+        img_gallery(1, div_id, tab_id)
+    })
+
+
+    $('.gallery-tab').click(function(){
+        $("#overlay").show()
+        var div_id = $(this).parent().attr("id")
+        var tab_id = $(this).parent().parent().attr("id")
+        // alert("plop " + tab_id)
+        img_gallery(1, div_id, tab_id)
     })
 
 
@@ -222,6 +243,7 @@ $(document).ready(function() {
 
         var myindex = $(this).parent().find("img").attr("data-index")
         var mycount = $(this).parent().find("img").attr("data-count")
+        var mytab = $(this).parent().find("img").attr("data-tab")
         var mydiv_id = $("#viewer-img").attr("data-id")
         myindex = parseInt(myindex)
         mycount = parseInt(mycount)
@@ -235,13 +257,14 @@ $(document).ready(function() {
                 myindex = mycount
             }
         }
-        img_gallery(myindex, mydiv_id)
+        img_gallery(myindex, mydiv_id, mytab)
     })
 
     $("#next").click(function () {
 
         var myindex = $(this).parent().find("img").attr("data-index")
         var mycount = $(this).parent().find("img").attr("data-count")
+        var mytab = $(this).parent().find("img").attr("data-tab")
         var mydiv_id = $("#viewer-img").attr("data-id")
         myindex = parseInt(myindex)
 
@@ -252,7 +275,7 @@ $(document).ready(function() {
             myindex = 1
         }
 
-        img_gallery(myindex, mydiv_id)
+        img_gallery(myindex, mydiv_id, mytab)
     })
 
     $("#cross").click(function () {
@@ -300,7 +323,8 @@ function outerContainer($u, $numItems, $img, $photo) {
     echo '
         <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'" data-img="'.$img.'" data-photo="'.$photo.'" id="'.$div_id.'">
             <span class="reload" title="Reload '.htmlspecialchars($u).'">&#9889;</span>
-            <span class="gallery">►</span>
+            <span class="gallery-feed" title="View '.htmlspecialchars($u).' images">►</span>
+            <span class="gallery-tab" title="View all images in this tab">►</span>
             <div class="innerContainer"></div>
         </div>
 ';

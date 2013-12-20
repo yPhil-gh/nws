@@ -168,8 +168,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
             if (isset($feedRss->channel->link)) {
                 $feedLink = get_link($feedRss->channel->link);
             }
-        }
-        else {
+        } else {
             if (isset($feedRss->item)) {
                 $items = $feedRss->item;         // rss of some sort
             } elseif (isset($tumb)) {	    	 // tumblr
@@ -183,6 +182,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                 $feedLink = get_link($feedRss->link);
             }
         }
+
         if (empty($feedLink))  $feedLink = $u;
         $favicon = get_favicon_cached($feedLink);
 
@@ -277,13 +277,13 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                     if ($ext == "mp3")
                         $img = '<a href="'.$atomImg.'"><span class="audio-note" title="Audio content">♫</span></a>';
                     else
-                        $img = '<a href="'.$atomImg.'"><img class="'.$img_class.'" alt="'.$title.' - atomImg" src="'.$atomImg.'" /></a>';
+                        $img = '<a href="'.$atomImg.'"><img class="'.$img_class.'" data-link="'.$link.'" alt="'.$title.'" src="'.$atomImg.'" /></a>';
                 } elseif (!empty($mediaImg)) {
-                    $img = '<a href="'.$mediaImg.'"><img class="'.$img_class.'" alt="'.$title.'" src="'.$mediaImg.'" /></a>';
+                    $img = '<a href="'.$mediaImg.'"><img class="'.$img_class.'" data-link="'.$link.'" alt="'.$title.'" src="'.$mediaImg.'" /></a>';
                 } elseif (!empty($imgSrc)) {
                     list($width, $height) = getimagesize($imgSrc);
                     if (isset($width) && $width > 2) {
-                        $img = '<a href="'.$imgSrc.'"><img class="'.$img_class.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
+                        $img = '<a href="'.$imgSrc.'"><img class="'.$img_class.'" data-link="'.$link.'" alt="'.$title.'" src="'.$imgSrc.'" /></a>';
                     }
                     else $img = '';
                 } else {

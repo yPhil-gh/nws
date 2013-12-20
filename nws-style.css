@@ -37,7 +37,7 @@ a:hover {
 }
 
 a:active {
-    color:#f00;
+    color:orange;
 }
 
 h1 {
@@ -132,15 +132,21 @@ h1 {
     background: #333;
 }
 
-.reload, .gallery {
+.reload, .gallery-feed, .gallery-tab {
     cursor:pointer;
     float:right;
-    line-height:.8em;
-    margin: 0 .1em 0 0;
-    font-size:150%;
+    margin: 0 .5em 0 0;
+    /* line-height:.8em; */
+    /* font-size:150%; */
 }
 
-.reload:hover, .gallery:hover {
+.gallery-tab {
+    position:absolute;
+    top:1em;
+    right:1em;
+}
+
+.reload:hover, .gallery-feed:hover, .gallery-tab:hover {
     color:orange;
 }
 
@@ -204,7 +210,7 @@ img.full {
 }
 
 .feedDel:hover {
-    color:red;
+    color:orange;
 }
 
 .feedUp:hover {
@@ -256,7 +262,7 @@ img.full {
 
 #viewer-img {
     /* width: 500px; */
-    border: 1px solid #FFFFFF;
+    border: 1px solid #2E3436;
 }
 
 #viewer span {
@@ -279,7 +285,7 @@ img.full {
 
 #viewer span:hover {
     /* box-shadow: 0px 0px 2px 1px #333333; */
-    color: red;
+    color: orange;
 }
 
 #viewer:hover span {
@@ -310,12 +316,16 @@ img.full {
     display: none;
 }
 
-#viewer #img-name
-{
+#viewer #img-name {
     font-weight: normal;
-    background-color: #ccc;
+    color:#eeeeec;
+    background-color: #2e3436;
     bottom: 30px;
+    /* right:1px; */
+    /* top: 30px; */
     /* left: -200px; */
+    left:1px;
+    padding: .2em .5em;
     font-size: 14px;
     text-align: left;
     border-radius: 0 5px 5px 0;
@@ -323,6 +333,7 @@ img.full {
     -webkit-transition: .5s;
     -o-transition: .5s;
     transition: .5s;
+    text-overflow: ellipsis;
 }
 
 #viewer:hover #cross {
@@ -341,19 +352,21 @@ img.full {
     left: 64px;
 }
 
-#viewer:hover #img-name {
-    left: 1px;
-}
+/*
+ * #viewer:hover #img-name {
+ *     left: 1px;
+ * }
+ */
 
 .icon-home, .icon-play, .icon-pause, .icon-prev, .icon-next, .icon-arrow-left, .icon-close {
-	/* font-family: 'icomoon'; */
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
+    border-radius: 0 5px 5px 0;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
 }
 
 .icon-home:before {
@@ -386,13 +399,7 @@ img.full {
 
 /* ◁ ▶ ▷ ■ */
 
-►
-
 /* ► Play. ▌▌ Pause. ■ Stop. */
-
-#img-name {
-    text-overflow: ellipsis;
-}
 
 #overlay {
     position: fixed;
@@ -402,9 +409,19 @@ img.full {
     width: 100%;
     height: 100%;
     background-color: #000;
-    filter:alpha(opacity=50);
-    -moz-opacity:0.5;
-    -khtml-opacity: 0.5;
-    opacity: 0.8;
+    /* filter:alpha(opacity=80); */
+    /* -moz-opacity:0.8; */
+    /* -khtml-opacity: 0.8; */
+    opacity: 0.9;
     z-index: 500;
+
+    text-align: center;
+    margin: auto;
+}
+
+.error {
+    text-align: center;
+    padding: 1em;
+    /* margin: auto; */
+    border: orange 1px solid;
 }
