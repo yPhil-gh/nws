@@ -135,18 +135,25 @@ $(document).ready(function() {
     function img_gallery(i, div_id, tab_id) {
 
         if (!tab_id == '') {
-            var images = $( "#" + tab_id).find('img')
+            var images = $( "#" + tab_id).find('img').not('.favicon img')
             $("#viewer-img").attr("data-tab", tab_id)
         } else {
-            var images = $( "#" + div_id).find('img')
+            var images = $( "#" + div_id).find('img').not('.favicon img')
         }
 
         viewport_width = $(window).width()
         viewport_height = $(window).height()
 
-        var count = (images.length - 1)
+        // var count = (images.length - 1)
+        var count = images.length
         var current_img = images.eq(i)
+
         var post_url = current_img.parent().attr("url")
+        var site_url = current_img.attr("data-link").substring(7, current_img.attr("data-link").length)
+
+        var indx = site_url.indexOf("/");
+
+        debug = "Site: " + site_url.substring(0, indx) + " "
 
         // alert("yow, " + count)
 
@@ -189,7 +196,7 @@ $(document).ready(function() {
             $("#viewer-img").css("width", "")
         }
 
-        debug = "W: " + curr_img_width + " / " + viewport_width + " H: " + curr_img_height + " / " + viewport_height + " - "
+        // debug = debug + "W: " + curr_img_width + " / " + viewport_width + " H: " + curr_img_height + " / " + viewport_height + " - "
 
         $("#viewer").css("display", "block")
         $("#viewer-img").attr("src", current_img.attr("src"))
@@ -210,18 +217,16 @@ $(document).ready(function() {
         $("#overlay").show()
         var div_id = $(this).parent().attr("id")
         var tab_id = ''
-        img_gallery(1, div_id, tab_id)
+        img_gallery(0, div_id, tab_id)
     })
-
 
     $('.gallery-tab').click(function(){
         $("#overlay").show()
         var div_id = $(this).parent().attr("id")
         var tab_id = $(this).parent().parent().attr("id")
         // alert("plop " + tab_id)
-        img_gallery(1, div_id, tab_id)
+        img_gallery(0, div_id, tab_id)
     })
-
 
     // Reposition and resize the image according to viewport
     $(window).resize(function () {
@@ -396,7 +401,7 @@ $current_commits = @file_get_contents("https://api.github.com/repos/xaccrocheur/
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "32328b51f5cdd20d87422446cfb63bde676fbc8c";
+    $ref_commit = "353d60ed6be6e966daea66b8eb2c9a12403a1714";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
