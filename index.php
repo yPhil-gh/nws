@@ -40,6 +40,12 @@ $(document).ready(function() {
     var feed_max_age = 3600;
     var ajax_spinner = '<img src="img/loading.gif" class="loading" alt="loading..." />'
 
+    $('body').keydown(function(e) {
+        if (e.keyCode == 32 || e.keyCode == 13) {
+            e.preventDefault()
+        }
+    });
+
     $('body').keyup(function(e) {
 
         if (e.keyCode == 37 || e.keyCode == 82)
@@ -61,6 +67,20 @@ $(document).ready(function() {
         if (e.keyCode == 27) {
             close_viewer()
         }
+
+        if (e.keyCode == 32 || e.keyCode == 13) {
+            e.preventDefault()
+            if ($("#play").is(':visible'))
+                $("#play").trigger('click')
+            else
+                $("#pause").trigger('click')
+        }
+
+        // $(document).keydown(function (e) {
+        //     var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+        //     if ((key == 32) && (e.target.className != null) && (e.target.className.indexOf("ui-button") != -1))
+        // });
+
 
         var active_tab = $("#tabs").tabs("option", "active")
 
@@ -157,7 +177,7 @@ $(document).ready(function() {
 
         // alert("yow, " + count)
 
-        if (count < 1){
+        if (count < 1) {
             $("#overlay").html('<div class="error">No images</div>')
             $('#overlay div').css({
                 position:'absolute',
@@ -278,7 +298,7 @@ $(document).ready(function() {
             myindex = (myindex + 1)
         }
         else {
-            myindex = 1
+            myindex = 0
         }
 
         img_gallery(myindex, mydiv_id, mytab)
@@ -390,8 +410,8 @@ echo '
             <span id="img-name"><a></a></span>
             <span id="prev" title="Previous" aria-hidden="true" class="icon-prev"></span>
             <span id="next" title="next" aria-hidden="true" class="icon-next"></span>
-            <span id="pause" title="Pause Slideshow" aria-hidden="true" class="icon-pause"></span>
-            <span id="play" title="Start Slideshow" aria-hidden="true" class="icon-play"></span>
+            <span id="pause" title="Pause Slideshow" aria-hidden="true" class="icon-pause playpause"></span>
+            <span id="play" title="Start Slideshow" aria-hidden="true" class="icon-play playpause"></span>
         </div>
     </div>
 <a href="nws-manage.php"><img src="img/nws.png" alt="manage" style="margin-top:.5em" /> Manage feeds</a>
