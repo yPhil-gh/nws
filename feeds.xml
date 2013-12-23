@@ -3,7 +3,6 @@
 <!--
     img can be either { none first all }
     photo can be either {true false}
--->
 
   <url tab="news">http://www.futura-sciences.com/rss/actualites.xml</url>
   <url tab="news">http://www.pcinpact.com/rss/news.xml</url>
@@ -30,8 +29,10 @@
   <url tab="tech">http://linuxfr.org/news.atom</url>
   <url tab="tech">http://www.theverge.com/rss/index.xml</url>
   <url tab="tech" img="none">http://rss.slashdot.org/Slashdot/slashdot</url>
+-->
 
   <url tab="00z">http://awkwardstockphotos.com/rss</url>
+  <url tab="snd">http://feeds2.feedburner.com/PitchforkAlbumReviews/</url>
 
   <!-- disabled feeds
        <url tab="snd">http://planet.linuxaudio.org/rss20.xml</url>

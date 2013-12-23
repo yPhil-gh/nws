@@ -126,7 +126,7 @@ $(document).ready(function() {
     var viewport_height = $(window).height()
     var i
     var timeOut = null
-    var debug = "empty"
+    var msg = "empty"
 
     $("#viewer").css("top", ((viewport_height / 2) - 150) + "px")
     $("#viewer").css("left", ((viewport_width / 2) - 250) + "px")
@@ -154,6 +154,9 @@ $(document).ready(function() {
 
     function img_gallery(i, div_id, tab_id) {
 
+        viewport_width = $(window).width()
+        viewport_height = $(window).height()
+
         if (!tab_id == '') {
             var images = $( "#" + tab_id).find('img').not('.favicon img')
             $("#viewer-img").attr("data-tab", tab_id)
@@ -161,24 +164,10 @@ $(document).ready(function() {
             var images = $( "#" + div_id).find('img').not('.favicon img')
         }
 
-        viewport_width = $(window).width()
-        viewport_height = $(window).height()
-
-        // var count = (images.length - 1)
         var count = images.length
-        var current_img = images.eq(i)
 
-        var post_url = current_img.parent().attr("url")
-        var site_url = current_img.attr("data-link").substring(7, current_img.attr("data-link").length)
-
-        var indx = site_url.indexOf("/");
-
-        debug = "Site: " + site_url.substring(0, indx) + " "
-
-        // alert("yow, " + count)
-
-        if (count < 1) {
-            $("#overlay").html('<div class="error">No images</div>')
+        if (!count) {
+            $("#overlay").html('<div class="error">☹ No images ☹</div>')
             $('#overlay div').css({
                 position:'absolute',
                 left: ($(window).width() - $('.className').outerWidth())/2,
@@ -187,19 +176,31 @@ $(document).ready(function() {
             exit
         }
 
-        var theImage = new Image()
-        theImage.src = current_img.attr("src")
+        var current_img = images.eq(i)
 
-        var curr_img_width = theImage.width
-        var curr_img_height = theImage.height
+        var site_url = current_img.attr("data-link").substring(7, current_img.attr("data-link").length)
+        var first_slash = site_url.indexOf("/");
+
+        msg = "(" + site_url.substring(0, first_slash) + ") "
+
+        var img = new Image()
+        img.src = current_img.attr("src")
+
+        var curr_img_width = img.width
+        var curr_img_height = img.height
 
         $("#viewer-img").fadeOut(0)
 
-        if (curr_img_width < 320) {
-            debug = debug + " - resized - "
-            $("#viewer").css("width", 320 + "px")
+        if (curr_img_width > curr_img_height)
+            var acceptable_min_width = 320
+        else
+            var acceptable_min_width = 230
+
+        if (curr_img_width < acceptable_min_width) {
+            msg = msg + " - resized - "
+            $("#viewer").css("width", acceptable_min_width + "px")
             $("#viewer").css("height", 240 + "px")
-            $("#viewer-img").css("width", 320 + "px")
+            $("#viewer-img").css("width", acceptable_min_width + "px")
             $("#viewer-img").css("height", 240 + "px")
             $("#viewer-img").css("height", "")
         } else {
@@ -217,16 +218,15 @@ $(document).ready(function() {
             $("#viewer-img").css("width", "")
         }
 
-        // debug = debug + "W: " + curr_img_width + " / " + viewport_width + " H: " + curr_img_height + " / " + viewport_height + " - "
+        // msg = msg + "W: " + curr_img_width + " / " + viewport_width + " H: " + curr_img_height + " / " + viewport_height + " - "
 
         $("#viewer").css("display", "block")
         $("#viewer-img").attr("src", current_img.attr("src"))
 
-
         $("#viewer-img").attr("data-index", i)
         $("#viewer-img").attr("data-count", count)
         $("#viewer-img").attr("data-id", div_id)
-        $("#img-name a").text(debug + "[#" + i + " of " + count + "] " + current_img.attr("alt"))
+        $("#img-name a").text(msg + "[#" + i + " of " + count + "] " + current_img.attr("alt"))
         $("#buttons").text("[#" + i + " of " + count + "] ")
         $("#img-name a").attr("href", current_img.attr("data-link"))
         $("#img-name a").attr("title", current_img.attr("alt"))
@@ -435,7 +435,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "6bb0835e56ca2242430f7b5ac0cd1c1807033d1e";
+    $ref_commit = "c73c0215511aae32d76c9a62c650dd94d8875982";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
