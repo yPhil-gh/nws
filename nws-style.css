@@ -132,7 +132,7 @@ h1 {
     background: #333;
 }
 
-.reload, .gallery-feed, .gallery-tab {
+.reload, .gallery-feed, .gallery-tab, .gallery-tab2 {
     cursor:pointer;
     float:right;
     margin: 0 .5em 0 0;
@@ -145,6 +145,13 @@ h1 {
     position:absolute;
     top:.3em;
     right:.3em;
+}
+
+.gallery-tab2 {
+    font-size:150%;
+    position:absolute;
+    top:.3em;
+    right:3em;
 }
 
 .reload:hover, .gallery-feed:hover, .gallery-tab:hover {

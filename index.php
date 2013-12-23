@@ -86,6 +86,7 @@ $(document).ready(function() {
 
         if (direction != null)
             if (direction == 'next')
+                // $("#tabs").tabs("option", "active").find(".gallery-tab").show()
                 if (active_tab < totaltabs -1)
                     $("#tabs").tabs("option", "active", active_tab + 1)
                 else
@@ -126,7 +127,6 @@ $(document).ready(function() {
     var viewport_height = $(window).height()
     var i
     var timeOut = null
-    var msg = "empty"
 
     $("#viewer").css("top", ((viewport_height / 2) - 150) + "px")
     $("#viewer").css("left", ((viewport_width / 2) - 250) + "px")
@@ -154,12 +154,15 @@ $(document).ready(function() {
 
     function img_gallery(i, div_id, tab_id) {
 
+        var msg
+
         viewport_width = $(window).width()
         viewport_height = $(window).height()
 
         if (!tab_id == '') {
             var images = $( "#" + tab_id).find('img').not('.favicon img')
             $("#viewer-img").attr("data-tab", tab_id)
+            // msg = "tab_id: " + tab_id + " div_id: " + div_id
         } else {
             var images = $( "#" + div_id).find('img').not('.favicon img')
         }
@@ -180,8 +183,6 @@ $(document).ready(function() {
 
         var site_url = current_img.attr("data-link").substring(7, current_img.attr("data-link").length)
         var first_slash = site_url.indexOf("/");
-
-        msg = "(" + site_url.substring(0, first_slash) + ") "
 
         var img = new Image()
         img.src = current_img.attr("src")
@@ -218,6 +219,13 @@ $(document).ready(function() {
             $("#viewer-img").css("width", "")
         }
 
+        if (curr_img_width > viewport_width) {
+            $("#viewer").css("max-width", viewport_width + "px")
+            $("#viewer-img").css("width", (viewport_width - 5) + "px" + "!important")
+            $("#viewer-img").css("max-width", (viewport_width - 2) + "px")
+            $("#viewer-img").css("height", "")
+        }
+
         // msg = msg + "W: " + curr_img_width + " / " + viewport_width + " H: " + curr_img_height + " / " + viewport_height + " - "
 
         $("#viewer").css("display", "block")
@@ -244,8 +252,9 @@ $(document).ready(function() {
 
     $('.gallery-tab').click(function(){
         $("#overlay").show()
-        var div_id = $(this).parent().attr("id")
-        var tab_id = $(this).parent().parent().attr("id")
+        // var div_id = $(this).parent().attr("id")
+        var div_id = ''
+        var tab_id = $(this).parent().attr("id")
         // alert("plop " + tab_id)
         img_gallery(0, div_id, tab_id)
     })
@@ -351,7 +360,6 @@ function outerContainer($u, $numItems, $img, $photo) {
         <div class="outerContainer" style="" title ="'.htmlspecialchars($u, ENT_QUOTES).'" data-numItems="'.$numItems.'" data-img="'.$img.'" data-photo="'.$photo.'" id="'.$div_id.'">
             <span class="reload" title="Reload '.htmlspecialchars($u).'">&#9889;</span>
             <span class="gallery-feed" title="View '.htmlspecialchars($u).' images">►</span>
-            <span class="gallery-tab" title="View all images in this tab">►</span>
             <div class="innerContainer"></div>
         </div>
 ';
@@ -395,7 +403,9 @@ echo '
 
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
-    <div id="tab-'.$tabName.'">';
+    <div id="tab-'.$tabName.'">
+    <span class="gallery-tab" title="View all images in the '.$tabName.' tab">►</span>
+';
         foreach ($tabGroups[$tabName] as $tabUrl)
             outerContainer($tabUrl['url'],$tabUrl['numItems'],$tabUrl['img'],$tabUrl['photo']);
     echo '
@@ -435,7 +445,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "c73c0215511aae32d76c9a62c650dd94d8875982";
+    $ref_commit = "783d0e67343a31dec8ab016e84d24dfc1232464a";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
