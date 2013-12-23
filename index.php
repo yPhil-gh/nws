@@ -127,6 +127,7 @@ $(document).ready(function() {
     var viewport_height = $(window).height()
     var i
     var timeOut = null
+    var msg = "empty"
 
     $("#viewer").css("top", ((viewport_height / 2) - 150) + "px")
     $("#viewer").css("left", ((viewport_width / 2) - 250) + "px")
@@ -153,8 +154,6 @@ $(document).ready(function() {
     })
 
     function img_gallery(i, div_id, tab_id) {
-
-        var msg
 
         viewport_width = $(window).width()
         viewport_height = $(window).height()
@@ -184,6 +183,9 @@ $(document).ready(function() {
         var site_url = current_img.attr("data-link").substring(7, current_img.attr("data-link").length)
         var first_slash = site_url.indexOf("/");
 
+        // msg = msg + "(" + site_url.substring(0, first_slash) + ") "
+        msg = "(tab " + div_id + ") " + "(div " + tab_id
+
         var img = new Image()
         img.src = current_img.attr("src")
 
@@ -198,7 +200,7 @@ $(document).ready(function() {
             var acceptable_min_width = 230
 
         if (curr_img_width < acceptable_min_width) {
-            msg = msg + " - resized - "
+            // msg = msg + " - resized - "
             $("#viewer").css("width", acceptable_min_width + "px")
             $("#viewer").css("height", 240 + "px")
             $("#viewer-img").css("width", acceptable_min_width + "px")
@@ -404,7 +406,7 @@ echo '
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
     <div id="tab-'.$tabName.'">
-    <span class="gallery-tab" title="View all images in the '.$tabName.' tab">►</span>
+    <span class="gallery-tab" title="View all images in the '.$tabName.' tab">></span>
 ';
         foreach ($tabGroups[$tabName] as $tabUrl)
             outerContainer($tabUrl['url'],$tabUrl['numItems'],$tabUrl['img'],$tabUrl['photo']);
@@ -445,7 +447,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "783d0e67343a31dec8ab016e84d24dfc1232464a";
+    $ref_commit = "b98b6ee219792c8a21461a2596cdd44b2a2986b3";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
