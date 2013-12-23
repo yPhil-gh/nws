@@ -289,10 +289,10 @@ $(document).ready(function() {
         if (myindex > mycount) {
             myindex = mycount
         } else {
-            if (myindex > 1) {
+            if (myindex > 0) {
                 myindex = (myindex - 1)
             } else {
-                myindex = mycount
+                myindex = (mycount - 1)
             }
         }
         img_gallery(myindex, mydiv_id, mytab)
@@ -406,7 +406,7 @@ echo '
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
     <div id="tab-'.$tabName.'">
-    <span class="gallery-tab" title="View all images in the '.$tabName.' tab">></span>
+    <span class="gallery-tab" title="View all images in the '.$tabName.' tab">►</span>
 ';
         foreach ($tabGroups[$tabName] as $tabUrl)
             outerContainer($tabUrl['url'],$tabUrl['numItems'],$tabUrl['img'],$tabUrl['photo']);
@@ -447,7 +447,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "b98b6ee219792c8a21461a2596cdd44b2a2986b3";
+    $ref_commit = "44a16d13ba30d20fb1ba05551ac2cac55a87d9b9";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
