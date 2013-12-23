@@ -227,6 +227,7 @@ $(document).ready(function() {
         $("#viewer-img").attr("data-count", count)
         $("#viewer-img").attr("data-id", div_id)
         $("#img-name a").text(debug + "[#" + i + " of " + count + "] " + current_img.attr("alt"))
+        $("#buttons").text("[#" + i + " of " + count + "] ")
         $("#img-name a").attr("href", current_img.attr("data-link"))
         $("#img-name a").attr("title", current_img.attr("alt"))
         $("#link-img").attr("href", current_img.attr("src"))
@@ -294,7 +295,7 @@ $(document).ready(function() {
         var mydiv_id = $("#viewer-img").attr("data-id")
         myindex = parseInt(myindex)
 
-        if (myindex < mycount) {
+        if (myindex < (mycount -1)) {
             myindex = (myindex + 1)
         }
         else {
@@ -402,18 +403,18 @@ foreach (array_keys($tabGroups) as $tabName) {
 }
 
 echo '
-        <div id="viewer">
-            <a id="link-img">
-                <img id="viewer-img" />
-            </a>
-            <span id="cross" title="Close" aria-hidden="true" class="icon-close"></span>
-            <span id="img-name"><a></a></span>
-            <span id="prev" title="Previous" aria-hidden="true" class="icon-prev"></span>
-            <span id="next" title="next" aria-hidden="true" class="icon-next"></span>
-            <span id="pause" title="Pause Slideshow" aria-hidden="true" class="icon-pause playpause"></span>
-            <span id="play" title="Start Slideshow" aria-hidden="true" class="icon-play playpause"></span>
-        </div>
+    <div id="viewer">
+      <a id="link-img">
+        <img id="viewer-img" />
+      </a>
+      <span id="cross" title="Close" aria-hidden="true" class="icon-close"></span>
+      <span id="img-name"><a></a></span>
+        <span id="prev" title="Previous" aria-hidden="true" class="icon-prev"></span>
+        <span id="next" title="next" aria-hidden="true" class="icon-next"></span>
+        <span id="pause" title="Pause Slideshow" aria-hidden="true" class="icon-pause playpause"></span>
+        <span id="play" title="Start Slideshow" aria-hidden="true" class="icon-play playpause"></span>
     </div>
+</div>
 <a href="nws-manage.php"><img src="img/nws.png" alt="manage" style="margin-top:.5em" /> Manage feeds</a>
 ';
 
@@ -434,7 +435,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "9678c051ce2d06f58df8bef1111cd9792d04fc54";
+    $ref_commit = "6bb0835e56ca2242430f7b5ac0cd1c1807033d1e";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;

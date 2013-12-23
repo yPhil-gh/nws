@@ -141,9 +141,10 @@ h1 {
 }
 
 .gallery-tab {
+    font-size:150%;
     position:absolute;
-    top:1em;
-    right:1em;
+    top:.3em;
+    right:.3em;
 }
 
 .reload:hover, .gallery-feed:hover, .gallery-tab:hover {
@@ -335,19 +336,50 @@ img.full {
     text-overflow: ellipsis;
 }
 
+#viewer #buttons {
+    position:absolute;
+    font-size:5pt;
+    z-index:1001;
+    width:5em;
+    height:3em;
+    opacity:0.5;
+    font-weight: normal;
+    color:#eeeeec;
+    background-color: #2e3436;
+    top: 1px;
+    /* right:1px; */
+    /* top: 30px; */
+    /* left: -200px; */
+    left:1px;
+    padding: .2em .5em;
+    font-size: 14px;
+    text-align: left;
+    border-radius: 0 0 5px 0;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+    text-overflow: ellipsis;
+}
+
+
 #viewer:hover #cross {
     left: 4px;
+    z-index:1002;
 }
 
 #viewer:hover #prev {
+    z-index:1002;
     left: 25px;
 }
 
 #viewer:hover #play {
+    z-index:1002;
     left: 46px;
 }
 
 #viewer:hover #next {
+    z-index:1002;
     left: 64px;
 }
 
