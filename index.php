@@ -41,14 +41,28 @@ $(document).ready(function() {
     var ajax_spinner = '<img src="img/loading.gif" class="loading" alt="loading..." />'
 
     $('body').keydown(function(e) {
-        if (e.keyCode == 32 || e.keyCode == 13) {
+        if (e.keyCode == 32) {
             e.preventDefault()
         }
     });
 
     $('body').keyup(function(e) {
 
-        if (e.keyCode == 37 || e.keyCode == 82)
+        alert(e.keyCode)
+
+        if (e.keyCode == 71) {
+            if( $("#viewer").is(':visible') ) {
+                $("#img-name a").trigger('click')
+                // alert($("#img-name a").attr('href'))
+                // $("#img-name a").click()
+                // $("#img-name a").css('border', '1px solid red')
+                window.location = $("#img-name a").attr('href');
+            } else {
+                alert("plop")
+            }
+        }
+
+        if (e.keyCode == 37)
             if( $("#viewer").is(':visible') ) {
                 $("#prev").trigger('click')
                 direction = null
@@ -56,7 +70,7 @@ $(document).ready(function() {
                 direction = 'prev'
             }
 
-        if (e.keyCode == 39 || e.keyCode == 84)
+        if (e.keyCode == 39)
             if( $("#viewer").is(':visible') ) {
                 $("#next").trigger('click')
                 direction = null
@@ -68,13 +82,13 @@ $(document).ready(function() {
             close_viewer()
         }
 
-        if (e.keyCode == 32 || e.keyCode == 13) {
-            e.preventDefault()
-            if ($("#play").is(':visible'))
-                $("#play").trigger('click')
-            else
-                $("#pause").trigger('click')
-        }
+        // if (e.keyCode == 32) {
+        //     e.preventDefault()
+        //     if ($("#play").is(':visible'))
+        //         $("#play").trigger('click')
+        //     else
+        //         $("#pause").trigger('click')
+        // }
 
         // $(document).keydown(function (e) {
         //     var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
@@ -158,6 +172,8 @@ $(document).ready(function() {
         viewport_width = $(window).width()
         viewport_height = $(window).height()
 
+        msg = " tab: (" + tab_id + ")" + " div: (" + div_id + ")"
+
         if (!tab_id == '') {
             var images = $( "#" + tab_id).find('img').not('.favicon img')
             $("#viewer-img").attr("data-tab", tab_id)
@@ -169,11 +185,11 @@ $(document).ready(function() {
         var count = images.length
 
         if (!count) {
-            $("#overlay").html('<div class="error">☹ No images ☹</div>')
-            $('#overlay div').css({
+            $("#overlay").html('<div id="error">☹ No images ☹</div>')
+            $('#overlay #error').css({
                 position:'absolute',
-                left: ($(window).width() - $('.className').outerWidth())/2,
-                top: ($(window).height() - $('.className').outerHeight())/2
+                left: ($(window).width() - $('#error').outerWidth())/2,
+                top: ($(window).height() - $('#error').outerHeight())/2
             });
             exit
         }
@@ -183,8 +199,8 @@ $(document).ready(function() {
         var site_url = current_img.attr("data-link").substring(7, current_img.attr("data-link").length)
         var first_slash = site_url.indexOf("/");
 
-        // msg = msg + "(" + site_url.substring(0, first_slash) + ") "
-        msg = "(tab " + div_id + ") " + "(div " + tab_id
+        // msg = "(" + site_url.substring(0, first_slash) + ") "
+        // msg = "(tab " + div_id + ") " + "(div " + tab_id + ")"
 
         var img = new Image()
         img.src = current_img.attr("src")
@@ -254,10 +270,10 @@ $(document).ready(function() {
 
     $('.gallery-tab').click(function(){
         $("#overlay").show()
-        // var div_id = $(this).parent().attr("id")
-        var div_id = ''
+        var div_id = $(this).parent().children("div").first().attr("id")
+        // var div_id = ''
         var tab_id = $(this).parent().attr("id")
-        // alert("plop " + tab_id)
+        // alert("plop " + div_id)
         img_gallery(0, div_id, tab_id)
     })
 
@@ -313,6 +329,10 @@ $(document).ready(function() {
             myindex = 0
         }
 
+        msg = " tab: (" + mytab + ")" + " div: (" + mydiv_id + ")"
+
+        alert(msg)
+
         img_gallery(myindex, mydiv_id, mytab)
     })
 
@@ -331,6 +351,7 @@ $(document).ready(function() {
         $("#viewer").css("display", "none");
         $("#overlay").hide()
         $("#overlay").html('')
+        images = null
     }
 
     $('.reload').trigger('click')
@@ -406,7 +427,7 @@ echo '
 foreach (array_keys($tabGroups) as $tabName) {
     echo '
     <div id="tab-'.$tabName.'">
-    <span class="gallery-tab" title="View all images in the '.$tabName.' tab">►</span>
+    <span class="gallery-tab" title="View all images in the ['.$tabName.'] tab">►</span>
 ';
         foreach ($tabGroups[$tabName] as $tabUrl)
             outerContainer($tabUrl['url'],$tabUrl['numItems'],$tabUrl['img'],$tabUrl['photo']);
