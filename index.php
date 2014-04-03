@@ -48,7 +48,7 @@ $(document).ready(function() {
 
     $('body').keyup(function(e) {
 
-        alert(e.keyCode)
+        // alert(e.keyCode)
 
         if (e.keyCode == 71) {
             if( $("#viewer").is(':visible') ) {
