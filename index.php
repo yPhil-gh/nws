@@ -48,9 +48,9 @@ $(document).ready(function() {
 
     $('body').keyup(function(e) {
 
-        alert(e.keyCode + direction)
+        // alert(e.keyCode + direction)
 
-        direction = null
+        direction = null;
 
         if (e.keyCode == 71) {
             if( $("#viewer").is(':visible') ) {
@@ -64,21 +64,17 @@ $(document).ready(function() {
             }
         }
 
-        if (e.keyCode == 37)
-            if( $("#viewer").is(':visible') ) {
-                $("#prev").trigger('click')
-                direction = null
-            } else {
-                direction = 'prev'
-            }
+        if (e.keyCode == 37) {
+            direction = null;
+        } else {
+            direction = 'prev';
+        }
 
-        if (e.keyCode == 39)
-            if( $("#viewer").is(':visible') ) {
-                $("#next").trigger('click')
-                direction = null
-            } else {
-                direction = 'next'
-            }
+        if (e.keyCode == 39) {
+            direction = null
+        } else {
+            direction = 'next'
+        }
 
         if (e.keyCode == 27) {
             close_viewer()
@@ -333,7 +329,7 @@ $(document).ready(function() {
 
         msg = " tab: (" + mytab + ")" + " div: (" + mydiv_id + ")"
 
-        alert(msg)
+        // alert(msg)
 
         img_gallery(myindex, mydiv_id, mytab)
     })
@@ -494,3 +490,5 @@ if ($current_commits !== false) {
 </span>
 </body>
 </html>
+
+Mais ne me bipes pas maintenant, sweetie, je suis en réunion et je ne pourrai pas avoir cette premiere conversation ensemble entouré de collègues
