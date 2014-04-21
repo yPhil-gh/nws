@@ -466,7 +466,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "0e9eae78c8ab562bd5bb1a8050408c9b3970bc9a";
+    $ref_commit = "bfb4c57ecbe8f749bbfa095bd50557c76f641d75";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
@@ -490,5 +490,3 @@ if ($current_commits !== false) {
 </span>
 </body>
 </html>
-
-Mais ne me bipes pas maintenant, sweetie, je suis en réunion et je ne pourrai pas avoir cette premiere conversation ensemble entouré de collègues
