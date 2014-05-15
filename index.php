@@ -166,7 +166,7 @@ $(document).ready(function() {
         viewport_width = $(window).width()
         viewport_height = $(window).height()
 
-        msg = " tab: (" + tab_id + ")" + " div: (" + div_id + ")"
+        msg = ""
 
         if (!tab_id == '') {
             var images = $( "#" + tab_id).find('img').not('.favicon img')
@@ -323,7 +323,7 @@ $(document).ready(function() {
             myindex = 0
         }
 
-        msg = " tab: (" + mytab + ")" + " div: (" + mydiv_id + ")"
+        // msg = " tab: (" + mytab + ")" + " div: (" + mydiv_id + ")"
 
         // alert(msg)
 
@@ -462,7 +462,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "d3272e825d13a5a9418a5c6770c263422afa0203";
+    $ref_commit = "e00f14db8a7ac8fea937533d41e6fe6f12a1006e";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
