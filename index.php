@@ -46,69 +46,69 @@ $(document).ready(function() {
         }
     });
 
-    // $('body').keyup(function(e) {
+    $('body').keyup(function(e) {
 
-    //     // alert(e.keyCode + direction)
+        // alert(e.keyCode + direction)
 
-    //     direction = null;
+        direction = null;
 
-    //     if (e.keyCode == 71) {
-    //         if( $("#viewer").is(':visible') ) {
-    //             $("#img-name a").trigger('click')
-    //             // alert($("#img-name a").attr('href'))
-    //             // $("#img-name a").click()
-    //             // $("#img-name a").css('border', '1px solid red')
-    //             window.location = $("#img-name a").attr('href');
-    //         } else {
-    //             alert("plop")
-    //         }
-    //     }
+        if (e.keyCode == 71) {
+            if( $("#viewer").is(':visible') ) {
+                $("#img-name a").trigger('click')
+                // alert($("#img-name a").attr('href'))
+                // $("#img-name a").click()
+                // $("#img-name a").css('border', '1px solid red')
+                window.location = $("#img-name a").attr('href');
+            } else {
+                alert("plop")
+            }
+        }
 
-    //     if (e.keyCode == 37) {
-    //         direction = null;
-    //     } else {
-    //         direction = 'prev';
-    //     }
+        if (e.keyCode == 37) {
+            direction = null;
+        } else {
+            direction = 'prev';
+        }
 
-    //     if (e.keyCode == 39) {
-    //         direction = null
-    //     } else {
-    //         direction = 'next'
-    //     }
+        if (e.keyCode == 39) {
+            direction = null
+        } else {
+            direction = 'next'
+        }
 
-    //     if (e.keyCode == 27) {
-    //         close_viewer()
-    //     }
+        if (e.keyCode == 27) {
+            close_viewer()
+        }
 
-    //     // if (e.keyCode == 32) {
-    //     //     e.preventDefault()
-    //     //     if ($("#play").is(':visible'))
-    //     //         $("#play").trigger('click')
-    //     //     else
-    //     //         $("#pause").trigger('click')
-    //     // }
+        // if (e.keyCode == 32) {
+        //     e.preventDefault()
+        //     if ($("#play").is(':visible'))
+        //         $("#play").trigger('click')
+        //     else
+        //         $("#pause").trigger('click')
+        // }
 
-    //     // $(document).keydown(function (e) {
-    //     //     var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
-    //     //     if ((key == 32) && (e.target.className != null) && (e.target.className.indexOf("ui-button") != -1))
-    //     // });
+        // $(document).keydown(function (e) {
+        //     var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+        //     if ((key == 32) && (e.target.className != null) && (e.target.className.indexOf("ui-button") != -1))
+        // });
 
 
-    //     var active_tab = $("#tabs").tabs("option", "active")
+        var active_tab = $("#tabs").tabs("option", "active")
 
-    //     if (direction != null)
-    //         if (direction == 'next')
-    //             // $("#tabs").tabs("option", "active").find(".gallery-tab").show()
-    //             if (active_tab < totaltabs -1)
-    //                 $("#tabs").tabs("option", "active", active_tab + 1)
-    //             else
-    //                 $("#tabs").tabs("option", "active", 0)
-    //         else
-    //             if (active_tab != 0)
-    //                 $("#tabs").tabs("option", "active", active_tab - 1)
-    //             else
-    //                 $("#tabs").tabs("option", "active", totaltabs - 1)
-    // })
+        if (direction != null)
+            if (direction == 'next')
+                // $("#tabs").tabs("option", "active").find(".gallery-tab").show()
+                if (active_tab < totaltabs -1)
+                    $("#tabs").tabs("option", "active", active_tab + 1)
+                else
+                    $("#tabs").tabs("option", "active", 0)
+            else
+                if (active_tab != 0)
+                    $("#tabs").tabs("option", "active", active_tab - 1)
+                else
+                    $("#tabs").tabs("option", "active", totaltabs - 1)
+    })
 
 
     $("#tabs").bind("tabsactivate", function (event, ui) {
@@ -466,7 +466,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "37698eab68b2889bd7526a4ae0f8a9875593d94d";
+    $ref_commit = "0ce201de4c492c90af238293df7124113afda631";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
