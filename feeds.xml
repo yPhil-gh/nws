@@ -34,7 +34,7 @@
   <url tab="00z">http://rss.lemonde.fr/c/205/f/3050/index.rss</url>
   <url tab="00z">http://awkwardstockphotos.com/rss</url>
   <url tab="snd">http://feeds2.feedburner.com/PitchforkAlbumReviews/</url>
-  <url tab="snd">https://gdata.youtube.com/feeds/base/users/doublebiceps/uploads</url>
+  <url tab="plop">https://gdata.youtube.com/feeds/base/users/doublebiceps/uploads</url>
 
   <!-- disabled feeds
        <url tab="snd">http://planet.linuxaudio.org/rss20.xml</url>
