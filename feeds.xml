@@ -3,12 +3,12 @@
 <!--
     img can be either { none first all }
     photo can be either {true false}
+-->
 
   <url tab="news">http://www.futura-sciences.com/rss/actualites.xml</url>
   <url tab="news">http://www.pcinpact.com/rss/news.xml</url>
 
   <url tab="news">http://rss.lefigaro.fr/lefigaro/laune</url>
-  <url tab="news">http://rss.lemonde.fr/c/205/f/3050/index.rss</url>
   <url tab="news" numItems="5" img="first">http://www.arretsurimages.net/tous-les-contenus.rss</url>
   <url tab="news">http://www.acrimed.org/spip.php?page=backend</url>
   <url tab="news" numItems="8" img="first">http://feeds.bbci.co.uk/news/world/rss.xml</url>
@@ -29,9 +29,8 @@
   <url tab="tech">http://linuxfr.org/news.atom</url>
   <url tab="tech">http://www.theverge.com/rss/index.xml</url>
   <url tab="tech" img="none">http://rss.slashdot.org/Slashdot/slashdot</url>
--->
 
-  <url tab="00z">http://rss.lemonde.fr/c/205/f/3050/index.rss</url>
+
   <url tab="00z">http://awkwardstockphotos.com/rss</url>
   <url tab="snd">http://feeds2.feedburner.com/PitchforkAlbumReviews/</url>
   <url tab="plop">https://gdata.youtube.com/feeds/base/users/doublebiceps/uploads</url>
