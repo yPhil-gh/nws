@@ -64,13 +64,31 @@ $(document).ready(function() {
             }
         }
 
-        if (e.keyCode == 37) {
-            direction = 'prev';
-        } else if (e.keyCode == 39) {
-            direction = 'next'
-        } else {
-            direction = null;
-        }
+        // if (e.keyCode == 37) {
+        //     direction = 'prev';
+        // } else if (e.keyCode == 39) {
+        //     direction = 'next'
+        // } else {
+        //     direction = null;
+        // }
+
+
+        if (e.keyCode == 37)
+            if( $("#viewer").is(':visible') ) {
+                $("#prev").trigger('click')
+                direction = null
+            } else {
+                direction = 'prev'
+            }
+
+        if (e.keyCode == 39)
+            if( $("#viewer").is(':visible') ) {
+                $("#next").trigger('click')
+                direction = null
+            } else {
+                direction = 'next'
+            }
+
 
         if (e.keyCode == 27) {
             close_viewer()
@@ -462,7 +480,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "e00f14db8a7ac8fea937533d41e6fe6f12a1006e";
+    $ref_commit = "00c7a58a431a5752d352326bd79824d211ed2222";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
