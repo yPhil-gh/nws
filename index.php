@@ -486,7 +486,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "77b791acce10634a64fa02b6811cc76d5f9ea198";
+    $ref_commit = "27f295f47d3a75967017461311fb47b9bb425f8c";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
@@ -504,9 +504,9 @@ if ($current_commits !== false) {
 }
 
 ?>
-<div id="overlay"> </div>
+    <div id="overlay"> </div>
     <span id="version" onClick="document.location.href='https://github.com/xaccrocheur/nws'" title="<?php echo $version_message ?>">
     <span class="<?php echo $version_class ?>">♼</span>
     </span>
-    </body>
-    </html>
+</body>
+</html>
