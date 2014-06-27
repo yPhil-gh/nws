@@ -456,7 +456,7 @@ if (empty($urls)) {
         echo '
     <div id="viewer">
       <a id="link-img">
-        <img id="viewer-img" />
+        <img id="viewer-img" alt="Gallery viewer" />
       </a>
       <span id="cross" title="Close" aria-hidden="true" class="icon-close"></span>
       <span id="img-name"><a></a></span>
@@ -486,7 +486,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "28fecabe414cbf5fef04557ca595d135f785689b";
+    $ref_commit = "046a1845c43b1a296f7735ff1642f8d08b394f29";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
