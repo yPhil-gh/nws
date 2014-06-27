@@ -6,6 +6,9 @@
   https://github.com/xaccrocheur/nws/
 
 */
+
+$feeds = 'feeds.xml';
+
 ?>
 
 <!DOCTYPE html>
@@ -376,7 +379,7 @@
 
 <?php
 
-$urls = simplexml_load_file('feeds.xml');
+$urls = simplexml_load_file($feeds);
 $img_modes=array('none'=> 'none', 'all'=> 'all', 'first'=> 'first');
 
 function outerContainer($u, $numItems, $img, $photo) {
@@ -400,10 +403,8 @@ function outerContainer($u, $numItems, $img, $photo) {
 ';
 }
 
-// $urls = array_filter($urls);
-
 if (empty($urls)) {
-    echo "<p>No feeds found in ./feeds.xml</p>";
+    echo "<p>No feeds found in " . getcwd() . "/$feeds</p>";
 } else {
 
     foreach ($urls->url as $url) {
@@ -486,7 +487,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "cab1a68321ec7c31a2310653dddc88f0b8a1c697";
+    $ref_commit = "1c2b6dda18788cbdc1407d0ac2fefeebda3cd59e";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
