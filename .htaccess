@@ -1,0 +1,6 @@
+AuthUserFile /absolute/path/to/.htauth
+AuthName "You get to read my feeds, but only I manage them, mmkay?"
+AuthType Basic
+<Files "nws-manage.php">
+    Require valid-user
+</Files>
