@@ -22,7 +22,9 @@
 *** Installation
    - Copy the files in a directory within a webserver root.
    - Point your browser to that webserver's directory. That's it.
-   - Oh, if you want to use the caching features (faster and more private) make sure that the web server has the right to write to said directory, or create it yourself : cache and cache/favicon
+   - Oh, if you want to use the caching features (faster and more private) make sure that the web server has the right to write to said directory:
+     - On the average web server (Debian / Apache) it's generally just a matter of, in the root folder: 'sudo chown .www-data .'
+   - or create it yourself : cache and cache/favicon (NWS works perfectly w/o caching, only a little less fast)
    - Recommended : Protect (restrict access to) the back-office
      - Use [[https://duckduckgo.com/?q%3Dhtpassword%2Bgenerator][a trusted online htpassword generator]] (You can also create user/password pair(s) directly on the server with the command "htpasswd -b .access username password")
      - Paste this user/password pair in a file, and upload it as nws/.access (or another - secure - location, see below)
