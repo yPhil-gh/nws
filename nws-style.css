@@ -389,13 +389,12 @@ img.full {
 
 .icon-home, .icon-play, .icon-pause, .icon-prev, .icon-next, .icon-arrow-left, .icon-close {
     border-radius: 0 5px 5px 0;
-    speak: none;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
 }
 
 .icon-home:before {
