@@ -80,81 +80,11 @@ function get_link($links) {
     }
 }
 
-// getfile() :
-//      $url        : string, should already be urlencoded
-//      $max_age    : integer, number of seconds
-function get_file($url, $max_age) {
-    global $cache_dir;
+function reparse($u, $numItems, $imgMode, $photoblog) {
 
-    if (file_exists($cache_dir)) {
-        $cache_ok = true;
-    }
-    else {
-        $cache_ok = @mkdir($cache_dir);
-    }
+    $rssfeed = file_get_contents($u) or die("File Load / read error");
 
-    // cache file should not contain '://' otherwise it will be considered as an url
-    // simplifiying by looking for 'http://' or 'https://'
-    $url_decoded = urldecode($url);
-    if ($cache_ok && (substr($url_decoded, 0, strlen('http://')) == 'http://')) {
-        $cache_file = substr($url_decoded, strlen('http://'));
-    }
-    elseif ($cache_ok && (substr($url_decoded, 0, strlen('https://')) == 'https://')) {
-        $cache_file = substr($url_decoded, strlen('https://'));
-    }
-    else {
-        $cache_ok = false;
-    }
-
-    if (!$cache_ok) { // abort cache feature
-        $rssfeed = file_get_contents($url) or die("Load / read error");
-        $age = 0;
-        return array($rssfeed, $age);
-    }
-    // reencod to avoid specials symbols (like '/')
-    $cache_file = urlencode($cache_file);
-    $cache_file = $cache_dir . $cache_file;
-
-    $rssfeed = false;
-    if (file_exists($cache_file)) {
-        $age = time() - filemtime($cache_file);
-        if ($age < $max_age)
-            $rssfeed = file_get_contents($cache_file);
-    }
-
-    if ($rssfeed === false) { // either unreadable cache file, or cache file is too old
-        $rssfeed = file_get_contents($url);
-        $age = 0;
-        if ($rssfeed !== false) {
-            $fh = fopen($cache_file, 'w');
-            if ($fh !== false) {
-                fwrite($fh, $rssfeed);
-                fclose($fh);
-            }
-        }
-    }
-
-    if ($rssfeed === false) {
-        // feed can't be fetched, remote site might be too busy...
-        if (file_exists($cache_file)) {
-            // ok, we have an (old) version in cache
-            $age = time() - filemtime($cache_file);
-            $rssfeed = file_get_contents($cache_file) or die("Load / read error (cache)");
-        } else {
-            die("Load / read error (cache)");
-        }
-    }
-    return array($rssfeed, $age);
-
-}
-
-function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
-    $time_start = microtime(true);
-    // $u is already urlencoded (comming from a GET request)
-    list($xmlrss,$xmlrss_age) = get_file($u, $max_age);
-    $feedRss = simplexml_load_string($xmlrss) or die("Load / read error");
-
-    /* var_dump($photoblog); */
+    $feedRss = simplexml_load_string($rssfeed) or die("Feed Load / read error");
 
     $i = 0;
     $url = parse_url($u);
@@ -183,7 +113,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
             }
         }
 
-        if (empty($feedLink))  $feedLink = $u;
+        if (empty($feedLink)) $feedLink = $u;
         $favicon = get_favicon_cached($feedLink);
 
         $items_total = count($items);
@@ -193,26 +123,8 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
         else
             $display_items = $items_total;
 
-        if ($xmlrss_age > $max_age) {
-            // there's been a problem somewhere (unreachable remote host ?)
-            if ($xmlrss_age > 3600) {
-                $age_str = ((int) ($xmlrss_age / 3600)).' hours old';
-            }
-            elseif ($xmlrss_age > 60) {
-                $age_str = ((int) ($xmlrss_age / 60)).' minutes old';
-            }
-            else {
-                $age_str = $xmlrss_age.' seconds old';
-            }
-            $title_link = 'Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle.' (cached, '.$age_str.')';
-            $title_class= 'feedTitleCached';
-        }
-        else {
-            $title_link = 'Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle;
-            $title_class= 'feedTitle';
-        }
-
-        // echo "<br /><br />Favicon:" . $favicon;
+        $title_link = 'Displaying '.$display_items.' / '.$items_total.' items from '.$feedTitle;
+        $title_class= 'feedTitle';
 
         echo '
              <div class="feed" title ="'.$feedLink.'">
@@ -223,6 +135,7 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
 
                  </div>
                  <ul>';
+
 
         foreach($items as $item) {
             if ($i++ < $numItems) {
@@ -309,8 +222,6 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
                       </ul>
                       </div>';
     }
-    $time_end = microtime(true);
-    echo '<!-- time = '.((string) 1000*($time_end-$time_start)).' ms -->';
 }
 
 if (isset($_GET['n']))
@@ -323,13 +234,6 @@ if (isset($_GET['i']))
 else
     $imgMode='all';
 
-if (isset($_GET['age']))
-    $max_age = (int) $_GET['age'];
-else
-    $max_age = 3600;
-
-$max_age = 0; // Caching feeds is pointless
-
 $photoblog = false;
 foreach ($photoblog_domains as $photoblog_domain)
     if (strstr($_GET['z'], $photoblog_domain)) $photoblog = true;
@@ -339,6 +243,6 @@ if (isset($_GET['p'])) {
     elseif ($_GET['p'] == "false") $photoblog = false;
 }
 
-reparse($_GET['z'],$numItems,$imgMode,$photoblog, $max_age);
+reparse($_GET['z'], $numItems, $imgMode, $photoblog);
 
 ?>
