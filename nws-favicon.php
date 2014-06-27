@@ -88,7 +88,7 @@ function get_favicon ($url) {
         } else {
 
             $arr = $xml->xpath('//link[@rel="icon" or @rel="shortcut icon"]');
-            $favicon = $arr[0]['href'];
+            $favicon = $arr['0']['href'];
 
             if (image_exists($favicon)) {
                 $favicon = $favicon;

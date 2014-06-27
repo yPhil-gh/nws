@@ -17,11 +17,11 @@
   <url tab="news">http://rezo.net/backend/</url>
 
   <url tab="sci" numItems="3">http://fe3.yql.bf1.yahoo.com/pipes/pipe.run?_id=feff1572a71d8e1d04465296edf5a537&amp;_render=rss</url>
-  <url tab="sci">http://xkcd.com/rss.xml</url>
+  <url tab="sci" photo="true">http://xkcd.com/rss.xml</url>
   <url tab="sci" numItems="1">http://what-if.xkcd.com/feed.atom</url>
 
-  <url tab="img">http://allcreatures.tumblr.com/rss/</url>
-  <url tab="img">http://freecabinporn.com/rss/</url>
+  <url tab="img" photo="true">http://allcreatures.tumblr.com/rss/</url>
+  <url tab="img" photo="true">http://freecabinporn.com/rss/</url>
   <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
   <url tab="img">http://generalelectric.tumblr.com/rss</url>
 

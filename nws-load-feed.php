@@ -9,17 +9,6 @@
 
 ini_set('display_errors', 'Off');
 
-// If the feed's URL contains one of those, it will be treated as a Photoblog feed (full img width)
-// Unless the call forces photoblog mode to true or false
-$photoblog_domains = array(
-    ".tumblr.",
-    "cabinporn",
-    "bigpicture",
-    "xkcd.com",
-    "penguinpetes.com",
-    "awkwardstockphotos.com"
-);
-
 // Number of items / feed
 $items_limit = "16";
 $cache_dir = "cache/";
@@ -235,8 +224,6 @@ else
     $imgMode='all';
 
 $photoblog = false;
-foreach ($photoblog_domains as $photoblog_domain)
-    if (strstr($_GET['z'], $photoblog_domain)) $photoblog = true;
 
 if (isset($_GET['p'])) {
     if ($_GET['p'] == "true") $photoblog = true;
