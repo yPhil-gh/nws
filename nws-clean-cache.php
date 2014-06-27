@@ -14,6 +14,14 @@
 $cache_dir = "cache/";
 $favicon_cache_dir = "cache/favicon/";
 $max_age = 1;
+
+
+if (isset($_GET['all'])) {
+    delTree($cache_dir);
+    echo "<p class='notif'>Just deleted cache directory</p>";
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,6 +33,15 @@ $max_age = 1;
 </head>
 <body>
 <?php
+
+function delTree($dir) {
+    $files = array_diff(scandir($dir), array('.','..'));
+    foreach ($files as $file) {
+        (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
+    }
+    return rmdir($dir);
+}
+
     if (isset($_GET['max_age']))
         $max_age=$_GET['max_age'];
 
@@ -114,7 +131,12 @@ $max_age = 1;
 	} else {
 	    echo "<p class='notif'>Can't read favicon cache directory</p>";
 	}
+
+echo '<a href='.__FILE__.'?all>DELETE CACHE DIR</a>';
+
 ?>
 <a href="./"><img src="img/nws.png" alt="NWS" style="margin-top:.5em" /> NWS</a> | <a href="./nws-manage.php">Manage feeds</a>
 </body>
 </html>
+
+echo __FILE__;

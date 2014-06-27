@@ -22,7 +22,7 @@ $fallback_favicon = "img/nws.png";
 // 7889400 secs is a quarter
 
 function get_favicon_cached($url, $max_age = 7889400) {
-    $favicon_cache_dir = "cache/favicon/";
+    $favicon_cache_dir = "favicon_cache/";
     $cache_ok = false;
 
     $u = parse_url($url);
