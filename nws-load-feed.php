@@ -212,6 +212,8 @@ function reparse($u, $numItems, $imgMode, $photoblog, $max_age) {
             $title_class= 'feedTitle';
         }
 
+        // echo "<br /><br />Favicon:" . $favicon;
+
         echo '
              <div class="feed" title ="'.$feedLink.'">
                  <div class="'.$title_class.'">

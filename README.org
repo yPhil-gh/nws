@@ -22,6 +22,7 @@
 *** Installation
    - Copy the files in a directory within a webserver root.
    - Point your browser to that webserver's directory. That's it.
+   - Oh, if you want to use the caching features (faster and more private) make sure that the web server has the right to write to said directory, or create it yourself : cache and cache/favicon
    - Recommended : Protect (restrict access to) the back-office
      - Use [[https://duckduckgo.com/?q%3Dhtpassword%2Bgenerator][a trusted online htpassword generator]] (You can also create user/password pair(s) directly on the server with the command "htpasswd -b .access username password")
      - Paste this user/password pair in a file, and upload it as nws/.access (or another - secure - location, see below)
@@ -29,6 +30,10 @@
 
 *** Usage
    - Navigate the tabs with < left and > right arrow keys (and r & t)
+   - Click the big "►" to view all tabs's images in a gallery
+   - Click the small, item's "►" to view all feed's images in a gallery
+     - Navigate the gallery's images with < left and > right arrow keys
+     - Exit the gallery by clicking outside it, or pressing the ESC key
    - Use the "Manage feeds" link to access the "back office"
      - Use the "add a new feed" text entry field at the bottom to enter a new feed
      - Use the "new tab" text entry field to create a new category

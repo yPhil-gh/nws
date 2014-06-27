@@ -1,6 +1,6 @@
 <?php
 /*
-  nws-favicon : Get site's favicon using various strategies
+  nws-favicon : Get site's favicon (and cache it) using various strategies
 
   This script is part of NWS
   https://github.com/xaccrocheur/nws/
@@ -12,53 +12,48 @@ function image_exists($imgUrl) {
     return ((@GetImageSize($imgUrl)) ? true : false);
 }
 
+function removeslashes($string) {
+    $string=implode("",explode("\/",$string));
+    return stripslashes(trim($string));
+}
 
 $fallback_favicon = "img/nws.png";
 
-function get_favicon_cached($url, $force_update = false, $max_age = 604800) {
-    global $fallback_favicon;
+// 7889400 secs is a quarter
+
+function get_favicon_cached($url, $max_age = 7889400) {
     $favicon_cache_dir = "cache/favicon/";
     $cache_ok = false;
-    
-    // check if cache directory exists
+
+    $u = parse_url($url);
+    $cache_file = $favicon_cache_dir . $u['host'] . ".ico";
+
+    function create_cache_file ($url, $cache_file) {
+        $favicon = get_favicon($url);
+        $content = file_get_contents($favicon);
+        file_put_contents($cache_file, $content);
+    }
+
     if (file_exists($favicon_cache_dir)) {
         $cache_ok = true;
     } else {
         $cache_ok = @mkdir($favicon_cache_dir);
     }
-    
-    if (!$cache_ok) { // directory missing and unable to create it => abort cache feature
+
+    if (!$cache_ok) {
         return get_favicon($url);
     }
 
-    $u = parse_url($url);
-    $cache_file = $u['host']; // http://www.example.com/test_dir/test_page.html => www.example.com
-    // no need to reencode the cache file, there's no forbidden char in the domain name
-    $cache_file = $favicon_cache_dir.$cache_file;
-    
-    $favicon = false;
-    if (!$force_update && file_exists($cache_file)) {
+    if (file_exists($cache_file)) {
         $age = time() - filemtime($cache_file);
-        $favicon = file_get_contents($cache_file);
-
-        if ($age >= $max_age) { // too old : check if icon is still reachable
-            if (($favicon != $fallback_favicon) && (image_exists($favicon))) {
-                @touch($cache_file);
-            } else {
-                $favicon = false;
-            }
+        if ($age >= $max_age) {
+            create_cache_file($url, $cache_file);
         }
+        return $cache_file;
+    } else {
+        create_cache_file($url, $cache_file);
+        return $cache_file;
     }
-
-    if ($favicon === false) { // either unreadable cache file, or cache file is too old
-        $favicon = get_favicon($url);
-        $fh = fopen($cache_file, 'w');
-        if ($fh !== false) {
-            fwrite($fh, $favicon);
-            fclose($fh);
-        }
-    }
-    return $favicon;
 }
 
 function get_favicon ($url) {
@@ -80,6 +75,7 @@ function get_favicon ($url) {
 
     if (!image_exists($full_url_favicon)) {
 
+        echo "wopop! $favicon: ".$favicon;
         if (image_exists($base_domain_favicon)) {
 
             $arr = $xml->xpath('//link[@rel="icon" or @rel="shortcut icon"]');

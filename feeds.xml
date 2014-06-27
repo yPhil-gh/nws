@@ -5,6 +5,8 @@
     photo can be either {true false}
 -->
 
+  <url tab="news">http://www.egaliteetreconciliation.fr/spip.php?page=backend</url>
+
   <url tab="news">http://www.futura-sciences.com/rss/actualites.xml</url>
   <url tab="news">http://www.pcinpact.com/rss/news.xml</url>
 
@@ -25,8 +27,8 @@
 
   <url tab="vid">https://gdata.youtube.com/feeds/base/users/doublebiceps/uploads</url>
 
-  <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
   <url tab="tech">http://linuxfr.org/news.atom</url>
+  <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
   <url tab="tech">http://www.theverge.com/rss/index.xml</url>
   <url tab="tech" img="none">http://rss.slashdot.org/Slashdot/slashdot</url>
 
