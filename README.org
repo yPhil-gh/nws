@@ -22,7 +22,7 @@
 *** Installation
    - Copy the files in a directory within a webserver root.
    - Point your browser to that webserver's directory. That's it.
-   - Oh, if you want to use the caching features (faster and more private) make sure that the web server has the right to write to said directory:
+   - Oh, if you want to use the caching features (those favicons can take a loong time to get) make sure that the web server has the right to write to said directory:
      - On the average web server (Debian / Apache) it's generally just a matter of, in the root folder: 'sudo chown .www-data .'
    - or create it yourself : cache and cache/favicon (NWS works perfectly w/o caching, only a little less fast)
    - Recommended : Protect (restrict access to) the back-office

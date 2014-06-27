@@ -113,7 +113,7 @@ function get_file($url, $max_age) {
     }
     // reencod to avoid specials symbols (like '/')
     $cache_file = urlencode($cache_file);
-    $cache_file = $cache_dir.$cache_file;
+    $cache_file = $cache_dir . $cache_file;
 
     $rssfeed = false;
     if (file_exists($cache_file)) {
@@ -327,6 +327,8 @@ if (isset($_GET['age']))
     $max_age = (int) $_GET['age'];
 else
     $max_age = 3600;
+
+$max_age = 0; // Caching feeds is pointless
 
 $photoblog = false;
 foreach ($photoblog_domains as $photoblog_domain)
