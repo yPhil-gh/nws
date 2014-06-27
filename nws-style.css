@@ -284,9 +284,6 @@ img.full {
     cursor: pointer;
     /* border-radius: 50%; */
     opacity: 0;
-    -moz-transition: .3s;
-    -webkit-transition: .3s;
-    -o-transition: .3s;
     transition: .3s;
 }
 
@@ -336,9 +333,6 @@ img.full {
     font-size: 14px;
     text-align: left;
     border-radius: 0 5px 5px 0;
-    -moz-transition: .5s;
-    -webkit-transition: .5s;
-    -o-transition: .5s;
     transition: .5s;
     text-overflow: ellipsis;
 }
@@ -362,9 +356,6 @@ img.full {
     font-size: 14px;
     text-align: left;
     border-radius: 0 0 5px 0;
-    -moz-transition: .5s;
-    -webkit-transition: .5s;
-    -o-transition: .5s;
     transition: .5s;
     text-overflow: ellipsis;
 }
