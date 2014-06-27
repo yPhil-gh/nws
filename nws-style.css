@@ -464,3 +464,9 @@ img.full {
     /* margin: auto; */
     border: orange 1px solid;
 }
+
+.notif {
+    font-weight: bold;
+    padding : .5em .5em .5em 0;
+    border-top : 1px solid red;
+}

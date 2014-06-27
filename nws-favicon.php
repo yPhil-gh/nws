@@ -75,7 +75,6 @@ function get_favicon ($url) {
 
     if (!image_exists($full_url_favicon)) {
 
-        echo "wopop! $favicon: ".$favicon;
         if (image_exists($base_domain_favicon)) {
 
             $arr = $xml->xpath('//link[@rel="icon" or @rel="shortcut icon"]');

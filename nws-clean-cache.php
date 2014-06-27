@@ -67,9 +67,9 @@ $max_age = 3;
 		        }
 		    }
 		}
-		echo $nb_erase." file(s) erased <br />\n";
+		echo "<p class='notif'>$nb_erase file(s) erased</p>";
 	} else {
-	    echo "Can't read cache directory<br />\n";
+	    echo "<p class='notif'>Can't read cache directory</p>";
 	}
     echo "<h1>Cleaning Favicon's cache directory</h1>\n";
     $nb_erase = 0;
@@ -110,9 +110,9 @@ $max_age = 3;
 		        }
 		    }
 		}
-		echo $nb_erase." file(s) erased <br />\n";
+		echo "<p class='notif'>$nb_erase file(s) erased </p>";
 	} else {
-	    echo "Can't read cache directory<br />\n";
+	    echo "<p class='notif'>Can't read favicon cache directory</p>";
 	}
 ?>
 <a href="./"><img src="img/nws.png" alt="NWS" style="margin-top:.5em" /> NWS</a> | <a href="./nws-manage.php">Manage feeds</a>
