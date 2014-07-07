@@ -20,7 +20,7 @@
   <url tab="sci" photo="true">http://xkcd.com/rss.xml</url>
   <url tab="sci" numItems="1">http://what-if.xkcd.com/feed.atom</url>
 
-  <url tab="img" photo="true">http://allcreatures.tumblr.com/rss/</url>
+  <url tab="img" img="none">http://allcreatures.tumblr.com/rss/</url>
   <url tab="img" photo="true">http://freecabinporn.com/rss/</url>
   <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
   <url tab="img">http://generalelectric.tumblr.com/rss</url>

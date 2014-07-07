@@ -167,10 +167,6 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
                 if (empty($imgSrc) && !empty($elseSrc))
                     $imgSrc = $elseSrc;
 
-                if ($imgMode == 'none' || ($imgMode == 'first' && $i > 1)) {
-                    $img = '';
-                }
-
                 $img_class = ($photoblog ? "full" : "feed");
 
                 $description = (isset($item->description) ? $item->description : $item->content);
@@ -178,7 +174,7 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
 
                 if (!empty($atomImg)) {
                     $ext = pathinfo($atomImg, PATHINFO_EXTENSION);
-                    if ($ext == "mp3")
+                    if ($ext == "mp3" || $ext == "ogg")
                         $img = '<a href="'.$atomImg.'"><span class="audio-note" title="Audio content">♫</span></a>';
                     else
                         $img = '<a href="'.$atomImg.'"><img class="'.$img_class.'" data-link="'.$link.'" alt="'.$title.'" src="'.$atomImg.'" /></a>';
@@ -193,6 +189,12 @@ function reparse($u, $numItems, $imgMode, $photoblog) {
                 } else {
                     $img = '';
                 }
+
+
+                if ($imgMode == 'none' || ($imgMode == 'first' && $i > 1)) {
+                    $img = '';
+                }
+
 
                 if (empty($link)) // should not be usefull anymore
                     $link = htmlspecialchars($item->link['href']);
