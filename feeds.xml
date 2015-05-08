@@ -3,6 +3,7 @@
 <!--
     img can be either { none first all }
     photo can be either {true false}
+    Encode "&" with "$amp;" in your feed's URI
     NEVER use the "+" character in tab names
 -->
 
@@ -42,6 +43,5 @@
        <url tab="snd">http://planet.linuxaudio.org/rss20.xml</url>
        <url tab="snd">http://feeds2.feedburner.com/PitchforkAlbumReviews/</url>
        <url tab="snd">http://feeds.feedburner.com/LinuxJournalAudioVideo/</url>
-       Remember to encode & with $amp; in your feed's URI
   -->
 </feeds>
