@@ -270,7 +270,7 @@ $(document).ready(function() {
         $("#viewer-img").attr("data-index", i)
         $("#viewer-img").attr("data-count", count)
         $("#viewer-img").attr("data-id", div_id)
-        $("#img-name a").text(msg + "[#" + i + " of " + count + "] " + current_img.attr("alt"))
+        $("#img-name a").text("[#" + i + " of " + count + "] " + current_img.attr("alt"))
         $("#buttons").text("[#" + i + " of " + count + "] ")
         $("#img-name a").attr("href", current_img.attr("data-link"))
         $("#img-name a").attr("title", current_img.attr("alt"))
@@ -493,7 +493,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "58c3aea9392215e0d8b2838e45c78ccc661a15a5";
+    $ref_commit = "a67af95eaf429de316b0dfb77a59af07b2da4dee";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
