@@ -493,7 +493,7 @@ $current_commits = file_get_contents("https://api.github.com/repos/xaccrocheur/n
 if ($current_commits !== false) {
     $commits = json_decode($current_commits);
 
-    $ref_commit = "9c1428ed5e006ff117a3db699ed88b71023ad7d6";
+    $ref_commit = "3e08d919a8c81be51500fcff89ecbb75005a090f";
 
     $current_commit_minus1 = $commits[1]->sha;
     $commit_message = "last message : ".$commits[0]->commit->message;
