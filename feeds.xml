@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feeds>
+<!--
+    img can be either { none first all }
+    photo can be either {true false}
+    NEVER use the "+" character in tab names
+-->
+
+  <url tab="news">http://www.egaliteetreconciliation.fr/spip.php?page=backend</url>
+
+  <url tab="news">http://www.futura-sciences.com/rss/actualites.xml</url>
+  <url tab="news">http://www.pcinpact.com/rss/news.xml</url>
+
+  <url tab="news">http://rss.lefigaro.fr/lefigaro/laune</url>
+  <url tab="news" numItems="5" img="first">http://www.arretsurimages.net/tous-les-contenus.rss</url>
+  <url tab="news">http://www.acrimed.org/spip.php?page=backend</url>
+  <url tab="news" numItems="8" img="first">http://feeds.bbci.co.uk/news/world/rss.xml</url>
+  <url tab="news">http://rezo.net/backend/</url>
+
+  <url tab="sci" numItems="3">http://fe3.yql.bf1.yahoo.com/pipes/pipe.run?_id=feff1572a71d8e1d04465296edf5a537&amp;_render=rss</url>
+  <url tab="sci" photo="true">http://xkcd.com/rss.xml</url>
+  <url tab="sci" numItems="1">http://what-if.xkcd.com/feed.atom</url>
+
+  <url tab="img" img="none">http://allcreatures.tumblr.com/rss/</url>
+  <url tab="img" photo="true">http://freecabinporn.com/rss/</url>
+  <url tab="img">http://syndication.boston.com/bigpicture/index.xml</url>
+  <url tab="img">http://generalelectric.tumblr.com/rss</url>
+
+  <url tab="vid">https://gdata.youtube.com/feeds/base/users/doublebiceps/uploads</url>
+
+  <url tab="tech">http://linuxfr.org/news.atom</url>
+  <url tab="tech">http://laforge.gnumonks.org/weblog/index.rss</url>
+  <url tab="tech">http://www.theverge.com/rss/index.xml</url>
+  <url tab="tech" img="none">http://rss.slashdot.org/Slashdot/slashdot</url>
+
+
+  <url tab="00z">http://awkwardstockphotos.com/rss</url>
+  <url tab="snd">http://feeds2.feedburner.com/PitchforkAlbumReviews/</url>
+  <url tab="plop">https://gdata.youtube.com/feeds/base/users/doublebiceps/uploads</url>
+
+  <!-- disabled feeds
+       <url tab="snd">http://planet.linuxaudio.org/rss20.xml</url>
+       <url tab="snd">http://feeds2.feedburner.com/PitchforkAlbumReviews/</url>
+       <url tab="snd">http://feeds.feedburner.com/LinuxJournalAudioVideo/</url>
+       Remember to encode & with $amp; in your feed's URI
+  -->
+</feeds>
