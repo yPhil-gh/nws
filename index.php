@@ -156,7 +156,7 @@ $(document).ready(function() {
     var viewport_height = $(window).height()
     var i
     var timeOut = null
-    var msg = "empty"
+    var msg
 
     $("#viewer").css("top", ((viewport_height / 2) - 150) + "px")
     $("#viewer").css("left", ((viewport_width / 2) - 250) + "px")
@@ -192,10 +192,11 @@ $(document).ready(function() {
         if (!tab_id == '') {
             var images = $( "#" + tab_id).find('img').not('.favicon img')
             $("#viewer-img").attr("data-tab", tab_id)
-            // msg = "tab_id: " + tab_id + " div_id: " + div_id
         } else {
             var images = $( "#" + div_id).find('img').not('.favicon img')
         }
+
+        msg = "tab_id: " + tab_id + " div_id: " + div_id + " lengh: " + images.length
 
         var count = images.length
 
@@ -206,10 +207,12 @@ $(document).ready(function() {
                 left: ($(window).width() - $('#error').outerWidth())/2,
                 top: ($(window).height() - $('#error').outerHeight())/2
             });
-            exit
+            // exit
         }
 
         var current_img = images.eq(i)
+
+        msg = msg + " current_img: " + current_img
 
         var site_url = current_img.attr("data-link").substring(7, current_img.attr("data-link").length)
         var first_slash = site_url.indexOf("/");
@@ -274,6 +277,9 @@ $(document).ready(function() {
         $("#link-img").attr("href", current_img.attr("src"))
 
         $("#viewer-img").fadeIn(400)
+
+        console.log("msg:" + msg)
+
     }
 
     $('.gallery-feed').click(function(){
@@ -346,7 +352,6 @@ $(document).ready(function() {
 
         // msg = " tab: (" + mytab + ")" + " div: (" + mydiv_id + ")"
 
-        // alert(msg)
 
         img_gallery(myindex, mydiv_id, mytab)
     })
@@ -371,6 +376,7 @@ $(document).ready(function() {
 
     $('.reload').trigger('click')
     feed_max_age = 10; // allow to force reloading the feed
+
 })
 
     </script>

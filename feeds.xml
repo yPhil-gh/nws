@@ -3,6 +3,7 @@
 <!--
     img can be either { none first all }
     photo can be either {true false}
+    NEVER use the "+" character in tab names
 -->
 
   <url tab="news">http://www.egaliteetreconciliation.fr/spip.php?page=backend</url>
